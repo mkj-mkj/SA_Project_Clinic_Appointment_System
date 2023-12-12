@@ -1,0 +1,15 @@
+127.0.0.1 - - [24/Nov/2023:13:41:49 +0800] "GET / HTTP/1.1" 404 751
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/ HTTP/1.1" 200 7083
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/statics/css/cake.generic.css HTTP/1.1" 200 15502
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/statics/img/cake.power.gif HTTP/1.1" 200 201
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/statics/js/jquery-3.4.1.min.js HTTP/1.1" 200 88145
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/statics/icon/favicon.ico HTTP/1.1" 200 372
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:50 +0800] "GET /NCU_MIS_SA/statics/img/cake.icon.png HTTP/1.1" 200 943
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:41:51 +0800] "GET /NCU_MIS_SA/api/member.do?_=1700804510823 HTTP/1.1" 200 118
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:13:42:17 +0800] "GET /NCU_MIS_SA/api/member.do?_=1700804536919 HTTP/1.1" 200 116
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/product.html HTTP/1.1" 200 6172
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/statics/css/bootstrap.min.css HTTP/1.1" 200 155758
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/statics/css/product.css HTTP/1.1" 200 439
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/statics/js/jquery-3.4.1.min.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/api/product.do?_=1700813794509 HTTP/1.1" 200 117
+0:0:0:0:0:0:0:1 - - [24/Nov/2023:16:16:34 +0800] "GET /NCU_MIS_SA/statics/icon/favicon.ico HTTP/1.1" 304 -
