@@ -18,18 +18,18 @@ import ncu.im3069.demo.util.DBMgr;
  * @since 1.0.0
  */
 
-public class MemberHelper {
+public class UserHelper {
     
     /**
      * 實例化（Instantiates）一個新的（new）MemberHelper物件<br>
      * 採用Singleton不需要透過new
      */
-    private MemberHelper() {
+    private UserHelper() {
         
     }
     
     /** 靜態變數，儲存MemberHelper物件 */
-    private static MemberHelper mh;
+    private static UserHelper uh;
     
     /** 儲存JDBC資料庫連線 */
     private Connection conn = null;
@@ -43,11 +43,11 @@ public class MemberHelper {
      *
      * @return the helper 回傳MemberHelper物件
      */
-    public static MemberHelper getHelper() {
+    public static UserHelper getHelper() {
         /** Singleton檢查是否已經有MemberHelper物件，若無則new一個，若有則直接回傳 */
-        if(mh == null) mh = new MemberHelper();
+        if(uh == null) uh = new UserHelper();
         
-        return mh;
+        return uh;
     }
     
     /**
