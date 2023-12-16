@@ -19,7 +19,7 @@ import java.util.Calendar;
 
 public class Department {
 
-    private String Id;
+    private int Id;
 
     private String Name;
 

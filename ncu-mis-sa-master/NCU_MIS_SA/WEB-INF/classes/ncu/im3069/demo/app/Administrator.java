@@ -49,11 +49,11 @@ public class Administrator {
     }
 
     /**
-     * 取得使用者之身分證字號
+     * 取得管理者之電子信箱
      *
-     * @return the id 回傳會員編號
+     * @return the id 回傳管理者編號
      */
-    public String getID() {
+    public int getID() {
         return this.Id;
     }
 
@@ -71,7 +71,7 @@ public class Administrator {
 
     /**
      * 更新管理者資料
-     *
+     * 
      * @return the JSON object 回傳SQL更新之結果與相關封裝之資料
      */
     public JSONObject update() {
@@ -80,7 +80,7 @@ public class Administrator {
 
     /**
      * 取得該名管理者所有資料
-     *
+     * 
      * @return the data 取得該名管理者之所有資料並封裝於JSONObject物件內
      */
     public JSONObject getData() {

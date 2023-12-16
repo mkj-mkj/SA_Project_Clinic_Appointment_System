@@ -9,8 +9,8 @@ import ncu.im3069.demo.util.DBMgr;
 // TODO: Auto-generated Javadoc
 /**
  * <p>
- * The Class UserHelper<br>
- * UserHelper類別（class）主要管理所有與Member相關與資料庫之方法（method）
+ * The Class DepartmentHelper<br>
+ * DepartmentHelper類別（class）主要管理所有與Department相關與資料庫之方法（method）
  * </p>
  * 
  * @author IPLab
@@ -61,11 +61,11 @@ public class DepartmentHelper {
     }
 
     /**
-     * 透過科別編號（ID）取得使用者資料
+     * 透過科別編號（ID）取得科別資料
      * 
      * @return the JSON object 回傳SQL執行結果與該編號之科別資料
      */
-    public JSONObject getByID(String id) {
+    public JSONObject getByID(int id) {
 
     }
 
