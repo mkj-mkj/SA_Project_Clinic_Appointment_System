@@ -5,7 +5,6 @@ import org.json.*;
 import java.security.Timestamp;
 import java.util.Calendar;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class Room
  * Room類別（class）具有診室所需要之屬性與方法，並且儲存與診室相關之商業判斷邏輯
@@ -17,7 +16,7 @@ public class Room {
 
     private String Num;
 
-    private int ClincId;
+    private int ClinicId;
 
     private Clinic clinic;
 
@@ -31,26 +30,29 @@ public class Room {
      * 實例化（Instantiates）一個新的（new）Room物件
      */
     public Room(int Id) {
-
+        this.Id = Id;
     }
 
     /**
      * 實例化（Instantiates）一個新的（new）Room物件
      */
     public Room(int Id, String Num) {
-
+        this.Id = Id;
+        this.Num = Num;
     }
 
     /**
      * 實例化（Instantiates）一個新的（new）Room物件
      */
-    public Room(int Id, String Num, String ClincId) {
-
+    public Room(int Id, String Num, int ClinicId) {
+        this.Id = Id;
+        this.Num = Num;
+        this.ClinicId = ClinicId;
     }
 
     /**
      * 取得診室編號
-     *
+     * 
      * @return the id 回傳診室編號
      */
     public int getID() {
@@ -58,11 +60,11 @@ public class Room {
     }
 
     public String getNum() {
-
+        return this.Num;
     }
 
     public int getClinicID() {
-
+        return this.ClinicId;
     }
 
     /**
@@ -71,7 +73,12 @@ public class Room {
      * @return the data 取得該診室所有資料並封裝於JSONObject物件內
      */
     public JSONObject getData() {
-
+        /** 透過JSONObject將該診室所需之資料全部進行封裝 */
+        JSONObject jso = new JSONObject();
+        jso.put("id", getID());
+        jso.put("num", getNum());
+        jso.put("clinic_id", getClinicID());
+        return jso;
     }
 
 }
