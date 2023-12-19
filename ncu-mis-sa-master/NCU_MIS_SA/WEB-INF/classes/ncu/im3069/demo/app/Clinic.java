@@ -59,10 +59,20 @@ public class Clinic {
         return this.Id;
     }
 
+    /**
+     * 取得門診名稱
+     * 
+     * @return the id 回傳門診名稱
+     */
     public String getName() {
         return this.Name;
     }
 
+    /**
+     * 取得門診所屬的科別編號
+     * 
+     * @return the id 回傳科別編號
+     */
     public int getDeptID() {
         return this.DeptId;
     }
