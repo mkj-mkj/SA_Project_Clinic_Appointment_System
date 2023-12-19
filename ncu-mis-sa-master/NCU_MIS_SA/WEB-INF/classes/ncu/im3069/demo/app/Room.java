@@ -59,10 +59,20 @@ public class Room {
         return this.Id;
     }
 
+    /**
+     * 取得診室代號
+     * 
+     * @return the id 回傳診室代號
+     */
     public String getNum() {
         return this.Num;
     }
 
+    /**
+     * 取得診室所屬的門診編號
+     * 
+     * @return the id 回傳門診編號
+     */
     public int getClinicID() {
         return this.ClinicId;
     }
