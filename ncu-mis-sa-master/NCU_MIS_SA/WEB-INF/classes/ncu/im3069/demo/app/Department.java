@@ -43,6 +43,11 @@ public class Department {
         return this.Id;
     }
 
+    /**
+     * 取得科別之名稱
+     * 
+     * @return the id 回傳科別名稱
+     */
     public String getName() {
         return this.Name;
     }
