@@ -59,7 +59,7 @@ public class User {
     }
 
     /**
-     * 實例化（Instantiates）一個新的（new）User物件<br>
+     * 實例化（Instantiates）一個新的（new）User物件
      */
     public User(String Id, String Name, int CaseNumber) {
         this.Id = Id;
@@ -68,9 +68,9 @@ public class User {
     }
 
     /**
-     * 實例化（Instantiates）一個新的（new）User物件<br>
+     * 實例化（Instantiates）一個新的（new）User物件
      */
-    public User(String Id, String Name, int CaseNumber, String Address, Timestamp Birth, Boolean Gender, String Email,
+    public User(String Id, int CaseNumber, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
             String Phone, String ResidenceTel, String BloodType, float Height, float Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
@@ -276,7 +276,7 @@ public class User {
         jso.put("user_address", getAddress());
         jso.put("user_birth", getBirth());
         jso.put("user_email", getEmail());
-        jso.put("user_gener", getGender());
+        jso.put("user_gender", getGender());
         jso.put("user_phone", getPhone());
         jso.put("residence_tel", getResidenceTel());
         jso.put("blood", getBloodType());
