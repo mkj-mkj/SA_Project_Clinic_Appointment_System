@@ -123,7 +123,7 @@ public class DepartmentHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該編號之科別資料
      */
-    public JSONObject getByID(int id) {
+    public JSONObject getByID(String id) {
         JSONObject data = new JSONObject();
         Department dept = null;
         /** 記錄實際執行之SQL指令 */
@@ -143,7 +143,7 @@ public class DepartmentHelper {
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setString(1, id);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
