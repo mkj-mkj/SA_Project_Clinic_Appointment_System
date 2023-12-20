@@ -94,6 +94,20 @@ public class Announcement {
         return this.UpdateTime;
     }
 
+    public String setUpdateTime() {
+        /** 設定更新資料時間 */
+        Calendar calendar = Calendar.getInstance();
+        int Day_of_Month = calendar.get(Calendar.DAY_OF_MONTH);
+        int Month_of_Year = calendar.get(Calendar.MONTH);
+        int Year = calendar.get(Calendar.YEAR);
+        int Hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int Minute = calendar.get(Calendar.MINUTE);
+        int Second = calendar.get(Calendar.SECOND);
+        this.UpdateTime = Integer.toString(Year) + "-" + Integer.toString(Month_of_Year) + "-"
+                + Integer.toString(Day_of_Month) + " " + Integer.toString(Hour) + ":" + Integer.toString(Minute) + ":"
+                + Integer.toString(Second);
+    }
+
     /**
      * 更新公告資料
      * 
