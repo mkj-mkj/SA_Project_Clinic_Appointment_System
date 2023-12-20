@@ -9,7 +9,7 @@ import ncu.im3069.demo.app.DepartmentHelper;
 import ncu.im3069.tools.JsonReader;
 
 /**
- * The Class DepartmentController<br>
+ * The Class DepartmentController
  * DepartmentController類別（class）主要用於處理Department相關之Http請求（Request），繼承HttpServlet
  */
 
@@ -18,7 +18,7 @@ public class DepartmentController extends HttpServlet {
         /** The Constant serialVersionUID. */
         private static final long serialVersionUID = 1L;
 
-        /** deph，MemberHelper之物件與Member相關之資料庫方法（Sigleton） */
+        /** deph，DepartmentHelper之物件與Department相關之資料庫方法（Sigleton） */
         private DepartmentHelper deph = DepartmentHelper.getHelper();
 
         /**
