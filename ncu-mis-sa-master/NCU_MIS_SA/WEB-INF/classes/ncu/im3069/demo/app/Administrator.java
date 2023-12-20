@@ -2,6 +2,8 @@ package ncu.im3069.demo.app;
 
 import org.json.*;
 
+import netscape.javascript.JSObject;
+
 import java.security.Timestamp;
 import java.util.Calendar;
 
@@ -37,7 +39,8 @@ public class Administrator {
      * 採用多載（overload）方法進行，此建構子用於建立管理者資料時，產生一名新的管理者
      */
     public Administrator(String Name, String Email) {
-
+        this.Name = Name;
+        this.Email = Email;
     }
 
     /**
@@ -45,7 +48,16 @@ public class Administrator {
      * 採用多載（overload）方法進行，此建構子用於建立管理者資料時，產生一名新的管理者
      */
     public Administrator(String Name, String Email, String Password) {
+        this.Name = Name;
+        this.Email = Email;
+        this.Password = Password;
+    }
 
+    public Administrator(int Id,String Name, String Email, String Password) {
+        this.Name = Name;
+        this.Email = Email;
+        this.Password = Password;
+        this.Id = Id;
     }
 
     /**
@@ -58,15 +70,15 @@ public class Administrator {
     }
 
     public String getName() {
-
+        return this.Name;
     }
 
     public String getEmail() {
-
+        return this.Email;
     }
 
     public String Password() {
-
+        return this.Password;
     }
 
     /**
@@ -75,7 +87,13 @@ public class Administrator {
      * @return the JSON object 回傳SQL更新之結果與相關封裝之資料
      */
     public JSONObject update() {
+        JSONObject data = new JSONObject();
 
+        /** 檢查該名管理員是否已經在資料庫 */
+        if(this.Id != 0) {
+            /** 透過MemberHelper物件，更新目前之會員資料置資料庫中 */
+            data = ah.update(this);
+        }
     }
 
     /**
@@ -84,13 +102,19 @@ public class Administrator {
      * @return the data 取得該名管理者之所有資料並封裝於JSONObject物件內
      */
     public JSONObject getData() {
-
+        /** 透過JSONObject將該管理者所需之資料全部進行封裝 */
+        JSONObject jso = new JSONObject();
+        jso.put("id", getID());
+        jso.put("name", getName());
+        jso.put("email", getEmail());
+        jso.put("password", Password());
+        return jso;
     }
 
     /**
      * 計算新管理者編號<br>
      */
-    private void setID() {
+    // private void setID() {
 
-    }
+    // }
 }
