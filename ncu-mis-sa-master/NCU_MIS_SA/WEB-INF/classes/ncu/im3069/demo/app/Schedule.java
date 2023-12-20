@@ -2,7 +2,8 @@ package ncu.im3069.demo.app;
 
 import org.json.*;
 
-import java.security.Timestamp;
+//import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 // TODO: Auto-generated Javadoc
@@ -49,22 +50,40 @@ public class Schedule {
      * 實例化（Instantiates）一個新的（new）Schedule物件
      */
     public Schedule(int Seq, Timestamp DateTime, int ClinicId) {
-
+        this.Seq = Seq;
+        this.DateTime = DateTime;
+        this.ClinicId = ClinicId;
     }
 
     /**
      * 實例化（Instantiates）一個新的（new）Schedule物件
      */
     public Schedule(int Seq, Timestamp DateTime, int ClinicId, int DoctorId) {
-
+        this.Seq = Seq;
+        this.DateTime = DateTime;
+        this.ClinicId = ClinicId;
+        this.DoctorId = DoctorId;
     }
 
     /**
      * 實例化（Instantiates）一個新的（new）Schedule物件
      */
     public Schedule(int Seq, Timestamp DateTime, int ClinicId, int DoctorId, int MaxCapacity) {
-
+        this.Seq = Seq;
+        this.DateTime = DateTime;
+        this.ClinicId = ClinicId;
+        this.DoctorId = DoctorId;
+        this.MaxCapacity = MaxCapacity;
     }
+
+    public Schedule(int Seq, Timestamp DateTime, int ClinicId, int DoctorId, int MaxCapacity,int CurrentRegistrations) {
+        this.Seq = Seq;
+        this.DateTime = DateTime;
+        this.ClinicId = ClinicId;
+        this.DoctorId = DoctorId;
+        this.MaxCapacity = MaxCapacity;
+        this.CurrentRegistrations = CurrentRegistrations;
+    }    
 
     /**
      * 取得班表流水號
@@ -76,23 +95,23 @@ public class Schedule {
     }
 
     public Timestamp getDateTime() {
-
+        return this.DateTime;
     }
 
     public int getClinicID() {
-
+        return this.ClinicId;
     }
 
     public int getDoctorID() {
-
+        return this.DoctorId;
     }
 
     public int getMaxCapacity() {
-
+        return this.MaxCapacity;
     }
 
     public int getCurrentRegistrations() {
-
+        return this.CurrentRegistrations;
     }
 
     /**
@@ -101,7 +120,13 @@ public class Schedule {
      * @return the JSON object 回傳SQL更新之結果與相關封裝之資料
      */
     public JSONObject update() {
-
+        JSONObject json = new JSONObject();
+        /** 檢查該班表是否已經在資料庫 */
+        if (this.Seq != 0) {
+            /** 透過ScheduleHelper物件，更新目前之門診資料置資料庫中 */
+            json = sh.update(this);
+        }
+        return json;
     }
 
     /**
@@ -110,13 +135,21 @@ public class Schedule {
      * @return the data 取得該班表之所有資料並封裝於JSONObject物件內
      */
     public JSONObject getData() {
-
+    /** 透過JSONObject將班表所需之資料全部進行封裝 */
+    JSONObject jso = new JSONObject();
+    jso.put("seq", getSeq());
+    jso.put("time", getDateTime());
+    jso.put("clinic", getClinicID());
+    jso.put("doctor", getDoctorID());
+    jso.put("maxcapacity", getMaxCapacity());
+    jso.put("currentregistrations", getCurrentRegistrations());
+    return jso;
     }
 
     /**
      * 計算新班表流水號
      */
-    private void setSeq() {
+    // private void setSeq() {
 
-    }
+    // }
 }

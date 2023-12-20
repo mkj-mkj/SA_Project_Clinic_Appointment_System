@@ -150,10 +150,10 @@ public class AdministratorHelper {
                 row += 1;
                 
                 /** 將 ResultSet 之資料取出 */
-                int Id = rs.getInt("id");
-                String Name = rs.getString("name");
-                String Email = rs.getString("email");              
-                String Password = rs.getString("password");
+                int Id = rs.getInt("admin_id");
+                String Name = rs.getString("admin_name");
+                String Email = rs.getString("admin_mail");              
+                String Password = rs.getString("admin_password");
                 
                 /** 將每一筆會員資料產生一名新Admin物件 */
                 a = new Administrator(Id, Name, Email, Password);
@@ -229,10 +229,10 @@ public class AdministratorHelper {
                 row += 1;
                 
                 /** 將 ResultSet 之資料取出 */
-                int Id = rs.getInt("id");
-                String Name = rs.getString("name");
-                String Email = rs.getString("email");
-                String Password = rs.getString("password");
+                int Id = rs.getInt("admin_id");
+                String Name = rs.getString("admin_name");
+                String Email = rs.getString("admin_mail");
+                String Password = rs.getString("admin_password");
                 
                 /** 將每一筆管理者資料產生一名新admin物件 */
                 a = new Administrator(Id,Name,Email,Password);
