@@ -98,7 +98,13 @@ public class Announcement {
         Calendar calendar = Calendar.getInstance();
         int Day_of_Month = calendar.get(Calendar.DAY_OF_MONTH);
         int Month_of_Year = calendar.get(Calendar.MONTH);
-        this.UpdateTime = Integer.toString(Month_of_Year) + "/" + Integer.toString(Day_of_Month);
+        int Year = calendar.get(Calendar.YEAR);
+        int Hour = calendar.get(Calendar.HOUR_OF_DAY);
+        int Minute = calendar.get(Calendar.MINUTE);
+        int Second = calendar.get(Calendar.SECOND);
+        this.UpdateTime = Integer.toString(Year) + "-" + Integer.toString(Month_of_Year) + "-"
+                + Integer.toString(Day_of_Month) + " " + Integer.toString(Hour) + ":" + Integer.toString(Minute) + ":"
+                + Integer.toString(Second);
 
         /** 檢查該公告是否已經在資料庫 */
         if (this.Seq != 0) {
