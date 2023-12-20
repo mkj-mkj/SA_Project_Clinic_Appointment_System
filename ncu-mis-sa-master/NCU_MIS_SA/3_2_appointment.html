@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<link rel="stylesheet" href="3_2_appointment.css">
+	<meta charset="UTF-8">
+	<title>掛號系統</title>
+</head>
+	
+<body>
+	<h1>掛號系統</h1>
+    <h2>請輸入以下資料以完成掛號</h2>
+
+    <center><table border="0" cellspacing="0" cellpadding="5">
+		<tr>
+			<td width= "150" ><strong>身分證號碼(必填)</strong></td>
+			<td width= "300"><input type="text" name="id"   placeholder= "請輸入身分證字號"style= "width: 167px;" pattern="[A-Z0-9]{10}" required= "required"/></td><!--這裡已經驗證身分證號格式和要求必填了-->
+		</tr>
+		<tr>
+			<td><strong>生日(必填)</strong></td>
+			<td><input type="date" name="birthday" style="width: 170px;" required= "required"/></td><!--required= "required"要求必填-->
+		</tr>
+	</table>
+	<a href="3_appointment_function.html" class="back">回上一頁</a>
+	<a  class="confirm">確定掛號</a><!--點選確定掛號後要驗證這個身分證號+生日是否已有病歷資料在資料庫內-->
+	<!--如果已有病歷資料，顯示掛號成功提示，資料庫新增這筆掛號資料，在3_3_2_ap_data.html顯示預約資訊-->
+	<!--如果沒有病歷資料，則連接至3_3_user_data.html介面輸入初診資料-->
+		
+	</center>
+
+
+</body>
+</html>
