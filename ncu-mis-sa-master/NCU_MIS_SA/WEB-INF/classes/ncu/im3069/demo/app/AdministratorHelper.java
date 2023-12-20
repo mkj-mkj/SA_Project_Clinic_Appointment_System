@@ -73,7 +73,7 @@ public class AdministratorHelper {
             conn = DBMgr.getConnection();
             
             /** SQL指令 */
-            String sql = "DELETE FROM `hospital`.`Administrator` WHERE `Id` = ? LIMIT 1";  
+            String sql = "DELETE FROM `hospital`.`Administrator` WHERE `admin_id` = ? LIMIT 1";  
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -210,7 +210,7 @@ public class AdministratorHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hospital`.`Administrator` WHERE `Id` = ? LIMIT 1";
+            String sql = "SELECT * FROM `hospital`.`Administrator` WHERE `admin_id` = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -290,7 +290,7 @@ public class AdministratorHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hospital`.`Administrator` WHERE `Email` = ?";
+            String sql = "SELECT count(*) FROM `hospital`.`Administrator` WHERE `admin_mail` = ?";
             
             /** 取得所需之參數 */
             String Email = a.getEmail();
@@ -325,7 +325,7 @@ public class AdministratorHelper {
     }
 
     /**
-     * 更新一名會員之管理者資料
+     * 更新一名管理者資料
      * 
      * @return the JSONObject 回傳SQL指令執行結果與執行之資料
      */
@@ -343,7 +343,7 @@ public class AdministratorHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `hospital`.`Administrator` SET `Name` = ? ,`Password` = ? WHERE `Email` = ?";
+            String sql = "Update `hospital`.`Administrator` SET `admin_name` = ? ,`admin_password` = ? WHERE `admin_mail` = ?";
             /** 取得所需之參數 */
             String name = a.getName();
             String email = a.getEmail();
@@ -353,8 +353,7 @@ public class AdministratorHelper {
             pres = conn.prepareStatement(sql);
             pres.setString(1, name);
             pres.setString(2, password);
-            pres.setTimestamp(3, Timestamp.valueOf(LocalDateTime.now()));
-            pres.setString(4, email);
+            pres.setString(3, email);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
