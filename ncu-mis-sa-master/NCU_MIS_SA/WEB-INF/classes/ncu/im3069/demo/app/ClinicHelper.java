@@ -184,7 +184,7 @@ public class ClinicHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該門診編號之門診資料
      */
-    public JSONObject getByID(int id) {
+    public JSONObject getByID(String id) {
         JSONObject data = new JSONObject();
         Clinic c = null;
         /** 記錄實際執行之SQL指令 */
@@ -204,7 +204,7 @@ public class ClinicHelper {
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setString(1, id);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
@@ -270,14 +270,14 @@ public class ClinicHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hostipal`.`clinic` WHERE `clinic_id` = ?";
+            String sql = "SELECT count(*) FROM `hostipal`.`clinic` WHERE `clinic_name` = ?";
 
             /** 取得所需之參數 */
-            int clinic_id = c.getID();
+            String clinic_name = c.getName();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, clinic_id);
+            pres.setString(1, clinic_name);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
