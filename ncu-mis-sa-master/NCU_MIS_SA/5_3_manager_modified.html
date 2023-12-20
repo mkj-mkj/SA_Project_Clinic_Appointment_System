@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理者修改資料頁面</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+			padding: 5px;
+        }
+        form {
+            margin-top: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 10px;
+            color: black;
+            font-size: 1.2em;
+        }
+        input {
+            width: 300px;
+            height: 40px;
+            padding: 5px;
+            font-size: 1em;
+            border: 1px solid #004B97;
+            border-radius: 5px;
+        }
+        input[type="submit"] {
+            background-color: #004B97;
+            color: white;
+            cursor: pointer;
+            width: 100px; /* Adjusted width */
+        }
+        .example-text {
+            font-style: italic;
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;">
+	<h1><b>修改管理者資料</b></h1></div>
+    <form>
+        <label for="name">Name:</label>
+        <br>
+        <input type="text" id="name" name="name" value="" onfocus="setExampleText(this, '範例姓名');" onblur="clearExampleText(this);">
+        <br><br>
+        <label for="email">Email:</label>
+        <br>
+        <input type="email" id="email" name="email" value="" onfocus="setExampleText(this, 'example@email.com');" onblur="clearExampleText(this);">
+        <br><br>
+        <label for="password">Password:</label>
+        <br>
+        <input type="text" id="password" name="password" value="" onfocus="setExampleText(this, '範例密碼');" onblur="clearExampleText(this);">
+        <br><br>
+        <input type="submit" value="確定"><!--刪除舊資料，新增新資料，並顯示「修改成功！」提示-->
+	
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setExampleText(document.getElementById("name"), '範例姓名');
+            setExampleText(document.getElementById("email"), 'example@email.com');
+            setExampleText(document.getElementById("password"), '範例密碼');
+        });
+
+        function setExampleText(element, example) {
+            if (element.value === "") {
+                element.value = example;
+                element.classList.add("example-text");
+            }
+        }
+
+        function clearExampleText(element) {
+            if (element.value === element.defaultValue) {
+                element.value = "";
+                element.classList.remove("example-text");
+            }
+        }
+    </script>
+</body>
+</html>
