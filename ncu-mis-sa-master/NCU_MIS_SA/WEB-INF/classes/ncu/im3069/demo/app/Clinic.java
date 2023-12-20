@@ -44,6 +44,14 @@ public class Clinic {
     /**
      * 實例化（Instantiates）一個新的（new）Clinic物件
      */
+    public Clinic(String Name, int DeptId) {
+        this.Name = Name;
+        this.DeptId = DeptId;
+    }
+
+    /**
+     * 實例化（Instantiates）一個新的（new）Clinic物件
+     */
     public Clinic(int Id, String Name, int DeptId) {
         this.Id = Id;
         this.Name = Name;
