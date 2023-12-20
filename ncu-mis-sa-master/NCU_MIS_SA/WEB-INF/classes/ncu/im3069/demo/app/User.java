@@ -2,7 +2,7 @@ package ncu.im3069.demo.app;
 
 import org.json.*;
 
-import java.security.Timestamp;
+import java.sql.Timestamp;
 import java.util.Calendar;
 
 // TODO: Auto-generated Javadoc
@@ -33,9 +33,9 @@ public class User {
 
     private String BloodType;
 
-    private float Height;
+    private Float Height;
 
-    private float Weight;
+    private Float Weight;
 
     private String AllergyHistory;
 
@@ -71,7 +71,7 @@ public class User {
      * 實例化（Instantiates）一個新的（new）User物件
      */
     public User(String Id, int CaseNumber, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
-            String Phone, String ResidenceTel, String BloodType, float Height, float Weight, String AllergyHistory,
+            String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
         this.Name = Name;
