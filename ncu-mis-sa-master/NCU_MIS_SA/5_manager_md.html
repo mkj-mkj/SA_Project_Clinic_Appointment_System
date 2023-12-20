@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理者資料</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+			padding: 5px;
+        }
+        table {
+            width: 810px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-radius: 15px;
+        }
+        th, td {
+            border: 2px solid #ffffff;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #004B97;
+            color: white;
+        }
+        td {
+            text-align: left;
+            background-color: #E0E0E0;
+        }
+        td:nth-child(1), td:nth-child(3), td:nth-child(4) {
+            width: 15%; 
+        }
+        td:nth-child(2) {
+            width: 55%; 
+        }
+        a {
+            width: 100%;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;"><h1><b>管理者</b></h1></div>
+    <table><!--管理者資料庫有幾筆資料就顯示幾筆-->
+        <tr>
+            <th>姓名</th>
+            <th>郵箱</th>
+            <th>按鈕</th>
+            <th>按鈕</th>
+        </tr>
+        <tr>
+            <td>姓名 1</td>
+            <td>郵箱 1</td>
+            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>姓名 2</td>
+            <td>郵箱 2</td>
+            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>姓名 3</td>
+            <td>郵箱 3</td>
+            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>姓名 4</td>
+            <td>郵箱 4</td>
+            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>姓名 5</td>
+            <td>郵箱 5</td>
+            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+    </table>
+	<br>
+    <div><a href="5_2_manager_add.html" class="add-button">新增</a></div>
+</body>
+</html>

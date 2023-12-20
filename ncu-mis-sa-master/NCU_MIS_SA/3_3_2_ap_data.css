@@ -1,0 +1,28 @@
+body {
+	text-align: center;
+     }
+h1 {
+	font-size: 3em;
+	background-color: #004B97;
+	color: white;
+	margin: 0;
+	padding: 5px;
+	text-align: center;
+	}
+.reservation-info {
+	margin: 20px auto;
+    padding: 20px;
+    text-align: left;
+	font-size: 20px;
+    display: inline-block;
+	}
+a{
+	margin: 10px;
+    padding: 10px;
+    font-size: 16px;
+	background-color: #004B97;
+	color: #FFFFFF;
+	border:none;
+	border-radius:10px;
+	text-decoration: none;
+      }
