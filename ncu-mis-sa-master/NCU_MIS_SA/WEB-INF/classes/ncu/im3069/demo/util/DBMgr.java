@@ -3,17 +3,10 @@ package ncu.im3069.demo.util;
 import java.sql.*;
 import java.util.Properties;
 
-// TODO: Auto-generated Javadoc
 /**
- * <p>
- * The Class DBMgr<br>
- * DBMgr類別（class）主要管理與資料庫建立與關閉連線之方法（method），並儲存相關之設定資料<br>
+ * The Class DBMgr
+ * DBMgr類別（class）主要管理與資料庫建立與關閉連線之方法（method），並儲存相關之設定資料
  * 每個要與資料庫建立連線之類別應該import本類別
- * </p>
- *
- * @author IPLab
- * @version 1.0.0
- * @since 1.0.0
  */
 
 public class DBMgr {
@@ -22,8 +15,9 @@ public class DBMgr {
     static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
 
     /** DB_URL常數，指定資料庫所在之IP或網域、Port號碼與指定所要使用資料庫 */
-//    static final String DB_URL = "jdbc:mysql://localhost:3306/missa?allowPublicKeyRetrieval=true&useSSL=false";
-    static final String DB_URL = "jdbc:mysql://localhost:3306/missa";
+    // static final String DB_URL =
+    // "jdbc:mysql://localhost:3306/hospital?allowPublicKeyRetrieval=true&useSSL=false";
+    static final String DB_URL = "jdbc:mysql://localhost:3306/hospital";
 
     /** USER常數，所要使用之資料庫使用者帳號 */
     static final String USER = "root";
@@ -87,15 +81,17 @@ public class DBMgr {
     /**
      * 關閉所有資料庫連線與釋放SQL資源
      *
-     * @param stm SQL查詢之指令
+     * @param stm  SQL查詢之指令
      * @param conn 資料庫之連線
      */
     public static void close(Statement stm, Connection conn) {
         try {
             /** 確認Statement是否為null，若不為null則嘗試關閉Statement釋放資源 */
-            if (stm != null) stm.close();
+            if (stm != null)
+                stm.close();
             /** 確認Connection是否為null，若不為null則嘗試關閉Connection釋放資源 */
-            if (conn != null) conn.close();
+            if (conn != null)
+                conn.close();
         } catch (Exception e) {
             /** 若錯誤則印出錯誤訊息 */
             e.printStackTrace();
@@ -105,18 +101,21 @@ public class DBMgr {
     /**
      * 關閉所有資料庫連線與釋放SQL資源
      *
-     * @param rs 資料庫檢索後之結果資料
-     * @param stm SQL查詢之指令
+     * @param rs   資料庫檢索後之結果資料
+     * @param stm  SQL查詢之指令
      * @param conn 資料庫之連線
      */
     public static void close(ResultSet rs, Statement stm, Connection conn) {
         try {
             /** 確認ResultSet是否為null，若不為null則嘗試關閉ResultSet釋放資源 */
-            if (rs != null) rs.close();
+            if (rs != null)
+                rs.close();
             /** 確認Statement是否為null，若不為null則嘗試關閉Statement釋放資源 */
-            if (stm != null) stm.close();
+            if (stm != null)
+                stm.close();
             /** 確認Connection是否為null，若不為null則嘗試關閉Connection釋放資源 */
-            if (conn != null) conn.close();
+            if (conn != null)
+                conn.close();
         } catch (Exception e) {
             /** 若錯誤則印出錯誤訊息 */
             e.printStackTrace();
@@ -124,8 +123,8 @@ public class DBMgr {
     }
 
     public static String[] stringToArray(String data, String delimiter) {
-      String[] result;
-      result = data.split(delimiter);
-      return result;
+        String[] result;
+        result = data.split(delimiter);
+        return result;
     }
 }
