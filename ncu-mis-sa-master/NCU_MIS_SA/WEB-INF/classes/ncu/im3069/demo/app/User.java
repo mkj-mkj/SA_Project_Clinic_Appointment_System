@@ -5,7 +5,6 @@ import org.json.*;
 import java.sql.Timestamp;
 import java.util.Calendar;
 
-// TODO: Auto-generated Javadoc
 /**
  * The Class User
  * User類別（class）具有使用者所需要之屬性與方法，並且儲存與使用者相關之商業判斷邏輯
