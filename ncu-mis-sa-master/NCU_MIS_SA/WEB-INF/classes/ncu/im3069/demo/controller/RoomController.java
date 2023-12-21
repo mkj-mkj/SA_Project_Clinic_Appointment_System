@@ -56,7 +56,7 @@ public class RoomController extends HttpServlet {
 
                 /** 判斷該字串是否存在，若存在代表要取回個別診室之資料，否則代表要取回全部資料庫內診室之資料 */
                 if (id.isEmpty()) {
-                        /** 透過ClinicHelper物件之getAll()方法取回所有診室之資料，回傳之資料為JSONObject物件 */
+                        /** 透過RoomHelper物件之getAll()方法取回所有診室之資料，回傳之資料為JSONObject物件 */
                         JSONObject query = rh.getAll();
 
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
