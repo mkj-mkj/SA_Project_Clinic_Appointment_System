@@ -69,6 +69,30 @@ public class User {
     /**
      * 實例化（Instantiates）一個新的（new）User物件
      */
+    public User(String Id, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
+            String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
+            String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
+        this.Id = Id;
+        this.Name = Name;
+        this.Address = Address;
+        this.Birth = Birth;
+        this.Email = Email;
+        this.Gender = Gender;
+        this.Phone = Phone;
+        this.ResidenceTel = ResidenceTel;
+        this.BloodType = BloodType;
+        this.Height = Height;
+        this.Weight = Weight;
+        this.AllergyHistory = AllergyHistory;
+        this.ServillHistory = ServillHistory;
+        this.ContactName = ContactName;
+        this.ContactRel = ContactRel;
+        this.ContactTel = ContactTel;
+    }
+
+    /**
+     * 實例化（Instantiates）一個新的（new）User物件
+     */
     public User(String Id, int CaseNumber, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
             String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
