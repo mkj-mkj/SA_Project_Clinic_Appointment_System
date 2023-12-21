@@ -32,15 +32,14 @@
             border: 1px solid #004B97;
             border-radius: 5px;
         }
+		select {
+			width: 310px;
+		}
         input[type="submit"] {
             background-color: #004B97;
             color: white;
             cursor: pointer;
-            width: 100px; /* Adjusted width */
-        }
-        .example-text {
-            font-style: italic;
-            color: black;
+            width: 70px; 
         }
     </style>
 </head>
@@ -53,6 +52,16 @@
 		<!--資料庫導入原本的門診名稱，使使用者能基於原本名稱基礎進行修改-->
 		</label></strong>
         <br><br>
+		<div>
+			<b><label for="clinic_room">隸屬診室</label></b>
+			<select name="clinic_room" id="clinic_room">
+				<option value="">請選擇</option><!--資料庫撈診室名稱資料-->
+				<option value="診室 A">診室 A</option>
+				<option value="診室 B">診室 B</option>
+				<option value="診室 C">診室 C</option>
+			</select>
+		</div>
+
         <input type="submit" value="確定"><!--刪除舊資料，新增新資料，並顯示「修改成功！」提示-->
 	
     </form>
