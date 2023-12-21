@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>患者管理功能頁面</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+        }
+        table {
+            width: 810px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-radius: 15px;
+        }
+        th, td {
+            border: 2px solid #ffffff;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #004B97;
+            color: white;
+        }
+        td {
+            text-align: left;
+            background-color: #E0E0E0;
+        }
+        td:nth-child(1), td:nth-child(3), td:nth-child(4) {
+            width: 15%; 
+        }
+        td:nth-child(2) {
+            width: 55%; 
+        }
+        .modify-button {
+            width: 100%;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .add-button {
+            width: 120px;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .search-form {
+            margin-bottom: 20px;
+        }
+        .search-input {
+            width: 200px;
+            padding: 8px;
+            border: 1px solid #004B97;
+            border-radius: 5px;
+        }
+        .search-button {
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;">
+        <h1><b>患者管理</b></h1>
+        
+    </div>
+	<form class="search-form">
+            <input type="text" class="search-input" placeholder="輸入身分證碼">
+            <button type="submit" class="search-button">搜尋</button>
+        </form>
+    <table>
+        <tr>
+            <th>姓名</th>
+            <th>身分證</th>
+            <th>按鈕</th>
+            <th>按鈕</th>
+        </tr>
+        <tr>
+            <td>姓名 1</td>
+            <td>郵箱 1</td>
+            <td><button class="modify-button">修改</button></td>
+            <td><button class="modify-button">刪除</button></td>
+        </tr>
+        <tr>
+            <td>姓名 2</td>
+            <td>郵箱 2</td>
+            <td><button class="modify-button">修改</button></td>
+            <td><button class="modify-button">刪除</button></td>
+        </tr>
+        <tr>
+            <td>姓名 3</td>
+            <td>郵箱 3</td>
+            <td><button class="modify-button">修改</button></td>
+            <td><button class="modify-button">刪除</button></td>
+        </tr>
+        <tr>
+            <td>姓名 4</td>
+            <td>郵箱 4</td>
+            <td><button class="modify-button">修改</button></td>
+            <td><button class="modify-button">刪除</button></td>
+        </tr>
+        <tr>
+            <td>姓名 5</td>
+            <td>郵箱 5</td>
+            <td><button class="modify-button">修改</button></td>
+            <td><button class="modify-button">刪除</button></td>
+        </tr>
+    </table>
+    <br>
+    <div><button class="add-button">新增</button></div>
+</body>
+</html>
