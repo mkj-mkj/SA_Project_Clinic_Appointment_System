@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>預約資料</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+			padding: 5px;
+        }
+        table {
+            width: 810px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-radius: 15px
+			
+        }
+        th, td {
+            border: 2px solid #ffffff;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #004B97;
+            color: white;
+        }
+        td {
+            text-align: left;
+            background-color: #E0E0E0;
+        }
+		
+		td:nth-child(1) {
+            width: 5%; 
+        }
+		td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+            width: 25%; 
+        }
+        td:nth-child(2), td:nth-child(6),{
+            width: 10%;
+        }
+        
+		-->
+        a {
+            width: 100%;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			text-decoration: none;
+        }
+		
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;">
+	<h1><b>預約資訊</b></h1></div>
+    <table><!--身份證字號對應的預約資料有幾筆資料就顯示幾筆-->
+        <tr>
+			<th>查詢</th>
+            <th>Seq</th>
+            <th>醫生名稱</th>
+			<th>掛號門診</th><!--顯示掛號門診名稱-->
+            <th>預約時間</th>
+            <th>掛號號碼</th>
+        </tr>
+        <tr>
+			<td><input type="checkbox" id="seq1"></td>
+            <td>Seq</td>
+            <td>醫生名稱</td>
+			<td>掛號門診</td>
+			<td>預約時間</td>
+			<td>掛號號碼</td>
+        </tr>
+        <tr>
+			<td><input type="checkbox" id="seq2"></td>
+            <td>Seq</td>
+            <td>醫生名稱</td>
+			<td>掛號門診</td>
+			<td>預約時間</td>
+			<td>掛號號碼</td>
+        </tr>
+        <tr>
+			<td><input type="checkbox" id="seq3"></td>
+            <td>Seq</td>
+            <td>醫生名稱</td>
+			<td>掛號門診</td>
+			<td>預約時間</td>
+			<td>掛號號碼</td>
+        </tr>
+    </table>
+	<br>
+    <div><a href="3_3_2_ap_data.html" class="add-button">查詢</a></div><!--打勾的方框點查詢按鈕可以查詢選取資料的詳細資訊(連到3_3_2_ap_data.html))-->
+</body>
+<script>
+const seq1 = document.getElementById("seq1");
+if (seq1.checked) {
+  // 方框已打勾
+} 
+</script>
+</html>
