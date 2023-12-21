@@ -51,6 +51,15 @@ public class Announcement {
     /**
      * 實例化（Instantiates）一個新的（new）Announcement物件
      */
+    public Announcement(String Title, String Content, String UpdateTime) {
+        this.Title = Title;
+        this.Content = Content;
+        this.UpdateTime = UpdateTime;
+    }
+
+    /**
+     * 實例化（Instantiates）一個新的（new）Announcement物件
+     */
     public Announcement(int Seq, String Title, String Content, String UpdateTime) {
         this.Seq = Seq;
         this.Title = Title;
