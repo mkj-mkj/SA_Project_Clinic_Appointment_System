@@ -54,11 +54,30 @@ public class Appointment {
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
+    public Appointment(int DoctorId, String UserId, Timestamp ReserveTime) {
+        this.DoctorId = DoctorId;
+        this.UserId = UserId;
+        this.ReserveTime = ReserveTime;
+    }
+
+    /**
+     * 實例化（Instantiates）一個新的（new）Appointment物件
+     */
     public Appointment(int Seq, int DoctorId, String UserId, Timestamp ReserveTime) {
         this.Seq = Seq;
         this.DoctorId = DoctorId;
         this.UserId = UserId;
         this.ReserveTime = ReserveTime;
+    }
+
+    /**
+     * 實例化（Instantiates）一個新的（new）Appointment物件
+     */
+    public Appointment(int DoctorId, String UserId, Timestamp ReserveTime, int AppointmentNumber) {
+        this.DoctorId = DoctorId;
+        this.UserId = UserId;
+        this.ReserveTime = ReserveTime;
+        this.AppointmentNumber = AppointmentNumber;
     }
 
     /**
