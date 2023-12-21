@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理者資料</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+			padding: 5px;
+        }
+        table {
+            width: 810px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-radius: 15px
+			
+        }
+        th, td {
+            border: 2px solid #ffffff;
+            padding: 12px;
+            text-align: center;
+        }
+        th {
+            background-color: #004B97;
+            color: white;
+        }
+        td {
+            text-align: left;
+            background-color: #E0E0E0;
+        }
+        td:nth-child(1), td:nth-child(3), td:nth-child(4), td:nth-child(5) {
+            width: 15%;
+        }
+        td:nth-child(2) {
+            width: 40%; 
+        }
+		-->
+        a {
+            width: 100%;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			text-decoration: none;
+        }
+		
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;">
+	<h1><b>門診</b></h1></div>
+    <table><!--門診資料庫有幾筆資料就顯示幾筆-->
+        <tr>
+            <th>名稱</th>
+            <th>門診ID</th>
+            <th>科室ID</th>
+            <th></th>
+			<th width="100"></th>
+        </tr>
+        <tr>
+            <td>名稱 1</td>
+            <td>門診ID 1</td>
+			<td>科室ID 1</td>
+            <td><a href="4_2_clinic_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>名稱 2</td>
+            <td>門診ID 2</td>
+			<td>科室ID 2</td>
+            <td><a href="4_2_clinic_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>名稱 3</td>
+            <td>門診ID 3</td>
+			<td>科室ID 3</td>
+            <td><a href="4_2_clinic_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>名稱 4</td>
+            <td>門診ID 4</td>
+			<td>科室ID 4</td>
+            <td><a href="4_2_clinic_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+        <tr>
+            <td>名稱 5</td>
+            <td>門診ID 5</td>
+			<td>科室ID 5</td>
+            <td><a href="4_2_clinic_modified.html" class="modify-button">修改</a></td>
+            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
+        </tr>
+    </table>
+	<br>
+    <div><a href="4_1_clinic_add.html" class="add-button">新增</a></div>
+</body>
+</html>
