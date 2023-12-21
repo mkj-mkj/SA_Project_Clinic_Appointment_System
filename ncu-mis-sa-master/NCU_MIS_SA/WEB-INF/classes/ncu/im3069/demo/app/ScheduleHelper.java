@@ -192,8 +192,78 @@ public class ScheduleHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該班表流水號之班表資料
      */
-    public JSONObject getBySeq(int Seq) {
+    public JSONObject getBySeq(int Seq) {  // int or string
+        JSONObject data = new JSONObject();
+        Schedule s = null;
+        /** 記錄實際執行之SQL指令 */
+        String exexcute_sql = "";
+        /** 紀錄程式開始執行時間 */
+        long start_time = System.nanoTime();
+        /** 紀錄SQL總行數 */
+        int row = 0;
+        /** 儲存JDBC檢索資料庫後回傳之結果，以 pointer 方式移動到下一筆資料 */
+        ResultSet rs = null;
 
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "SELECT * FROM `hosptial`.`schedule` WHERE `schedule`.`schedule_seq` = ? LIMIT 1";
+
+            /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
+            pres = conn.prepareStatement(sql);
+            pres.setInt(1, Seq);
+            /** 執行查詢之SQL指令並記錄其回傳之資料 */
+            rs = pres.executeQuery();
+
+            /** 紀錄真實執行的SQL指令，並印出 **/
+            exexcute_sql = pres.toString();
+            System.out.println(exexcute_sql);
+
+            /** 透過 while 迴圈移動pointer，取得每一筆回傳資料 */
+            while (rs.next()) {
+                /** 每執行一次迴圈表示有一筆資料 */
+                row += 1;
+                
+                /** 將 ResultSet 之資料取出 */
+                int seq = rs.getInt("schedule_seq");
+                Timestamp DateTime = rs.getTimestamp("datetime");
+                int ClinicId = rs.getInt("clinic_id");              
+                int DoctorId = rs.getInt("doctor_id"); 
+                int MaxCapacity = rs.getInt("MaxCapacity");
+                int CurrentRegistrations = rs.getInt("CurrentRegistrations");
+                
+                /** 將每一筆schedule資料產生一名新schedule物件 */
+                s = new Schedule(seq, DateTime, ClinicId, DoctorId, MaxCapacity, CurrentRegistrations);
+                /** 取出該班表之資料並封裝至 JSONsonArray 內 */
+                data = s.getData();
+            }
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(rs, pres, conn);
+        }
+
+        /** 紀錄程式結束執行時間 */
+        long end_time = System.nanoTime();
+        /** 紀錄程式執行時間 */
+        long duration = (end_time - start_time);
+
+        /** 將SQL指令、花費時間、影響行數與所有門診資料之JSONArray，封裝成JSONObject回傳 */
+
+        JSONObject response = new JSONObject();
+        response.put("sql", exexcute_sql);
+        response.put("row", row);
+        response.put("time", duration);
+        response.put("data", data);
+
+        return response;
     }
 
     /**
@@ -202,7 +272,65 @@ public class ScheduleHelper {
      * @return the JSON object 回傳SQL指令執行之結果
      */
     public JSONObject create(Schedule s) {
+        /** 記錄實際執行之SQL指令 */
+        String exexcute_sql = "";
+        /** 紀錄程式開始執行時間 */
+        long start_time = System.nanoTime();
+        /** 紀錄SQL總行數 */
+        int row = 0;
 
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "INSERT INTO `hostipal`.`schedule`(`schedule_seq`,datetime`, `clinic_id`, `doctor_id`, `MaxCapacity`)"
+                    + " VALUES(?, ?, ?, ?, ?)";
+
+            /** 取得所需之參數 */
+            int schedule_seq = s.getSeq();
+            Timestamp datetime = s.getDateTime();
+            int clinic_id = s.getClinicID();
+            int doctor_id = s.getDoctorID();
+            int MaxCapacity = s.getMaxCapacity();
+
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+            pres.setInt(1, schedule_seq);
+            pres.setTimestamp(2, datetime);
+            pres.setInt(3, clinic_id);
+            pres.setInt(4, doctor_id);
+            pres.setInt(5, MaxCapacity);
+
+            /** 執行新增之SQL指令並記錄影響之行數 */
+            row = pres.executeUpdate();
+
+            /** 紀錄真實執行的SQL指令，並印出 **/
+            exexcute_sql = pres.toString();
+            System.out.println(exexcute_sql);
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(pres, conn);
+        }
+
+        /** 紀錄程式結束執行時間 */
+        long end_time = System.nanoTime();
+        /** 紀錄程式執行時間 */
+        long duration = (end_time - start_time);
+
+        /** 將SQL指令、花費時間與影響行數，封裝成JSONObject回傳 */
+        JSONObject response = new JSONObject();
+        response.put("sql", exexcute_sql);
+        response.put("time", duration);
+        response.put("row", row);
+
+        return response;
     }
 
     /**
@@ -211,7 +339,65 @@ public class ScheduleHelper {
      * @return the JSONObject 回傳SQL指令執行結果與執行之資料
      */
     public JSONObject update(Schedule s) {
+        /** 紀錄回傳之資料 */
+        JSONArray jsa = new JSONArray();
+        /** 記錄實際執行之SQL指令 */
+        String exexcute_sql = "";
+        /** 紀錄程式開始執行時間 */
+        long start_time = System.nanoTime();
+        /** 紀錄SQL總行數 */
+        int row = 0;
 
+        try {
+            /** 取得資料庫之連線 */
+            conn = DBMgr.getConnection();
+            /** SQL指令 */
+            String sql = "Update `hospital`.`schedule` SET `schedule_seq` = ? ,`clinic_id` = ? ,`doctor_id` = ?, `MaxCapacity` = ?, `CurrentResgistrations` = ? WHERE `clinic_id` = ?";
+            /** 取得所需之參數 */
+            int schedule_seq = s.getSeq();
+            Timestamp datetime = s.getDateTime();
+            int clinic_id = s.getClinicID();
+            int doctor_id = s.getDoctorID();
+            int MaxCapacity = s.getMaxCapacity();
+
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(sql);
+            pres.setInt(1, schedule_seq);
+            pres.setTimestamp(2, datetime);
+            pres.setInt(3, clinic_id);
+            pres.setInt(4, doctor_id);
+            pres.setInt(5, MaxCapacity);
+            /** 執行更新之SQL指令並記錄影響之行數 */
+            row = pres.executeUpdate();
+
+            /** 紀錄真實執行的SQL指令，並印出 **/
+            exexcute_sql = pres.toString();
+            System.out.println(exexcute_sql);
+
+        } catch (SQLException e) {
+            /** 印出JDBC SQL指令錯誤 **/
+            System.err.format("SQL State: %s\n%s\n%s", e.getErrorCode(), e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            /** 若錯誤則印出錯誤訊息 */
+            e.printStackTrace();
+        } finally {
+            /** 關閉連線並釋放所有資料庫相關之資源 **/
+            DBMgr.close(pres, conn);
+        }
+
+        /** 紀錄程式結束執行時間 */
+        long end_time = System.nanoTime();
+        /** 紀錄程式執行時間 */
+        long duration = (end_time - start_time);
+
+        /** 將SQL指令、花費時間與影響行數，封裝成JSONObject回傳 */
+        JSONObject response = new JSONObject();
+        response.put("sql", exexcute_sql);
+        response.put("row", row);
+        response.put("time", duration);
+        response.put("data", jsa);
+
+        return response;
     }
 
 }

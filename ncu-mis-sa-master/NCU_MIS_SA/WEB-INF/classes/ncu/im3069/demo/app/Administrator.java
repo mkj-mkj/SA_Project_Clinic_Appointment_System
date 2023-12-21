@@ -22,6 +22,7 @@ public class Administrator {
     private String Email;
 
     private String Password;
+    
 
     /** ah，UserHelper之物件與User相關之資料庫方法（Sigleton） */
     private AdministratorHelper ah = AdministratorHelper.getHelper();
