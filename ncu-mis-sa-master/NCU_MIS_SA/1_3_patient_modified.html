@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+<head>
+	<link rel="stylesheet" href="修改患者.css">
+	<meta charset="UTF-8">
+
+  
+
+  <title>修改患者</title>
+</head>
+<body>
+		<h1>修改患者</h1>
+	<br/>
+	<br/>
+	<center><table border="1" cellspacing="0" cellpadding="5">
+		<tr>
+			<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
+			<td width= "500"><input type="text" name="id"  pattern="[A-Z0-9]{10}" required= "required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
+			<td><input type="text" name="name" maxlength="30" required= "required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">性別(必填)</font></strong></td>
+			<td required= "required">
+				<input type="radio" name="sex" value="男" checked> 男
+				<input type="radio" name="sex" value="女"> 女
+			</td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">生日(必填)</font></strong></td>
+			<td><input type="date" name="birthday" style="width: 170px;" required= "required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">現在地址(必填)</font></strong></td>
+			<td><input type="text" name="address" style="width: 450px;" required= "required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">聯絡電話(必填)</font></strong></td>
+			<td><input type="text" name="phone" placeholder="範例：09-12345678" maxlength="11" pattern="09\d{2}-\d{6}" required= "required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">E-Mail(必填)</font></strong></td>
+			<td><input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>血型</strong></td>
+			<td><input type="text" name="blood" placeholder="最長6碼"  maxlength="6" style="width: 70px;"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>身高</strong></td>
+			<td><input type="number" name="height" placeholder="公分" min="0" max="300" style="width: 70px;"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>體重</strong></td>
+			<td><input type="number" name="weight" placeholder="公斤" min="0" max="800" style="width: 70px;"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>是否有藥物過敏史(無請填寫無)</strong></td>
+			<td><input type="tel" name="medicine" placeholder="過敏藥物名稱" maxlength="100"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>個人過去重大病史</strong></td>
+			<td><input type="tel" name="medical_history" placeholder="手術或慢性病" maxlength="100"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>住宅電話</strong></td>
+			<td><input type="tel" name="home" placeholder="最長10碼" maxlength="10" maxlength="10" pattern="0[0-9]-\d{7}"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>聯絡人姓名</strong></td>
+			<td><input type="text" name="contact_name" placeholder="最長30碼" maxlength="30"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>關係</strong></td>
+			<td><input type="text" name="relationship" placeholder="最長12碼" maxlength="12"/></td>
+		</tr>
+		<tr>
+			<td bgcolor = "#C4E1FF"><strong>聯絡人電話</strong></td>
+			<td><input type="text" name="phone" placeholder="範例：09-12345678" maxlength="11" pattern="09\d{2}-\d{6}"/></td>
+		</tr>
+		
+		
+    </table></center>
+	<br/>
+	<br/>
+    <center><button type="submit" class="button">送出</button>
+	
+  </form>
+</body>
+</html>
