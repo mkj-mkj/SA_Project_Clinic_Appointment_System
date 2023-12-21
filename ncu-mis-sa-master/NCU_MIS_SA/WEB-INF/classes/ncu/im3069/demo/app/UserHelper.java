@@ -353,12 +353,12 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`user`(`user_id`, `case_number`, `name`, `user_address`, `user_birth`, `user_email`, `user_gender`, `user_phone`, `residence_tel`, `blood`, `height`, `weight`, `allergy_history`, `serverill_history`, `contact_name`, `contact_rel`, `contact_tel`)"
+            String sql = "INSERT INTO `hostipal`.`user`(`user_id`, `name`, `user_address`, `user_birth`, `user_email`, `user_gender`, `user_phone`, `residence_tel`, `blood`, `height`, `weight`, `allergy_history`, `serverill_history`, `contact_name`, `contact_rel`, `contact_tel`)"
                     + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             /** 取得所需之參數 */
             String user_id = u.getID();
-            int case_number = u.getCaseNumber();
+            // int case_number = u.getCaseNumber();
             String name = u.getName();
             String user_address = u.getAddress();
             Timestamp user_birth = u.getBirth();
@@ -378,22 +378,22 @@ public class UserHelper {
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, user_id);
-            pres.setInt(2, case_number);
-            pres.setString(3, name);
-            pres.setString(4, user_address);
-            pres.setTimestamp(5, user_birth);
-            pres.setString(6, user_email);
-            pres.setBoolean(7, user_gender);
-            pres.setString(8, user_phone);
-            pres.setString(9, residence_tel);
-            pres.setString(10, blood);
-            pres.setFloat(11, height);
-            pres.setFloat(12, weight);
-            pres.setString(13, AllergyHistory);
-            pres.setString(14, ServillHistory);
-            pres.setString(15, contact_name);
-            pres.setString(16, contact_rel);
-            pres.setString(17, contact_tel);
+            // pres.setInt(2, case_number);
+            pres.setString(2, name);
+            pres.setString(3, user_address);
+            pres.setTimestamp(4, user_birth);
+            pres.setString(5, user_email);
+            pres.setBoolean(6, user_gender);
+            pres.setString(7, user_phone);
+            pres.setString(8, residence_tel);
+            pres.setString(9, blood);
+            pres.setFloat(10, height);
+            pres.setFloat(11, weight);
+            pres.setString(12, AllergyHistory);
+            pres.setString(13, ServillHistory);
+            pres.setString(14, contact_name);
+            pres.setString(15, contact_rel);
+            pres.setString(16, contact_tel);
 
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
@@ -446,10 +446,10 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `hospital`.`user` SET `case_number` = ? ,`name` = ? ,`user_address` = ? ,`user_birth` = ? ,`user_email` = ? ,`user_gender` = ? ,`user_phone` = ? ,`residence_tel` = ? ,`blood` = ? ,`height` = ? ,`weight` = ? ,`allergy_history` = ? ,`serverill_history` = ? ,`contact_name` = ? ,`contact_rel` = ? ,`contact_tel` = ? WHERE `user_id` = ?";
+            String sql = "Update `hospital`.`user` SET `name` = ? ,`user_address` = ? ,`user_birth` = ? ,`user_email` = ? ,`user_gender` = ? ,`user_phone` = ? ,`residence_tel` = ? ,`blood` = ? ,`height` = ? ,`weight` = ? ,`allergy_history` = ? ,`serverill_history` = ? ,`contact_name` = ? ,`contact_rel` = ? ,`contact_tel` = ? WHERE `user_id` = ?";
             /** 取得所需之參數 */
             String user_id = u.getID();
-            int case_number = u.getCaseNumber();
+            // int case_number = u.getCaseNumber();
             String name = u.getName();
             String user_address = u.getAddress();
             Timestamp user_birth = u.getBirth();
@@ -468,23 +468,23 @@ public class UserHelper {
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, case_number);
-            pres.setString(2, name);
-            pres.setString(3, user_address);
-            pres.setTimestamp(4, user_birth);
-            pres.setString(5, user_email);
-            pres.setBoolean(6, user_gender);
-            pres.setString(7, user_phone);
-            pres.setString(8, residence_tel);
-            pres.setString(9, blood);
-            pres.setFloat(10, height);
-            pres.setFloat(11, weight);
-            pres.setString(12, AllergyHistory);
-            pres.setString(13, ServillHistory);
-            pres.setString(14, contact_name);
-            pres.setString(15, contact_rel);
-            pres.setString(16, contact_tel);
-            pres.setString(17, user_id);
+            // pres.setInt(1, case_number);
+            pres.setString(1, name);
+            pres.setString(2, user_address);
+            pres.setTimestamp(3, user_birth);
+            pres.setString(4, user_email);
+            pres.setBoolean(5, user_gender);
+            pres.setString(6, user_phone);
+            pres.setString(7, residence_tel);
+            pres.setString(8, blood);
+            pres.setFloat(9, height);
+            pres.setFloat(10, weight);
+            pres.setString(11, AllergyHistory);
+            pres.setString(12, ServillHistory);
+            pres.setString(13, contact_name);
+            pres.setString(14, contact_rel);
+            pres.setString(15, contact_tel);
+            pres.setString(16, user_id);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
