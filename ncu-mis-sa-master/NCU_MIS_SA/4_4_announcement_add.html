@@ -45,8 +45,11 @@
 <body>
 	<h1>新增公告</h1>
     <form action="/add-notice" method="post">
-        <div class="title-group">
 		<center><table>
+			<tr>
+				<td><label for="notice-seq">流水號</label></td>
+				<td><input type="text" name="id" required="required"></td>
+		<div class="title-group">		
 			<tr>
 				<td><label for="notice-title">標題</label></td>
 				<td style="height:50px;"><input type="text" class="title-control" id="notice-title" name="notice-title" required="required" /></td>
