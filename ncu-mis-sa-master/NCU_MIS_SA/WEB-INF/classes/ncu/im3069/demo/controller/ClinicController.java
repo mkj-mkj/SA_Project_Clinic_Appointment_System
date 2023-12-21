@@ -59,7 +59,7 @@ public class ClinicController extends HttpServlet {
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();
                         resp.put("status", "200");
-                        resp.put("message", "成功! 註冊會員資料...");
+                        resp.put("message", "成功! 新增門診資料...");
                         resp.put("response", data);
 
                         /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
@@ -107,7 +107,7 @@ public class ClinicController extends HttpServlet {
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();
                         resp.put("status", "200");
-                        resp.put("message", "會員資料取得成功");
+                        resp.put("message", "門診資料取得成功");
                         resp.put("response", query);
 
                         /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
