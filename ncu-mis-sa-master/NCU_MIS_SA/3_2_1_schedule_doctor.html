@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>管理者資料</title>
+    <style>
+        body {
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            color: white;
+            font-size: 3em;
+            margin-top: 0;
+            margin-bottom: 40px;
+			padding: 5px;
+        }
+        table {
+            width: 810px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            border-radius: 15px;
+        }
+        th, td {
+            border: 2px solid #ffffff;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #004B97;
+            color: white;
+        }
+        td {
+            text-align: left;
+            background-color: #E0E0E0;
+        }
+        td:nth-child(1), td:nth-child(3), td:nth-child(5) {
+            width: 20%; 
+        }
+		td:nth-child(2) {
+			width: 27%;
+		}
+		td:nth-child(5) {
+			width: 13%;
+		}
+		
+        .appointment {
+			text-align: center;
+            width: 100%;
+            padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+			text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div style="background-color:#004B97;"><h1><b>醫師門診時刻表</b></h1></div>
+    <table><!--管理者資料庫有幾筆資料就顯示幾筆-->
+        <tr>
+            <th>日期時間</th>
+            <th>門診名稱</th>
+            <th>醫生姓名</th>
+            <th>已掛人數</th>
+			<th>預約按鈕</th>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+			<td></td>
+            <td><a href="3_2_appointment.html" class="appointment">我要預約</a></td>
+        </tr>
+    </table>
+</body>
+</html>
