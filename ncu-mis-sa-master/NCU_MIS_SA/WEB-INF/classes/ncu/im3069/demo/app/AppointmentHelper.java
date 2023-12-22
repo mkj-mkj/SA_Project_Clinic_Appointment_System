@@ -147,7 +147,7 @@ public class AppointmentHelper {
                 int seq = rs.getInt("appointment_seq");
                 int doctor_id = rs.getInt("doctor_id");
                 String user_id = rs.getString("user_id");
-                Timestamp reserve_time = rs.getTimestamp("reserve_time");
+                String reserve_time = rs.getString("reserve_time");
                 int appointment_number = rs.getInt("appointment");
 
                 /** 將每一筆預約資料產生一個新Appointment物件 */
@@ -224,7 +224,7 @@ public class AppointmentHelper {
                 int seq = rs.getInt("appointment_seq");
                 int doctor_id = rs.getInt("doctor_id");
                 String user_id = rs.getString("user_id");
-                Timestamp reserve_time = rs.getTimestamp("reserve_time");
+                String reserve_time = rs.getString("reserve_time");
                 int appointment_number = rs.getInt("appointment");
 
                 /** 將每一筆預約資料產生一名新Appointment物件 */
@@ -274,12 +274,12 @@ public class AppointmentHelper {
 
             /** 取得所需之參數 */
             int dcotor_id = ap.getDoctorID();
-            Timestamp reserve_time = ap.getReserveTime();
+            String reserve_time = ap.getReserveTime();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setInt(1, dcotor_id);
-            pres.setTimestamp(2, reserve_time);
+            pres.setString(2, reserve_time);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
@@ -372,7 +372,7 @@ public class AppointmentHelper {
             // int appointment_seq = ap.getSeq();
             int doctor_id = ap.getDoctorID();
             String user_id = ap.getUserID();
-            Timestamp reserve_time = ap.getReserveTime();
+            String reserve_time = ap.getReserveTime();
             int appointment_number = getAppointment(ap);
 
             /** 將參數回填至SQL指令當中 */
@@ -380,7 +380,7 @@ public class AppointmentHelper {
             // pres.setInt(1, appointment_seq);
             pres.setInt(1, doctor_id);
             pres.setString(2, user_id);
-            pres.setTimestamp(3, reserve_time);
+            pres.setString(3, reserve_time);
             pres.setInt(4, appointment_number);
 
             /** 執行新增之SQL指令並記錄影響之行數 */
@@ -438,12 +438,12 @@ public class AppointmentHelper {
             /** 取得所需之參數 */
             String user_id = ap.getUserID();
             int doctor_id = ap.getDoctorID();
-            Timestamp reserve_time = ap.getReserveTime();
+            String reserve_time = ap.getReserveTime();
             int appointment_number = getAppointment(ap);
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setTimestamp(1, reserve_time);
+            pres.setString(1, reserve_time);
             pres.setInt(2, appointment_number);
             pres.setString(3, user_id);
             pres.setInt(4, doctor_id);

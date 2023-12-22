@@ -48,9 +48,9 @@ public class AppointmentController extends HttpServlet {
                 /** 取出經解析到JSONObject之Request參數 */
                 Integer doctor_id = jso.getInt("doctor_id");
                 String user_id = jso.getString("user_id");
-                Timestamp reserve_time = jso.getTimestamp("reserve_time");
+                String reserve_time = jso.getString("reserve_time");
 
-                /** 建立一個新的Appointment物件 */
+                /** 建立一個新的Appointment物件 */ 
                 Appointment ap = new Appointment(doctor_id, user_id, reserve_time);
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
@@ -172,7 +172,7 @@ public class AppointmentController extends HttpServlet {
                 /** 取出經解析到JSONObject之Request參數 */
                 String user_id = jso.getString("user_id");
                 int doctor_id = jso.getInt("doctor_id");
-                Timestamp reserve_time = jso.getTimestamp("reserve_time");
+                String reserve_time = jso.getString("reserve_time");
                 int appointment_num = jso.getInt("appointment_num");
 
                 /** 透過傳入之參數，新建一個以這些參數之預約Appointment物件 */

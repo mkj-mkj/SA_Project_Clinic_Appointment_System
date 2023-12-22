@@ -327,7 +327,7 @@ public class AnnouncementHelper {
             /** 取得所需之參數 */
             String announcement_title = an.getTitle();
             String announcement_content = an.getContent();
-            String update_time = an.setUpdateTime();
+            String update_time = an.getUpdateTime();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -391,13 +391,13 @@ public class AnnouncementHelper {
             int announce_seq = an.getSeq();
             String announce_title = an.getTitle();
             String announce_content = an.getContent();
-            String update_time = an.setUpdateTime();
+            String update_time = an.getUpdateTime();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setString(1, announce_title);
             pres.setString(2, announce_content);
-            pres.setString(3, update_time)
+            pres.setString(3, update_time);
             pres.setInt(4, announce_seq);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();

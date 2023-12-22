@@ -69,7 +69,7 @@ public class RoomController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 透過RoomHelper物件的getByID()方法自資料庫取回該診室之資料，回傳之資料為JSONObject物件 */
-                        JSONObject query = rh.getByID(id);
+                        JSONObject query = rh.getByID(Integer.parseInt(id));
 
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();

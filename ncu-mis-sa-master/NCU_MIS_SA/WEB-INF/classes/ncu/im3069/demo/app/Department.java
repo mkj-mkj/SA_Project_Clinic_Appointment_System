@@ -16,6 +16,8 @@ public class Department {
 
     private String Name;
 
+    private String Info;
+
     /** deph，DepartmentHelper之物件與Deoartnebt相關之資料庫方法（Sigleton） */
     private DepartmentHelper deph = DepartmentHelper.getHelper();
 
@@ -32,6 +34,12 @@ public class Department {
     public Department(int Id, String Name) {
         this.Id = Id;
         this.Name = Name;
+    }
+
+    public Department(int Id, String Name, String Info) {
+        this.Id = Id;
+        this.Name = Name;
+        this.Info = Info;
     }
 
     /**

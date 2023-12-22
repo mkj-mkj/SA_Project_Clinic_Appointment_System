@@ -2,12 +2,93 @@
 <!DOCTYPE xml>
 <web-app>
     <servlet>
-        <servlet-name>member</servlet-name>
-        <servlet-class>ncu.im3069.demo.controller.MemberController</servlet-class>
+        <servlet-name>user</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.UserController</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>member</servlet-name>
-        <url-pattern>/api/member.do</url-pattern>
+        <servlet-name>user</servlet-name>
+        <url-pattern>/api/user.do</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>administrator</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.AdministratorController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>administrator</servlet-name>
+        <url-pattern>/api/administrator.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>announcement</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.AnnouncementController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>announcement</servlet-name>
+        <url-pattern>/api/announcement.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>appointment</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.AppointmentController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appointment</servlet-name>
+        <url-pattern>/api/appointment.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>clinic</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.ClinicController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>clinic</servlet-name>
+        <url-pattern>/api/clinic.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>department</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.DepartmentController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>department</servlet-name>
+        <url-pattern>/api/department.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>doctor</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.DoctorController</servlet-class> 
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>doctor</servlet-name>
+        <url-pattern>/api/doctor.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>room</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.RoomController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>room</servlet-name>
+        <url-pattern>/api/room.do</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>schedule</servlet-name>
+        <servlet-class>ncu.im3069.demo.controller.ScheduleController</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>schedule</servlet-name>
+        <url-pattern>/api/schedule.do</url-pattern>
+    </servlet-mapping>
+
 </web-app>

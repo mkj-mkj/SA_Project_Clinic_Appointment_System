@@ -91,14 +91,4 @@
         <url-pattern>/api/schedule.do</url-pattern>
     </servlet-mapping>
 
-    <servlet>
-        <servlet-name>user</servlet-name>
-        <servlet-name>ncu.im3069.demo.controller.UserController</servlet-name>
-    </servlet>
-
-    <servlet-mapping>
-        <servlet-name>user</servlet-name>
-        <url-pattern>/api/user.do</url-pattern>
-    </servlet-mapping>
-
 </web-app>

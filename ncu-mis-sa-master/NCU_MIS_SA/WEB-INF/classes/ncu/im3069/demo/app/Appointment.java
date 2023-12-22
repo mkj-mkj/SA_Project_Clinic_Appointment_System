@@ -18,7 +18,7 @@ public class Appointment {
 
     private String UserId;
 
-    private Timestamp ReserveTime;
+    private String ReserveTime;
 
     private int AppointmentNumber;
 
@@ -54,7 +54,7 @@ public class Appointment {
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
-    public Appointment(int DoctorId, String UserId, Timestamp ReserveTime) {
+    public Appointment(int DoctorId, String UserId, String ReserveTime) {
         this.DoctorId = DoctorId;
         this.UserId = UserId;
         this.ReserveTime = ReserveTime;
@@ -63,7 +63,7 @@ public class Appointment {
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
-    public Appointment(int Seq, int DoctorId, String UserId, Timestamp ReserveTime) {
+    public Appointment(int Seq, int DoctorId, String UserId, String ReserveTime) {
         this.Seq = Seq;
         this.DoctorId = DoctorId;
         this.UserId = UserId;
@@ -73,7 +73,7 @@ public class Appointment {
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
-    public Appointment(int DoctorId, String UserId, Timestamp ReserveTime, int AppointmentNumber) {
+    public Appointment(int DoctorId, String UserId, String ReserveTime, int AppointmentNumber) {
         this.DoctorId = DoctorId;
         this.UserId = UserId;
         this.ReserveTime = ReserveTime;
@@ -83,7 +83,7 @@ public class Appointment {
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
-    public Appointment(int Seq, int DoctorId, String UserId, Timestamp ReserveTime, int AppointmentNumber) {
+    public Appointment(int Seq, int DoctorId, String UserId, String ReserveTime, int AppointmentNumber) {
         this.Seq = Seq;
         this.DoctorId = DoctorId;
         this.UserId = UserId;
@@ -108,7 +108,7 @@ public class Appointment {
         return this.UserId;
     }
 
-    public Timestamp getReserveTime() {
+    public String getReserveTime() {
         return this.ReserveTime;
     }
 

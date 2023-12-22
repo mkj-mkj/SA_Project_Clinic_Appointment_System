@@ -1,10 +1,11 @@
 package ncu.im3069.demo.controller;
 
 import java.io.*;
+
 import javax.servlet.*;
 import javax.servlet.http.*;
 import org.json.*;
-import java.sql.Timestamp;
+import java.security.Timestamp;
 import ncu.im3069.demo.app.Clinic;
 import ncu.im3069.demo.app.User;
 import ncu.im3069.demo.app.UserHelper;
@@ -213,4 +214,3 @@ public class UserController extends HttpServlet {
                 jsr.response(resp, response);
         }
     }
-}

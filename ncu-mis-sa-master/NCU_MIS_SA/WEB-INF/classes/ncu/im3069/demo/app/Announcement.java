@@ -103,7 +103,7 @@ public class Announcement {
         return this.UpdateTime;
     }
 
-    public String setUpdateTime() {
+    public void setUpdateTime() {
         /** 設定更新資料時間 */
         Calendar calendar = Calendar.getInstance();
         int Day_of_Month = calendar.get(Calendar.DAY_OF_MONTH);
