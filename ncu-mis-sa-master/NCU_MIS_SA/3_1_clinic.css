@@ -18,7 +18,11 @@ h1 {
 			background-color: #004B97;
 			color: #FFFFFF;
 		}
-		button {
+		a {
+			color: black;
+			text-decoration: none;
+		}
+		.home {
 			margin: 10px;
 			padding: 10px;
 			font-size: 16px;
@@ -26,5 +30,6 @@ h1 {
 			color: #FFFFFF;
 			border:none;
 			border-radius:10px;
+			text-decoration: none;
 		}
 		
