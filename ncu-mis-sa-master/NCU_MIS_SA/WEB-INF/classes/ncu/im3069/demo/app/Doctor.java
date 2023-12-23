@@ -18,6 +18,8 @@ public class Doctor {
 
     private int DeptId;
 
+    private String DeptName;
+
     private Department department;
 
     /** deph，DepartmentHelper之物件與Department相關之資料庫方法（Sigleton） */
@@ -51,6 +53,16 @@ public class Doctor {
     }
 
     /**
+     * 實例化（Instantiates）一個新的（new）Doctor物件
+     */
+    public Doctor(int Id, String Name, int DeptId, String DeptName) {
+        this.Id = Id;
+        this.Name = Name;
+        this.DeptId = DeptId;
+        this.DeptName = DeptName;
+    }
+
+    /**
      * 取得醫生之編號
      *
      * @return the id 回傳醫生編號
@@ -78,6 +90,15 @@ public class Doctor {
     }
 
     /**
+     * 取得醫生所屬之科別名稱
+     * 
+     * @return the id 回傳科別名稱
+     */
+    public String getDepartmentName() {
+        return this.DeptName;
+    }
+
+    /**
      * 取得該醫生所有資料
      *
      * @return the data 取得該名醫生之所有資料並封裝於JSONObject物件內
@@ -88,6 +109,7 @@ public class Doctor {
         jso.put("id", getID());
         jso.put("name", getName());
         jso.put("dept_id", getDepartment());
+        jso.put("dept_name", getDepartmentName());
         return jso;
     }
 
