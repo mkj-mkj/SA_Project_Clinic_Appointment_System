@@ -20,9 +20,9 @@ public class User {
 
     private String Address;
 
-    private Timestamp Birth;
+    private String Birth;
 
-    private Boolean Gender;
+    private int Gender;
 
     private String Email;
 
@@ -30,21 +30,21 @@ public class User {
 
     private String ResidenceTel;
 
-    private String BloodType;
+    private String BloodType = null;
 
-    private Float Height;
+    private Float Height = null;
 
-    private Float Weight;
+    private Float Weight = null;
 
-    private String AllergyHistory;
+    private String AllergyHistory = null;
 
-    private String ServillHistory;
+    private String ServillHistory = null;
 
-    private String ContactName;
+    private String ContactName = null;
 
-    private String ContactRel;
+    private String ContactRel = null;
 
-    private String ContactTel;
+    private String ContactTel = null;
 
     /** uh，UserHelper之物件與User相關之資料庫方法（Sigleton） */
     private UserHelper uh = UserHelper.getHelper();
@@ -69,7 +69,7 @@ public class User {
     /**
      * 實例化（Instantiates）一個新的（new）User物件
      */
-    public User(String Id, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
+    public User(String Id, String Name, String Address, String Birth, String Email, int Gender,
             String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
@@ -93,7 +93,7 @@ public class User {
     /**
      * 實例化（Instantiates）一個新的（new）User物件
      */
-    public User(String Id, int CaseNumber, String Name, String Address, Timestamp Birth, String Email, Boolean Gender,
+    public User(String Id, int CaseNumber, String Name, String Address, String Birth, String Email, int Gender,
             String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
@@ -156,7 +156,7 @@ public class User {
      *
      * @return the id 回傳使用者之生日
      */
-    public Timestamp getBirth() {
+    public String getBirth() {
         return this.Birth;
     }
 
@@ -165,7 +165,7 @@ public class User {
      *
      * @return the id 回傳使用者之性別 (1為女生，0為男生)
      */
-    public Boolean getGender() {
+    public int getGender() {
         return this.Gender;
     }
 

@@ -25,22 +25,22 @@ import ncu.im3069.tools.JsonReader;
 
 public class UserController extends HttpServlet {
 
-    /** The Constant serialVersionUID. */
-    private static final long serialVersionUID = 1L;
+        /** The Constant serialVersionUID. */
+        private static final long serialVersionUID = 1L;
 
-    /** uh，UserHelper之物件與User相關之資料庫方法（Sigleton） */
-    private UserHelper uh = UserHelper.getHelper();
+        /** uh，UserHelper之物件與User相關之資料庫方法（Sigleton） */
+        private UserHelper uh = UserHelper.getHelper();
 
-    /**
-     * 處理Http Method請求POST方法（新增資料）
-     *
-     * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
-     * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
-     * @throws ServletException the servlet exception
-     * @throws IOException      Signals that an I/O exception has occurred.
-     */
-    public void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        /**
+         * 處理Http Method請求POST方法（新增資料）
+         *
+         * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
+         * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
+         * @throws ServletException the servlet exception
+         * @throws IOException      Signals that an I/O exception has occurred.
+         */
+        public void doPost(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
                 /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
                 JsonReader jsr = new JsonReader(request);
                 JSONObject jso = jsr.getObject();
@@ -49,9 +49,9 @@ public class UserController extends HttpServlet {
                 String user_id = jso.getString("user_id");
                 String user_name = jso.getString("user_name");
                 String address = jso.getString("address");
-                Timestamp birth = jso.getTimestamp("birth");   
+                String birth = jso.getString("birth");
                 String email = jso.getString("email");
-                Boolean gender = jso.getBoolean("gender");
+                int gender = jso.getInt("gender");
                 String phone = jso.getString("phone");
                 String residence_tel = jso.getString("residence_tel");
                 String blood = jso.getString("blood");
@@ -64,17 +64,13 @@ public class UserController extends HttpServlet {
                 String contact_tel = jso.getString("contact_tel");
 
                 /** 建立一個新的User物件 */
-                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood, height, weight, allergy_history, servill_history, contact_name, contact_rel, contact_tel);
+                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood,
+                                height, weight, allergy_history, servill_history, contact_name, contact_rel,
+                                contact_tel);
 
-                /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
-                if (user_id.isEmpty() || user_name.isEmpty() || birth == null || address.isEmpty() || email.isEmpty() || phone.isEmpty() || gender == null) {
-                        /** 以字串組出JSON格式之資料 */
-                        String resp = "{\"status\": \'400\', \"message\": \'欄位不能有空值\', \'response\': \'\'}";
-                        /** 透過JsonReader物件回傳到前端（以字串方式） */
-                        jsr.response(resp, response);
-                }
+
                 /** 透過UserHelper物件的checkDuplicate()檢查該使用者之身分證字號是否有重複 */
-                else if (!uh.checkDuplicate(u)) {
+                if (!uh.checkDuplicate(u)) {
                         /** 透過UserHelper物件的create()方法新建一個使用者至資料庫 */
                         JSONObject data = uh.create(u);
 
@@ -88,22 +84,22 @@ public class UserController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 以字串組出JSON格式之資料 */
-                        String resp = "{\"status\": \'400\', \"message\": \'新增門診失敗，此門診名稱重複！\', \'response\': \'\'}";
+                        String resp = "{\"status\": \'400\', \"message\": \'新增使用者失敗，此身分證字號重複！\', \'response\': \'\'}";
                         /** 透過JsonReader物件回傳到前端（以字串方式） */
                         jsr.response(resp, response);
                 }
-    }
+        }
 
-    /**
-     * 處理Http Method請求GET方法（取得資料）
-     *
-     * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
-     * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
-     * @throws ServletException the servlet exception
-     * @throws IOException      Signals that an I/O exception has occurred.
-     */
-    public void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        /**
+         * 處理Http Method請求GET方法（取得資料）
+         *
+         * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
+         * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
+         * @throws ServletException the servlet exception
+         * @throws IOException      Signals that an I/O exception has occurred.
+         */
+        public void doGet(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
                 /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
                 JsonReader jsr = new JsonReader(request);
                 /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
@@ -135,18 +131,18 @@ public class UserController extends HttpServlet {
                         /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
                         jsr.response(resp, response);
                 }
-    }
+        }
 
-    /**
-     * 處理Http Method請求DELETE方法（刪除）
-     *
-     * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
-     * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
-     * @throws ServletException the servlet exception
-     * @throws IOException      Signals that an I/O exception has occurred.
-     */
-    public void doDelete(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        /**
+         * 處理Http Method請求DELETE方法（刪除）
+         *
+         * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
+         * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
+         * @throws ServletException the servlet exception
+         * @throws IOException      Signals that an I/O exception has occurred.
+         */
+        public void doDelete(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
                 JsonReader jsr = new JsonReader(request);
                 JSONObject jso = jsr.getObject();
 
@@ -164,18 +160,18 @@ public class UserController extends HttpServlet {
 
                 /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
                 jsr.response(resp, response);
-    }
+        }
 
-    /**
-     * 處理Http Method請求PUT方法（更新）
-     *
-     * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
-     * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
-     * @throws ServletException the servlet exception
-     * @throws IOException      Signals that an I/O exception has occurred.
-     */
-    public void doPut(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+        /**
+         * 處理Http Method請求PUT方法（更新）
+         *
+         * @param request  Servlet請求之HttpServletRequest之Request物件（前端到後端）
+         * @param response Servlet回傳之HttpServletResponse之Response物件（後端到前端）
+         * @throws ServletException the servlet exception
+         * @throws IOException      Signals that an I/O exception has occurred.
+         */
+        public void doPut(HttpServletRequest request, HttpServletResponse response)
+                        throws ServletException, IOException {
                 /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
                 JsonReader jsr = new JsonReader(request);
                 JSONObject jso = jsr.getObject();
@@ -184,9 +180,9 @@ public class UserController extends HttpServlet {
                 String user_id = jso.getString("user_id");
                 String user_name = jso.getString("user_name");
                 String address = jso.getString("address");
-                Timestamp birth = jso.getTimestamp("birth");   
+                String birth = jso.getString("birth");
                 String email = jso.getString("email");
-                Boolean gender = jso.getBoolean("gender");
+                int gender = jso.getInt("gender");
                 String phone = jso.getString("phone");
                 String residence_tel = jso.getString("residence_tel");
                 String blood = jso.getString("blood");
@@ -199,7 +195,8 @@ public class UserController extends HttpServlet {
                 String contact_tel = jso.getString("contact_tel");
 
                 /** 透過傳入之參數，新建一個以這些參數之使用者Ussr物件 */
-                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood, null, null, allergy_history, servill_history, contact_name, contact_rel, contact_tel);
+                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood, null,
+                                null, allergy_history, servill_history, contact_name, contact_rel, contact_tel);
 
                 /** 透過User物件的update()方法至資料庫更新該使用者資料，回傳之資料為JSONObject物件 */
                 JSONObject data = u.update();
@@ -213,4 +210,4 @@ public class UserController extends HttpServlet {
                 /** 透過JsonReader物件回傳到前端（以JSONObject方式） */
                 jsr.response(resp, response);
         }
-    }
+}

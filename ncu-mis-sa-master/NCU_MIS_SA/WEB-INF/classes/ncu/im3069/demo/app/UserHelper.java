@@ -64,7 +64,7 @@ public class UserHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `hospital`.`user` WHERE `user_id` = ? LIMIT 1";
+            String sql = "DELETE FROM `users` WHERE `user_id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hospital`.`user`";
+            String sql = "SELECT * FROM `users`";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -145,9 +145,9 @@ public class UserHelper {
                 int case_number = rs.getInt("case_number");
                 String user_name = rs.getString("name");
                 String user_address = rs.getString("user_address");
-                Timestamp user_birth = rs.getTimestamp("user_birth");
+                String user_birth = rs.getString("user_birth");
                 String user_email = rs.getString("user_email");
-                Boolean user_gender = rs.getBoolean("user_gender");
+                int user_gender = rs.getInt("user_gender");
                 String user_phone = rs.getString("user_phone");
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
@@ -215,7 +215,7 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hosptial`.`user` WHERE `user`.`user_id` = ? LIMIT 1";
+            String sql = "SELECT * FROM `users` WHERE `user_id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -237,9 +237,9 @@ public class UserHelper {
                 int case_number = rs.getInt("case_number");
                 String user_name = rs.getString("name");
                 String user_address = rs.getString("user_address");
-                Timestamp user_birth = rs.getTimestamp("user_birth");
+                String user_birth = rs.getString("user_birth");
                 String user_email = rs.getString("user_email");
-                Boolean user_gender = rs.getBoolean("user_gender");
+                int user_gender = rs.getInt("user_gender");
                 String user_phone = rs.getString("user_phone");
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
@@ -302,7 +302,7 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hostipal`.`user` WHERE `user_id` = ?";
+            String sql = "SELECT count(*) FROM `users` WHERE `user_id` = ?";
 
             /** 取得所需之參數 */
             String user_id = u.getID();
@@ -353,17 +353,17 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`user`(`user_id`, `name`, `user_address`, `user_birth`, `user_email`, `user_gender`, `user_phone`, `residence_tel`, `blood`, `height`, `weight`, `allergy_history`, `serverill_history`, `contact_name`, `contact_rel`, `contact_tel`)"
-                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `users`(`user_id`, `name`, `user_address`, `user_birth`, `user_email`, `user_gender`, `user_phone`, `residence_tel`, `blood`, `height`, `weight`, `allergy_history`, `serverill_history`, `contact_name`, `contact_rel`, `contact_tel`)"
+                    + " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
             /** 取得所需之參數 */
             String user_id = u.getID();
             // int case_number = u.getCaseNumber();
             String name = u.getName();
             String user_address = u.getAddress();
-            Timestamp user_birth = u.getBirth();
+            String user_birth = u.getBirth();
             String user_email = u.getEmail();
-            Boolean user_gender = u.getGender();
+            int user_gender = u.getGender();
             String user_phone = u.getPhone();
             String residence_tel = u.getResidenceTel();
             String blood = u.getBloodType();
@@ -381,9 +381,9 @@ public class UserHelper {
             // pres.setInt(2, case_number);
             pres.setString(2, name);
             pres.setString(3, user_address);
-            pres.setTimestamp(4, user_birth);
+            pres.setString(4, user_birth);
             pres.setString(5, user_email);
-            pres.setBoolean(6, user_gender);
+            pres.setInt(6, user_gender);
             pres.setString(7, user_phone);
             pres.setString(8, residence_tel);
             pres.setString(9, blood);
@@ -446,15 +446,15 @@ public class UserHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `hospital`.`user` SET `name` = ? ,`user_address` = ? ,`user_birth` = ? ,`user_email` = ? ,`user_gender` = ? ,`user_phone` = ? ,`residence_tel` = ? ,`blood` = ? ,`height` = ? ,`weight` = ? ,`allergy_history` = ? ,`serverill_history` = ? ,`contact_name` = ? ,`contact_rel` = ? ,`contact_tel` = ? WHERE `user_id` = ?";
+            String sql = "Update `users` SET `name` = ? ,`user_address` = ? ,`user_birth` = ? ,`user_email` = ? ,`user_gender` = ? ,`user_phone` = ? ,`residence_tel` = ? ,`blood` = ? ,`height` = ? ,`weight` = ? ,`allergy_history` = ? ,`serverill_history` = ? ,`contact_name` = ? ,`contact_rel` = ? ,`contact_tel` = ? WHERE `user_id` = ?";
             /** 取得所需之參數 */
             String user_id = u.getID();
             // int case_number = u.getCaseNumber();
             String name = u.getName();
             String user_address = u.getAddress();
-            Timestamp user_birth = u.getBirth();
+            String user_birth = u.getBirth();
             String user_email = u.getEmail();
-            Boolean user_gender = u.getGender();
+            int user_gender = u.getGender();
             String user_phone = u.getPhone();
             String residence_tel = u.getResidenceTel();
             String blood = u.getBloodType();
@@ -471,9 +471,9 @@ public class UserHelper {
             // pres.setInt(1, case_number);
             pres.setString(1, name);
             pres.setString(2, user_address);
-            pres.setTimestamp(3, user_birth);
+            pres.setString(3, user_birth);
             pres.setString(4, user_email);
-            pres.setBoolean(5, user_gender);
+            pres.setInt(5, user_gender);
             pres.setString(6, user_phone);
             pres.setString(7, residence_tel);
             pres.setString(8, blood);

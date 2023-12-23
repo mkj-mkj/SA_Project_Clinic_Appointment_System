@@ -1,91 +1,194 @@
 <!DOCTYPE html>
-<html lang="zh-tw">
+<!--  <html lang="zh-tw"> -->
 <head>
 	<link rel="stylesheet" href="3_3_user.css">
 	<meta charset="UTF-8">
-
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
   
 
   <title>初診資料</title>
 </head>
 <body>
 		<h1>初診資料</h1>
-	<br/>
-	<br/>
-	<center><table border="1" cellspacing="0" cellpadding="5">
-		<tr>
-			<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
-			<td width= "500"><input type="text" name="id"  pattern="[A-Z0-9]{10}" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
-			<td><input type="text" name="name" maxlength="30" required= "required"/></td><!--已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">性別(必填)</font></strong></td>
-			<td required= "required"><!--已要求必填-->
-				<input type="radio" name="sex" value="男" checked> 男
-				<input type="radio" name="sex" value="女"> 女
-			</td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">生日(必填)</font></strong></td>
-			<td><input type="date" name="birthday" style="width: 170px;" required= "required"/></td><!--已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">現在地址(必填)</font></strong></td>
-			<td><input type="text" name="address" style="width: 450px;" required= "required"/></td><!--已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">聯絡電話(必填)</font></strong></td>
-			<td><input type="text" name="phone" placeholder="範例：09-12345678" maxlength="11" pattern="09\d{2}-\d{6}" required= "required"/></td><!--聯絡電話格式在這邊已經驗證，已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">E-Mail(必填)</font></strong></td>
-			<td><input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required="required"/></td><!--Email資料格式在這邊已經驗證，已要求必填-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>血型</strong></td>
-			<td><input type="text" name="blood" placeholder="最長6碼"  maxlength="6" style="width: 70px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>身高</strong></td>
-			<td><input type="number" name="height" placeholder="公分" min="0" max="300" style="width: 70px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>體重</strong></td>
-			<td><input type="number" name="weight" placeholder="公斤" min="0" max="800" style="width: 70px;"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>是否有藥物過敏史(無請填寫無)</strong></td>
-			<td><input type="tel" name="medicine" placeholder="過敏藥物名稱" maxlength="100"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>個人過去重大病史</strong></td>
-			<td><input type="tel" name="medical_history" placeholder="手術或慢性病" maxlength="100"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>住宅電話</strong></td>
-			<td><input type="tel" name="home" placeholder="最長10碼" maxlength="10" maxlength="10" pattern="0[0-9]-\d{7}"/></td><!--住宅電話格式格式在這邊已經驗證-->
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>聯絡人姓名</strong></td>
-			<td><input type="text" name="contact_name" placeholder="最長30碼" maxlength="30"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>關係</strong></td>
-			<td><input type="text" name="relationship" placeholder="最長12碼" maxlength="12"/></td>
-		</tr>
-		<tr>
-			<td bgcolor = "#C4E1FF"><strong>聯絡人電話</strong></td>
-			<td><input type="text" name="phone" placeholder="範例：09-12345678" maxlength="11" pattern="09\d{2}-\d{6}"/></td><!--聯絡電話格式在這邊已經驗證，已要求必填-->
-		</tr>
-		</tr>
-		
-		
-    </table></center>
-	<br/>
-	<br/>
-    <center><button type="submit" class="button">送出</button><!--送出時驗證user資料庫中是否有這筆資料存在，若有則顯示「已有相同資料，請重新輸入」提示；若沒有重複資料則將這筆資料新增到使用者資料庫中-->
-</body>
+		<br/>
+		<br/>
+		<form>
+			<center><table border="1" cellspacing="0" cellpadding="5">
+				<tr>
+					<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
+					<td width= "500"><input type="text" name="id" id="user_id" pattern="[A-Z0-9]{10}" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
+					<td><input type="text" name="name" id="user_name" maxlength="30" required= "required"/></td><!--已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">性別(必填)</font></strong></td>
+					<td required= "required"><!--已要求必填-->
+						<input type="radio" name="sex" id="male" value="1" checked> 男
+						<input type="radio" name="sex" id="female" value="0"> 女
+					</td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">生日(必填)</font></strong></td>
+					<td><input type="date" name="birthday" id="birth" style="width: 170px;" required= "required"/></td><!--已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">現在地址(必填)</font></strong></td>
+					<td><input type="text" name="address" id="address" style="width: 450px;" required= "required"/></td><!--已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">聯絡電話(必填)</font></strong></td>
+					<td><input type="text" name="phone" id="user_phone" placeholder="範例：0912345678" maxlength="11" pattern="09\d{8}" required= "required"/></td><!--聯絡電話格式在這邊已經驗證，已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">E-Mail(必填)</font></strong></td>
+					<td><input type="email" name="email" id="email" pattern="[a-z0-9._%+]+@[a-z0-9.]+\.[a-z]{2,4}" required="required"/></td><!--Email資料格式在這邊已經驗證，已要求必填-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>血型</strong></td>
+					<td><input type="text" name="blood" id="blood_type" placeholder="最長6碼"  maxlength="6" style="width: 70px;"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>身高</strong></td>
+					<td><input type="number" name="height" id="height" placeholder="公分" min="0" max="300" style="width: 70px;"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>體重</strong></td>
+					<td><input type="number" name="weight" id="weight" placeholder="公斤" min="0" max="800" style="width: 70px;"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>是否有藥物過敏史(無請填寫無)</strong></td>
+					<td><input type="tel" name="medicine" id="allergy_history" placeholder="過敏藥物名稱" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>個人過去重大病史</strong></td>
+					<td><input type="tel" name="medical_history" placeholder="手術或慢性病" maxlength="100"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>住宅電話</strong></td>
+					<td><input type="tel" name="home" id="residence_tel" placeholder="最長10碼" maxlength="10" maxlength="10" pattern="0[0-9]\d{7}"/></td><!--住宅電話格式格式在這邊已經驗證-->
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>聯絡人姓名</strong></td>
+					<td><input type="text" name="contact_name" id="contact_name" placeholder="最長30碼" maxlength="30"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>關係</strong></td>
+					<td><input type="text" name="relationship" id="contact_rel" placeholder="最長12碼" maxlength="12"/></td>
+				</tr>
+				<tr>
+					<td bgcolor = "#C4E1FF"><strong>聯絡人電話</strong></td>
+					<td><input type="text" name="phone" id="contact_tel" placeholder="範例：0912345678" maxlength="11" pattern="09\d{8}"/></td><!--聯絡電話格式在這邊已經驗證，已要求必填-->
+				</tr>
+				</tr>			
+		    </table></center>
+			<br/>
+			<br/>
+    		<center><button type="submit" id="submit" class="button">送出</button><!--送出時驗證user資料庫中是否有這筆資料存在，若有則顯示「已有相同資料，請重新輸入」提示；若沒有重複資料則將這筆資料新增到使用者資料庫中-->
+    	</form>
+    
+	    <script type="text/javascript">
+	    	$(document).ready(function() {
+	        	// 處理表單點擊事件
+	        	var $form = $('#submit');
+	        	$form.click(function() {
+	        		submit();
+	        	});
+	
+	        	function submit() {
+	        		var user_id = $('#user_id').val();
+					var user_name = $('#user_name').val();
+					var gender = $("input[name='sex']:checked").val();
+					var birth = $('#birth').val();
+					var address = $('#address').val();
+					var phone = $('#user_phone').val();
+					var email = $('#email').val();
+					var blood_type = $('#blood_type').val();
+					var height = $('#height').val();
+					var weight = $('#weight').val();
+					var allergy_history = $('#allergy_history').val();
+					var servill_history = $('#servill_history').val();
+					var residence_tel = $('#residence_tel').val();
+					var contact_name = $('#contact_name').val();
+					var contact_rel = $('#contact_rel').val();
+					var contact_tel = $('#contact_tel').val();
+
+					if(blood_type == null) {
+						blood_type = "";
+					}
+					if(height == null) {
+						height = -1;
+					}
+					if(weight == null) {
+						weight = -1;
+					}
+					if(allergy_history == null) {
+						allergy_history = "";
+					}
+					if(servill_history == null) {
+						servill_history = "";
+					}
+					if(residence_tel == null) {
+						residence_tel = "";
+					}
+					if(contact_name == null) {
+						contact_name = "";
+					}
+					if(contact_rel == null) {
+						contact_rel = "";
+					}
+					if(contact_tel == null) {
+						contact_tel = "";
+					}
+					
+	 				
+	            	// 將資料組成JSON格式
+	                var data_object = {
+						"user_id": user_id,
+						"user_name": user_name,
+						"address": address,
+						"birth": birth,
+						"email": email,
+						"gender": gender,
+						"phone": phone,
+						"residence_tel": residence_tel,
+						"blood": blood_type,
+						"height": height,
+						"weight": weight,
+						"allergy_history": allergy_history,
+						"servill_history": servill_history,
+						"contact_name": contact_name,
+						"contact_rel": contact_rel,
+						"contact_tel": contact_tel
+	                };
+	
+	            	// 將JSON格式轉換成字串
+	            	var data_string = JSON.stringify(data_object);
+	
+	            	// 發出POST的AJAX請求
+	            	$.ajax({
+	                	type: "POST",
+	                	url: "api/user.do",
+	                	data: data_string,
+	                	crossDomain: true,
+	                	cache: false,
+	               		dataType: 'json',
+	                    timeout: 5000,
+	                	success: function (response) {
+	                		$('#flashMessage').html(response.message);
+	                    	$('#flashMessage').show();
+	                    	if(response.status == 200){
+	                    		
+	                        }
+	                    },
+	                	error: function () {
+	                     	alert("無法連線到伺服器！");
+	                	}
+	           		});    		
+	       		}
+	       	});
+		</script>
+	
+	</body>
 </html>
