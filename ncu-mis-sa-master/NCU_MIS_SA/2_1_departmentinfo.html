@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>科別資訊</title>
     <style>
         body {
@@ -46,35 +47,21 @@
 </head>
 <body>
     <div style="background-color:#004B97;"><h1><b>科別資訊</b></h1></div>
-    <table>
-        <tr>
-            <th>科別</th>
-			<th>資訊</th>
-        </tr>
-        <tr>
-            <td>科別內容 1</td>
-			<td>資訊內容 1</td>
-        </tr>
-        <tr>
-            <td>科別內容 2</td>
-			<td>資訊內容 2</td>
-        </tr>
-        <tr>
-            <td>科別內容 3</td>
-			<td>資訊內容 3</td>
-        </tr>
-        <tr>
-            <td>科別內容 4</td>
-			<td>資訊內容 4</td>
-        </tr>
-        <tr>
-            <td>科別內容 5</td>
-			<td>資訊內容 5</td>
-        </tr>
+    <table id="table">
+    	<thead>
+    	    <tr>
+            	<th>科別</th>
+				<th>資訊</th>
+        	</tr>
+    	</thead>
+    	<tbody>
+    	</tbody>
+
+
     </table>
     <script type="text/javascript">
         function getAllDepartment(){
-            // 發出POST的GET請求取得所有會員列表
+            // 發出POST的GET請求取得所有科別列表
             $.ajax({
                 type: "GET",
                 url: "api/department.do",
@@ -85,7 +72,6 @@
                 success: function (response) {
                     if(response.status == 200){
                         updateTable(response.response.data);
-                        updateSQLTable(response.response);
                     }
                     console.log(response);
                 },
@@ -95,12 +81,13 @@
             });
         }
 
-        // 更新會員列表表格
+        // 更新科別列表表格
         function updateTable(data) {
             $("#table > tbody").empty();
             var table_html = '';
+            
             $.each(data, function(index, value) {
-                table_html += '<tr><td scope="row">' + value['id'] + '</td>';
+                table_html += '<tr>';
                 table_html += '<td>' + value['name'] + '</td>';
                 table_html += '<td>' + value['info'] + '</td>';
                 table_html += '<tr>';
