@@ -66,7 +66,7 @@ public class AppointmentHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `hospital`.`appointment` WHERE `user_id` = ? and `doctor_id` = ? LIMIT 1";
+            String sql = "DELETE FROM `appointment` WHERE `user_id` = ? and `doctor_id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -112,7 +112,7 @@ public class AppointmentHelper {
     public JSONObject getAll() {
         /** 新建一個 Appointment 物件之 ap 變數，用於紀錄每一位查詢回之預約資料 */
         Appointment ap = null;
-        /** 用於儲存所有檢索回之門診，以JSONArray方式儲存 */
+        /** 用於儲存所有檢索回之預約資訊，以JSONArray方式儲存 */
         JSONArray jsa = new JSONArray();
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -187,8 +187,9 @@ public class AppointmentHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該身分證字號之預約資料
      */
-    public JSONObject getByID(String id) {
-        JSONObject data = new JSONObject();
+    public JSONObject getAppointmentByID(String id) {
+        /** 用於儲存所有檢索回之預約資訊，以JSONArray方式儲存 */
+        JSONArray jsa = new JSONArray();
         Appointment ap = null;
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -203,7 +204,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hosptial`.`appointment` WHERE `appointment`.`user_id` = ? LIMIT 1";
+            String sql = "SELECT * FROM `appointment` WHERE `user_id` = ?";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -226,11 +227,36 @@ public class AppointmentHelper {
                 String user_id = rs.getString("user_id");
                 String reserve_time = rs.getString("reserve_time");
                 int appointment_number = rs.getInt("appointment");
-
+                
+                String doctor_name = "";
+                int dept_id = 0;
+                //利用預約資料表中的doctor_id在醫生資料表中查找對應doctor_name
+                String doctor_name_sql = "SELECT `doctor_name`, `dept_id` FROM `doctor` WHERE `doctor_id` = ? LIMIT 1";
+                pres = conn.prepareStatement(doctor_name_sql);
+                pres.setInt(1, doctor_id);
+                ResultSet doctor_rs = pres.executeQuery();
+                
+                while (doctor_rs.next()) {
+                	doctor_name = doctor_rs.getString("doctor_name");
+                	dept_id = doctor_rs.getInt("dept_id");
+                }
+                
+                String dept_name = "";
+                //利用醫生資料表中的dept_id在科別資料表中查找對應dept_name
+                String dept_name_spl = "SELECT `dept_name` FROM `department` WHERE `dept_id` = ? LIMIT 1";
+                pres = conn.prepareStatement(dept_name_spl);
+                pres.setInt(1, dept_id);
+                ResultSet dept_rs = pres.executeQuery();
+                
+                while (dept_rs.next()) {
+                	dept_name = dept_rs.getString("dept_name");
+                }
+                
+                
                 /** 將每一筆預約資料產生一名新Appointment物件 */
-                ap = new Appointment(seq, doctor_id, user_id, reserve_time, appointment_number);
+                ap = new Appointment(seq, doctor_id, user_id, reserve_time, appointment_number, dept_name, doctor_name);
                 /** 取出該項預約資料並封裝至 JSONsonArray 內 */
-                data = ap.getData();
+                jsa.put(ap.getData());
             }
 
         } catch (SQLException e) {
@@ -255,7 +281,7 @@ public class AppointmentHelper {
         response.put("sql", exexcute_sql);
         response.put("row", row);
         response.put("time", duration);
-        response.put("data", data);
+        response.put("data", jsa);
 
         return response;
     }
@@ -270,7 +296,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hostipal`.`appoint` WHERE `doctor_id` = ? and `reserve_time` = ?";
+            String sql = "SELECT count(*) FROM `appoint` WHERE `doctor_id` = ? and `reserve_time` = ?";
 
             /** 取得所需之參數 */
             int dcotor_id = ap.getDoctorID();
@@ -312,7 +338,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hostipal`.`appointment` WHERE `user_id` = ? AND `doctor_id` = ?";
+            String sql = "SELECT count(*) FROM `appointment` WHERE `user_id` = ? AND `doctor_id` = ?";
 
             /** 取得所需之參數 */
             String user_id = ap.getUserID();
@@ -365,7 +391,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`appointment`(`doctor_id`, `user_id`, `reserve_time`, `appointment`)"
+            String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_time`, `appointment`)"
                     + " VALUES(?, ?, ?, ?, ?)";
 
             /** 取得所需之參數 */
@@ -434,7 +460,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `hospital`.`appointment` SET `reserve_time` = ? ,`appointment` = ? WHERE `user_id` = ? and `doctor_id` = ?";
+            String sql = "Update `appointment` SET `reserve_time` = ? ,`appointment` = ? WHERE `user_id` = ? and `doctor_id` = ?";
             /** 取得所需之參數 */
             String user_id = ap.getUserID();
             int doctor_id = ap.getDoctorID();

@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>預約資料</title>
     <style>
         body {
@@ -64,41 +65,72 @@
 <body>
     <div style="background-color:#004B97;">
 	<h1><b>預約資訊</b></h1></div>
-    <table><!--身份證字號對應的預約資料有幾筆資料就顯示幾筆-->
-        <tr>
-            <th>Seq</th>
-            <th>醫生名稱</th>
-			<th>掛號門診</th><!--顯示掛號門診名稱-->
-            <th>預約時間</th>
-            <th>掛號號碼</th>
-			<th>按鈕</th>
-        </tr>
-        <tr>
-            <td>Seq</td>
-            <td>醫生名稱</td>
-			<td>掛號門診</td>
-			<td>預約時間</td>
-			<td>掛號號碼</td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>Seq</td>
-            <td>醫生名稱</td>
-			<td>掛號門診</td>
-			<td>預約時間</td>
-			<td>掛號號碼</td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>Seq</td>
-            <td>醫生名稱</td>
-			<td>掛號門診</td>
-			<td>預約時間</td>
-			<td>掛號號碼</td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
+    <table id="table"><!--身份證字號對應的預約資料有幾筆資料就顯示幾筆-->
+    	<thead>
+	            <tr>
+	            <th>Seq</th>
+	            <th>醫生名稱</th>
+				<th>掛號門診</th><!--顯示掛號門診名稱-->
+	            <th>預約時間</th>
+	            <th>掛號號碼</th>
+				<th>取消預約</th>
+	        </tr>
+    	</thead>
+		<tbody>
+		</tbody>
     </table>
 	<br>
     <div><a href="3_1_clinic.html" class="add-button">重新預約</a></div><!--打勾的方框點查詢按鈕可以查詢選取資料的詳細資訊(連到3_3_2_ap_data.html))-->
+        <script type="text/javascript">
+        function getAllAppointment(){
+        	var user_id;
+        	var url = window.location.search;
+        	if(url.indexOf("?") != -1){
+        		user_id = url.substr(url.indexOf("=") + 1);
+        	}
+            // 發出POST的GET請求取得所有科別列表
+            $.ajax({
+                type: "GET",
+                url: "api/appointment.do",
+                crossDomain: true,
+                cache: false,
+                data:"id="+user_id,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+
+        // 更新科別列表表格
+        function updateTable(data) {
+            $("#table > tbody").empty();
+            var table_html = '';
+            
+            $.each(data, function(index, value) {
+                table_html += '<tr>';
+                table_html += '<td>' + value['seq'] + '</td>';
+                table_html += '<td>' + value['doctor_name'] + '</td>';
+                table_html += '<td>' + value['dept_name'] + '</td>';
+                table_html += '<td>' + value['reserve_time'] + '</td>';
+                table_html += '<td>' + value['appointment_number'] + '</td>';
+                table_html += '<td><a class="delete-button" id="">刪除</a></td>';
+                table_html += '<tr>';
+            })
+        
+            $("#table > tbody").append(table_html);
+        }
+
+        $(document).ready(function() {
+            getAllAppointment();
+        });
+    </script>
 </body>
 </html>

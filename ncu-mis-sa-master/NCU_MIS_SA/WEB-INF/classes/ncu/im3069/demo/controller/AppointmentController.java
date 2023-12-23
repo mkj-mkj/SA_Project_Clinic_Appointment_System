@@ -111,7 +111,7 @@ public class AppointmentController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 透過AppointmentHelper物件的getByID()方法自資料庫取回該預約之資料，回傳之資料為JSONObject物件 */
-                        JSONObject query = aph.getByID(id);
+                        JSONObject query = aph.getAppointmentByID(id);
 
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();
