@@ -51,7 +51,7 @@ public class AppointmentHelper {
      * 
      * @return the JSONObject 回傳SQL執行結果
      */
-    public JSONObject cancel(String user_id, int doctor_id) {
+    public JSONObject cancel(int seq) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         /** 紀錄程式開始執行時間 */
@@ -66,12 +66,12 @@ public class AppointmentHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `appointment` WHERE `user_id` = ? and `doctor_id` = ? LIMIT 1";
+            String sql = "DELETE FROM `appointment` WHERE `appointment_seq` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, user_id);
-            pres.setInt(2, doctor_id);
+            pres.setInt(1, seq);
+            
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
