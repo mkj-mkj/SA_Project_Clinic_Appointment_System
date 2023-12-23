@@ -59,6 +59,10 @@ public class Department {
     public String getName() {
         return this.Name;
     }
+    
+    public String getInfo() {
+    	return this.Info;
+    }
 
     /**
      * 取得該科別所有資料
@@ -70,6 +74,7 @@ public class Department {
         JSONObject jso = new JSONObject();
         jso.put("id", getID());
         jso.put("name", getName());
+        jso.put("info", getInfo());
         return jso;
     }
 
