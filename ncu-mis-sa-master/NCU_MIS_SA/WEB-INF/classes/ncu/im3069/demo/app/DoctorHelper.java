@@ -87,9 +87,20 @@ public class DoctorHelper {
                 int doctor_id = rs.getInt("doctor_id");
                 String doctor_name = rs.getString("doctor_name");
                 int dept_id = rs.getInt("dept_id");
-
+                String dept_name = "";
+                //利用醫生資料表中的dept_id在科別資料表中查找對應dept_name
+                String dept_name_spl = "SELECT `dept_name` FROM `department` WHERE `dept_id` = ? LIMIT 1";
+                pres = conn.prepareStatement(dept_name_spl);
+                pres.setInt(1, dept_id);
+                ResultSet dept_rs = pres.executeQuery();
+                
+                while (dept_rs.next()) {
+                	dept_name = dept_rs.getString("dept_name");
+                }
+                
+                
                 /** 將每一筆醫生資料產生一名新Doctor物件 */
-                d = new Doctor(doctor_id, doctor_name, dept_id);
+                d = new Doctor(doctor_id, doctor_name, dept_id, dept_name);
                 /** 取出該醫生之資料並封裝至 JSONsonArray 內 */
                 jsa.put(d.getData());
             }
@@ -162,6 +173,7 @@ public class DoctorHelper {
                 int doctor_id = rs.getInt("doctor_id");
                 String doctor_name = rs.getString("doctor_name");
                 int dept_id = rs.getInt("dept_id");
+
 
                 /** 將每一筆醫生資料產生一名新Doctor物件 */
                 d = new Doctor(doctor_id, doctor_name, dept_id);
