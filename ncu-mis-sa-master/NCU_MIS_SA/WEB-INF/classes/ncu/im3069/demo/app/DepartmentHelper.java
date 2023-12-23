@@ -85,10 +85,10 @@ public class DepartmentHelper {
                 /** 將 ResultSet 之資料取出 */
                 int id = rs.getInt("dept_id");
                 String name = rs.getString("dept_name");
-                // String info = rs.getString("dept_info");
+                String info = rs.getString("dept_info");
 
                 /** 將每一筆科別資料產生一名新Department物件 */
-                dept = new Department(id, name);
+                dept = new Department(id, name, info);
                 /** 取出該科別之資料並封裝至 JSONsonArray 內 */
                 jsa.put(dept.getData());
             }
