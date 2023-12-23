@@ -2,12 +2,13 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>科別資訊</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <title>醫生資訊</title>
     <style>
         body {
             text-align: center;
-			margin: 0; <!-- 清除外邊距 -->
-			padding: 0; <!-- 清除內邊距 -->
+			margin: 0; 
+			padding: 0;
         }
         h1 {
 			color:white;
@@ -46,31 +47,56 @@
 </head>
 <body>
     <div style="background-color:#004B97;"><h1><b>醫師資訊</b></h1></div>
-    <table>
-        <tr>
-            <th>醫師</th>
-			<th>簡介</th>
-        </tr>
-        <tr>
-            <td>醫師內容 1</td>
-			<td>簡介內容 1</td>
-        </tr>
-        <tr>
-            <td>醫師內容 2</td>
-			<td>簡介內容 2</td>
-        </tr>
-        <tr>
-            <td>醫師內容 3</td>
-			<td>簡介內容 3</td>
-        </tr>
-        <tr>
-            <td>醫師內容 4</td>
-			<td>簡介內容 4</td>
-        </tr>
-        <tr>
-            <td>醫師內容 5</td>
-			<td>簡介內容 5</td>
-        </tr>
+    <table id="table">
+        <thead>
+            <tr>
+                <th>醫師</th>
+                <th>簡介</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+
     </table>
+    <script type="text/javascript">
+        function getAllDoctor(){
+            // 發出POST的GET請求取得所有醫生列表
+            $.ajax({
+                type: "GET",
+                url: "api/doctor.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+
+        // 更新醫生列表表格
+        function updateTable(data) {
+            $("#table > tbody").empty();
+            var table_html = '';
+            $.each(data, function(index, value) {
+                table_html += '<tr>';
+                table_html += '<td>' + value['name'] + '</td>';
+                table_html += '<td>' + value['dept_name'] + '</td>';
+                table_html += '<tr>';
+            })
+        
+            $("#table > tbody").append(table_html);
+        }
+
+        $(document).ready(function() {
+            getAllDoctor();
+        });
+    </script>
 </body>
 </html>
