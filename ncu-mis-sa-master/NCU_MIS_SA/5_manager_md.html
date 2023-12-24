@@ -93,6 +93,79 @@
             <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
         </tr>
     </table>
+    <script type="text/javascript">
+            function getAllAdministrator(){
+                // 發出POST的GET請求取得所有管理者
+                $.ajax({
+                    type: "GET",
+                    url: "api/Administrator.do",
+                    crossDomain: true,
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        if(response.status == 200){
+                            updateTable(response.response.data);
+                        }
+                        console.log(response);
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+            }
+    
+            // 更新管理者表格
+            function updateTable(data) {
+                $("#table > tbody").empty();
+                var table_html = '';
+                
+                $.each(data, function(index, value) {
+                    table_html += '<tr>';
+                    table_html += '<td>' + value['name'] + '</td>';
+                    table_html += '<td>' + value['mail'] + '</td>';
+                    table_html += '<tr>';
+                })
+            
+                $("#table > tbody").append(table_html);
+            }
+    
+            $(document).ready(function() {
+                getAllAdministrator();
+                DeleteAdministrator();
+            });
+
+            function DeleteAdministrator() {
+                // 點擊 "刪除" 按鈕時觸發事件
+                $(".delete-button").on("click", function() {
+                // 獲取管理員 ID
+                var adminId = $(this).data("id");
+
+                // 發送 AJAX 請求以刪除管理員
+                $.ajax({
+                    type: "POST",  // 使用 POST 方法
+                    url: "api/Administrator.do",  // 請替換為實際的 API 端點
+                    crossDomain: true,
+                    data: { id: adminId },  // 傳遞管理員 ID 給服務器
+                    cache: false,
+                    dataType: 'json',
+                    timeout: 5000,
+                    success: function (response) {
+                        if(response.status == 200){
+                            // 刪除成功後，更新表格
+                            getAllAdministrator();
+                        } else {
+                            alert("刪除失敗：" + response.message);
+                        }
+                        console.log(response);
+                    },
+                    error: function () {
+                        alert("無法連線到伺服器！");
+                    }
+                });
+                });
+            }
+    </script>
 	<br>
     <div><a href="5_2_manager_add.html" class="add-button">新增</a></div>
 </body>
