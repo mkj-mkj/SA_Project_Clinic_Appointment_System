@@ -26,32 +26,32 @@
 			<tr>
 				<td class="title">8:00<br/>~<br/>12:00</td>
 				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">揚定育</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">高進治</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('揚定育', '(二)', '早上')">揚定育</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('高進治', '(三)', '早上')">高進治</a></td>
 				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">楊育誠</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('楊育誠', '(五)', '早上')">楊育誠</a></td>
 				<td></td>
 				<td></td>
 			</tr>
 			<tr>
 				<td class="title">14:00<br/>~<br/>18:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">陳朝興</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">楊定育</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('陳朝興', '(一)', '下午')">陳朝興</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('楊定育', '(二)', '下午')">楊定育</a></td>
 				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">陳朝興</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">楊育誠</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">楊定育</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">楊育誠</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('陳朝興', '(四)', '下午')">陳朝興</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('楊育誠', '(五)', '下午')">楊育誠</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('楊定育', '(六)', '下午')">楊定育</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('楊育誠', '(日)', '下午')">楊育誠</a></td>
 			</tr>
 			<tr>
 				<td class="title">19:00<br/>~<br/>21:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">陳朝興</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('陳朝興', '(一)', '晚上')">陳朝興</a></td>
 				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">高進治</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">陳朝興</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('高進治', '(三)', '晚上')">高進治</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('陳朝興', '(四)', '晚上')">陳朝興</a></td>
 				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">高進治</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">高進治</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('高進治', '(六)', '晚上')">高進治</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('高進治', '(日)', '晚上')">高進治</a></td>
 			</tr>
 		</tbody>
 	</table>
@@ -60,3 +60,12 @@
 	<a href="3_1_clinic.html" class="back">回上一頁</a></td>
 	</center>
 </body>
+<script>
+function selectDoctor(doctorName, day, time) {
+    // Add 'department' to the query string with the selected information
+    var queryString = '?doctor=' + encodeURIComponent(doctorName) + '&day=' + encodeURIComponent(day) + '&time=' + encodeURIComponent(time) + '&department=' + encodeURIComponent('鼻科');
+    
+    // Redirect to the second HTML file with the query string
+    window.location.href = '3_2_1_schedule_doctor.html' + queryString;
+}
+</script>
