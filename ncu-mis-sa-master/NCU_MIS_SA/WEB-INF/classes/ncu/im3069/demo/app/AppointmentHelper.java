@@ -147,7 +147,18 @@ public class AppointmentHelper {
                 int seq = rs.getInt("appointment_seq");
                 int doctor_id = rs.getInt("doctor_id");
                 String user_id = rs.getString("user_id");
-                String reserve_time = rs.getString("reserve_time");
+                String reserve_date = rs.getString("reserve_date");
+                String reserve_time_en = rs.getString("reserve_time");
+                String reserve_time = "";
+                switch(reserve_time_en) {
+                	case "morninig":
+                		reserve_time = reserve_date + " 早上班";
+                	case "noon":
+                		reserve_time = reserve_date + " 下午班";
+                	case "night":
+                		reserve_time = reserve_date + " 晚上班";
+                }
+                
                 int appointment_number = rs.getInt("appointment");
 
                 /** 將每一筆預約資料產生一個新Appointment物件 */
@@ -225,7 +236,18 @@ public class AppointmentHelper {
                 int seq = rs.getInt("appointment_seq");
                 int doctor_id = rs.getInt("doctor_id");
                 String user_id = rs.getString("user_id");
-                String reserve_time = rs.getString("reserve_time");
+                String reserve_date = rs.getString("reserve_date");
+                String reserve_time_en = rs.getString("reserve_time");
+                String reserve_time = "";
+                switch(reserve_time_en) {
+                	case "morninig":
+                		reserve_time = reserve_date + " 早上班";
+                	case "noon":
+                		reserve_time = reserve_date + " 下午班";
+                	case "night":
+                		reserve_time = reserve_date + " 晚上班";
+                }
+                
                 int appointment_number = rs.getInt("appointment");
                 
                 String doctor_name = "";

@@ -139,11 +139,10 @@ public class AppointmentController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                String user_id = jso.getString("user_id");
-                int doctor_id = jso.getInt("doctor_id");
+                int seq = jso.getInt("seq");
 
                 /** 透過AppointmentHelper物件的cancel()方法至資料庫刪除該預約，回傳之資料為JSONObject物件 */
-                JSONObject query = aph.cancel(user_id, doctor_id);
+                JSONObject query = aph.cancel(seq);
 
                 /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                 JSONObject resp = new JSONObject();
