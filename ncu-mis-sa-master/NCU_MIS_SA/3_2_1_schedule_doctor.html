@@ -62,21 +62,45 @@
     <div style="background-color:#004B97;"><h1><b>醫師門診時刻表</b></h1></div>
     <table><!--管理者資料庫有幾筆資料就顯示幾筆-->
         <tr>
-            <th>日期</th>
-			<th>診別</th><!--早上診、下午診、晚上診-->
-            <th>門診名稱</th>
+            <th>日期</th><!--周幾-->
+            <th>診別</th><!--早上診、下午診、晚上診-->
+            <th>門診名稱</th><!--科-->
             <th>醫生姓名</th>
             <th>已掛人數</th>
-			<th>預約按鈕</th>
+            <th>預約按鈕</th>
         </tr>
         <tr>
-			<td></td>
+            <td id="day"></td>
+            <td id="time"></td>
+            <td id="department"></td>
+            <td id="doctorName"></td>
             <td></td>
-            <td></td>
-            <td></td>
-			<td></td>
             <td><a href="3_2_appointment.html" class="appointment">我要預約</a></td>
         </tr>
     </table>
+
+    <!-- Script moved to the end of the body -->
+    <script>
+    window.onload = function() {
+        // Parse the query string to get the selected information
+        var queryString = window.location.search.substring(1);
+        var params = new URLSearchParams(queryString);
+        
+        // Update the table in the second HTML file with the selected information
+        var doctorNameElement = document.getElementById('doctorName');
+        var dayElement = document.getElementById('day');
+        var timeElement = document.getElementById('time');
+        var departmentElement = document.getElementById('department');
+        
+        if (doctorNameElement && dayElement && timeElement && departmentElement) {
+            doctorNameElement.innerHTML = params.get('doctor');
+            dayElement.innerHTML = params.get('day');
+            timeElement.innerHTML = params.get('time');
+            timeElement.innerHTML = params.get('time');
+            departmentElement.innerHTML = params.get('department');
+        }
+    }
+    </script>
 </body>
+
 </html>
