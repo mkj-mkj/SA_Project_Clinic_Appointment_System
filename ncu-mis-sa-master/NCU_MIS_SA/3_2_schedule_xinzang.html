@@ -1,62 +1,72 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-	<link rel="stylesheet" href="3_2_schedule.css">
-	<meta charset="UTF-8">
-	<title>門診時間表</title>
+    <link rel="stylesheet" href="3_2_schedule.css">
+    <meta charset="UTF-8">
+    <title>門診時間表</title>
 </head>
 <body>
-	<h1>門診時間</h1>
-	<center><h2>心臟血管科</h2>
-	<table border="1" cellspacing="0" cellpadding="5">
-		<thead>
-			<tr class="title">
-				<th></th>
-				<th>(一)</th>
-				<th>(二)</th>
-				<th>(三)</th>
-				<th>(四)</th>
-				<th>(五)</th>
-				<th>(六)</th>
-				<th>(日)</th>
-			</tr>
-		</thead>
-		
-		<tbody class="working">
-			<tr>
-				<td class="title">8:00<br/>~<br/>12:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">戴哲銘</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">戴哲銘</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">董子昀</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">溫奕誠</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">董子昀</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">劉晏俊</a></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="title">14:00<br/>~<br/>18:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">戴哲銘</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">劉晏俊</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">劉晏俊</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">溫奕誠</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">溫奕誠</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">董子昀</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">唐善志</a></td>
-			</tr>
-			<tr>
-				<td class="title">19:00<br/>~<br/>21:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">董子昀</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">溫奕誠</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">劉晏俊</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">戴哲銘</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">唐善志</a></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-	<br/>
-	<br/>
-	<a href="3_1_clinic.html" class="back">回上一頁</a></td>
-	</center>
+    <h1>門診時間</h1>
+    <center><h2>心臟血管科</h2>
+    <table border="1" cellspacing="0" cellpadding="5">
+        <thead>
+            <tr class="title">
+                <th></th>
+                <th>(一)</th>
+                <th>(二)</th>
+                <th>(三)</th>
+                <th>(四)</th>
+                <th>(五)</th>
+                <th>(六)</th>
+                <th>(日)</th>
+            </tr>
+        </thead>
+        
+        <tbody class="working">
+            <tr>
+                <td class="title">8:00<br/>~<br/>12:00</td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('戴哲銘', '(一)', '早上')">戴哲銘</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('戴哲銘', '(二)', '早上')">戴哲銘</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('董子昀', '(三)', '早上')">董子昀</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('溫奕誠', '(四)', '早上')">溫奕誠</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('董子昀', '(五)', '早上')">董子昀</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('劉晏俊', '(六)', '早上')">劉晏俊</a></td>
+                <td></td>
+            </tr>
+            <tr>
+                <td class="title">14:00<br/>~<br/>18:00</td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('戴哲銘', '(一)', '下午')">戴哲銘</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('劉晏俊', '(二)', '下午')">劉晏俊</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('劉晏俊', '(三)', '下午')">劉晏俊</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('溫奕誠', '(四)', '下午')">溫奕誠</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('溫奕誠', '(五)', '下午')">溫奕誠</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('董子昀', '(六)', '下午')">董子昀</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('唐善志', '(日)', '下午')">唐善志</a></td>
+            </tr>
+            <tr>
+                <td class="title">19:00<br/>~<br/>21:00</td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('董子昀', '(一)', '晚上')">董子昀</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('溫奕誠', '(二)', '晚上')">溫奕誠</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('劉晏俊', '(三)', '晚上')">劉晏俊</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('戴哲銘', '(四)', '晚上')">戴哲銘</a></td>
+                <td><a href="javascript:void(0)" onclick="selectDoctor('唐善志', '(五)', '晚上')">唐善志</a></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </tbody>
+    </table>
+    <br/>
+    <br/>
+    <a href="3_1_clinic.html" class="back">回上一頁</a></td>
+    </center>
 </body>
+<script>
+function selectDoctor(doctorName, day, time) {
+    // Add 'department' to the query string with the selected information
+    var queryString = '?doctor=' + encodeURIComponent(doctorName) + '&day=' + encodeURIComponent(day) + '&time=' + encodeURIComponent(time) + '&department=' + encodeURIComponent('心臟血管科');
+    
+    // Redirect to the second HTML file with the query string
+    window.location.href = '3_2_1_schedule_doctor.html' + queryString;
+}
+</script>
+</html>
