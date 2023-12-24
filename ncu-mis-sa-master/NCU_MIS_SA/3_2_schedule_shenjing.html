@@ -1,62 +1,73 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-	<link rel="stylesheet" href="3_2_schedule.css">
-	<meta charset="UTF-8">
-	<title>門診時間表</title>
+    <link rel="stylesheet" href="3_2_schedule.css">
+    <meta charset="UTF-8">
+    <title>門診時間表</title>
 </head>
 <body>
-	<h1>門診時間</h1>
-	<center><h2>神經科</h2>
-	<table border="1" cellspacing="0" cellpadding="5">
-		<thead>
-			<tr class="title">
-				<th></th>
-				<th>(一)</th>
-				<th>(二)</th>
-				<th>(三)</th>
-				<th>(四)</th>
-				<th>(五)</th>
-				<th>(六)</th>
-				<th>(日)</th>
-			</tr>
-		</thead>
-		
-		<tbody class="working">
-			<tr>
-				<td class="title">8:00<br/>~<br/>12:00</td>
-				<td></td>
-				<td><a href="3_2_1_schedule_doctor.html">汪涵</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">汪涵</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">高家祥</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">林毅</a></td>
-				<td></td>
-				<td></td>
-			</tr>
-			<tr>
-				<td class="title">14:00<br/>~<br/>18:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">周勝</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">李智凱</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">李智凱</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">高家祥</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">吳以程</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">林毅</a></td>
-				<td><a href="3_2_1_schedule_doctor.html">吳以程</a></td>
-			</tr>
-			<tr>
-				<td class="title">19:00<br/>~<br/>21:00</td>
-				<td><a href="3_2_1_schedule_doctor.html">周勝</a></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-			</tr>
-		</tbody>
-	</table>
-	<br/>
-	<br/>
-	<a href="3_1_clinic.html" class="back">回上一頁</a></td>
-	</center>
+    <h1>門診時間</h1>
+    <center>
+        <h2>神經科</h2>
+        <table border="1" cellspacing="0" cellpadding="5">
+            <thead>
+                <tr class="title">
+                    <th></th>
+                    <th>(一)</th>
+                    <th>(二)</th>
+                    <th>(三)</th>
+                    <th>(四)</th>
+                    <th>(五)</th>
+                    <th>(六)</th>
+                    <th>(日)</th>
+                </tr>
+            </thead>
+            
+            <tbody class="working">
+                <tr>
+                    <td class="title">8:00<br/>~<br/>12:00</td>
+                    <td></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('汪涵', '(二)', '早上')">汪涵</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('汪涵', '(三)', '早上')">汪涵</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('高家祥', '(四)', '早上')">高家祥</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('林毅', '(五)', '早上')">林毅</a></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td class="title">14:00<br/>~<br/>18:00</td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('周勝', '(一)', '下午')">周勝</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('李智凱', '(二)', '下午')">李智凱</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('李智凱', '(三)', '下午')">李智凱</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('高家祥', '(四)', '下午')">高家祥</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('吳以程', '(五)', '下午')">吳以程</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('林毅', '(六)', '下午')">林毅</a></td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('吳以程', '(日)', '下午')">吳以程</a></td>
+                </tr>
+                <tr>
+                    <td class="title">19:00<br/>~<br/>21:00</td>
+                    <td><a href="javascript:void(0)" onclick="selectDoctor('周勝', '(一)', '晚上')">周勝</a></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <br/>
+        <br/>
+        <a href="3_1_clinic.html" class="back">回上一頁</a></td>
+    </center>
+    <script>
+        function selectDoctor(doctorName, day, time) {
+            // Add 'department' to the query string with the selected information
+            var queryString = '?doctor=' + encodeURIComponent(doctorName) + '&day=' + encodeURIComponent(day) + '&time=' + encodeURIComponent(time) + '&department=' + encodeURIComponent('神經科');
+            
+            // Redirect to the second HTML file with the query string
+            window.location.href = '3_2_1_schedule_doctor.html' + queryString;
+        }
+    </script>
 </body>
+</html>
