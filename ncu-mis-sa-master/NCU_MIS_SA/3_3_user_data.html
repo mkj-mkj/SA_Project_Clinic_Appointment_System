@@ -16,7 +16,7 @@
 			<center><table border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
-					<td width= "500"><input type="text" name="id" id="user_id" pattern="[A-Z0-9]{10}" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
+					<td width= "500"><input type="text" name="id" id="user_id" pattern="^[A-Z][0-9]{9}$" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
 				</tr>
 				<tr>
 					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
