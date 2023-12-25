@@ -117,13 +117,16 @@
 					var contact_rel = $('#contact_rel').val();
 					var contact_tel = $('#contact_tel').val();
 					if(!user_id_rule.test(user_id)) {
-						alert("身分證格式不符！")
+						alert("身分證格式不符！");
+						return false;
 					}
 					if (!phone_rule.test(phone)) {
-						alert("電話格式不符！")
+						alert("電話格式不符！");
+						return false;
 					}
 					if (!email_rule.test(email)) {
-						alert("email格式不符")
+						alert("email格式不符");
+						return false;
 					}
 					if(blood_type == null) {
 						blood_type = "";
@@ -154,7 +157,7 @@
 					}
 					
 	 				else {
-	 					alert("新增成功");
+						alert("新增成功");
 						// 將資料組成JSON格式
 						var data_object = {
 							"user_id": user_id,
