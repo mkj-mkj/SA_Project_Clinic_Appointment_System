@@ -332,21 +332,19 @@ public class AdministratorHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`Administrator`(`admin_id`, `admin_name`, `admin_email`, `admin_password`)"
-                    + " VALUES(?, ?, ?, ?)";
+            String sql = "INSERT INTO `Administrator`(`admin_name`, `admin_mail`, `admin_password`)"
+                    + " VALUES(?, ?, ?)";
 
             /** 取得所需之參數 */
-            int Id = a.getID();
             String Name = a.getName();
             String Email = a.getEmail();
             String Password = a.Password();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, Id);
-            pres.setString(2, Name);
-            pres.setString(3, Email);
-            pres.setString(4, Password);
+            pres.setString(1, Name);
+            pres.setString(2, Email);
+            pres.setString(3, Password);
 
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
