@@ -192,7 +192,7 @@ public class AdministratorHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該管理者編號之管理者資料
      */
-    public JSONObject getByID(String id) {
+    public JSONObject getByMail(String mail) {
         /** 新建一個 Admin 物件之 a 變數，用於紀錄每一位查詢回之管理者資料 */
         Administrator a = null;
         /** 用於儲存所有檢索回之admin，以JSONArray方式儲存 */
@@ -210,11 +210,11 @@ public class AdministratorHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hospital`.`Administrator` WHERE `admin_id` = ? LIMIT 1";
+            String sql = "SELECT * FROM `Administrator` WHERE `admin_mail` = ? LIMIT 1";
             
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, id);
+            pres.setString(1, mail);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 

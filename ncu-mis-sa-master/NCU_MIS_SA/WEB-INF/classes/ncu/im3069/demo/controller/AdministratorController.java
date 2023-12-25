@@ -94,10 +94,10 @@ public class AdministratorController extends HttpServlet {
                 /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
                 JsonReader jsr = new JsonReader(request);
                 /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
-                String id = jsr.getParameter("id");
+                String mail = jsr.getParameter("mail");
 
                 /** 判斷該字串是否存在，若存在代表要取回個別admin資料，否則代表要取回全部資料庫內admin之資料 */
-                if (id.isEmpty()) {
+                if (mail.isEmpty()) {
                         /** 透過AdministratorHelper物件之getAll()方法取回所有admin之資料，回傳之資料為JSONObject物件 */
                         JSONObject query = ah.getAll();
 
@@ -111,7 +111,7 @@ public class AdministratorController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 透過adminHelper物件的getByID()方法自資料庫取回該admin之資料，回傳之資料為JSONObject物件 */
-                        JSONObject query = ah.getByID(id);
+                        JSONObject query = ah.getByMail(mail);
 
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();
