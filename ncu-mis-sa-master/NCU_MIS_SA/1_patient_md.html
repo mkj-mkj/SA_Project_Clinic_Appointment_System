@@ -3,6 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>患者管理功能頁面</title>
     <style>
         body {
@@ -61,10 +62,11 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            text-decoration: none;
         }
 
         .add-button {
-            width: 120px;
+            width: 50px;
         }
 
         .search-form {
@@ -91,60 +93,111 @@
 
 <body>
     <div style="background-color:#004B97;">
-        <h1><b>患者管理</b></h1>
+        <h1><b>患者管理000</b></h1>
     </div>
     <form class="search-form">
         <input type="text" class="search-input" placeholder="輸入身分證碼">
         <button type="submit" class="search-button">搜尋</button>
     </form>
-    <table>
-        <tr>
-            <th>姓名</th>
-            <th>身分證</th>
-            <th>按鈕</th>
-            <th>按鈕</th>
-        </tr>
-        <tr>
-            <td>姓名 1</td>
-            <td>郵箱 1</td>
-            <td><button class="modify-button" onclick="redirectToModifyPage()">修改</button></td>
-            <td><button class="modify-button">刪除</button></td>
-        </tr>
-        <tr>
-            <td>姓名 2</td>
-            <td>郵箱 2</td>
-            <td><button class="modify-button" onclick="redirectToModifyPage()">修改</button></td>
-            <td><button class="modify-button">刪除</button></td>
-        </tr>
-        <tr>
-            <td>姓名 3</td>
-            <td>郵箱 3</td>
-            <td><button class="modify-button" onclick="redirectToModifyPage()">修改</button></td>
-            <td><button class="modify-button">刪除</button></td>
-        </tr>
-        <tr>
-            <td>姓名 4</td>
-            <td>郵箱 4</td>
-            <td><button class="modify-button" onclick="redirectToModifyPage()">修改</button></td>
-            <td><button class="modify-button">刪除</button></td>
-        </tr>
-        <tr>
-            <td>姓名 5</td>
-            <td>郵箱 5</td>
-            <td><button class="modify-button" onclick="redirectToModifyPage()">修改</button></td>
-            <td><button class="modify-button">刪除</button></td>
-        </tr>
+    <table id="table">
+    	<thead>
+	        <tr>
+	        	<th>病歷號</th>
+	            <th>姓名</th>
+	            <th>身分證</th>
+	            <th></th>
+	            <th></th>
+	        </tr>
+        </thead>
+        <tbody></tbody>
     </table>
     <br>
-    <div><button class="add-button" onclick="redirectToAddPage()">新增</button></div>
+    <div>
+    	 <button class="add-button" onclick="redirectToAddPage()">新增</button>
+    	 <a href="5_manager_function.html" class="add-button">回上一頁</a>
+    </div>
 
-    <script>
+    <script type="text/javascript">
         function redirectToModifyPage() {
             window.location.href = '1_3_patient_modified.html';
         }
 
         function redirectToAddPage() {
             window.location.href = '1_2_patient_add.html';
+        }
+        function getAllPatient(){
+            // 發出POST的GET請求取得所有patient
+            $.ajax({
+                type: "GET",
+                url: "api/user.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+
+        // 更新patient表格
+        function updateTable(data) {
+            $("#table > tbody").empty();
+            var table_html = '';
+            
+            $.each(data, function(index, value) {
+                table_html += '<tr>';
+                table_html += '<td>' + value['case_number'] + '</td>';
+                table_html += '<td>' + value['name'] + '</td>';
+                table_html += '<td>' + value['user_id'] + '</td>';
+                table_html += '<td><button class="delete_button" onclick="DeletePatient(' + value['case_number'] + ');">刪除</button></td>';
+                table_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['user_id']+');">修改</button></td>';
+                table_html += '<tr>';
+            })
+        
+            $("#table > tbody").append(table_html);
+        }
+
+        $(document).ready(function() {
+            getAllPatient();
+        });
+        
+        function DeletePatient(case_number) {  
+            var check = window.confirm("確認要刪除此病患嗎");
+            if (check == true) {
+            console.log("刪除病患");
+           // 發出POST的DELETE請求刪除該筆病患資料
+           var request = {'case_number': case_number};
+           var data_string = JSON.stringify(request);
+            // 發送 AJAX 請求以刪除病患
+            $.ajax({
+                type: "DELETE",  // 使用 POST 方法
+                url: "api/user.do",  
+                crossDomain: true,
+                data: data_string,  // 傳遞病患 ID 給服務器
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        // 刪除成功後，更新表格
+                        getAllPatient();
+                    } else {
+                        alert("刪除失敗：" + response.message);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+            };
         }
     </script>
 </body>

@@ -147,10 +147,10 @@ public class UserController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                String id = jso.getString("id");
+                int case_number = jso.getInt("case_number");
 
                 /** 透過UserHelper物件的deleteByID()方法至資料庫刪除該使用者，回傳之資料為JSONObject物件 */
-                JSONObject query = uh.deleteByID(id);
+                JSONObject query = uh.deleteByID(Integer.parseInt(case_number));
 
                 /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                 JSONObject resp = new JSONObject();
