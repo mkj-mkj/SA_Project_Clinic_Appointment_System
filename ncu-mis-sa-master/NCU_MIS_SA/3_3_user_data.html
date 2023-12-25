@@ -16,7 +16,7 @@
 			<center><table border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
-					<td width= "500"><input type="text" name="id" id="user_id" pattern="^[A-Z][0-9]{9}$" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
+					<td width= "500"><input type="text" name="id" id="user_id" pattern="^[A-Z][0-9]{9}$" required/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
 				</tr>
 				<tr>
 					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
@@ -98,12 +98,15 @@
 	
 	        	function submit() {
 	        		var user_id = $('#user_id').val();
+					var user_id_rule = /^[A-Z][12]\d{8}$/;
 					var user_name = $('#user_name').val();
 					var gender = $("input[name='sex']:checked").val();
 					var birth = $('#birth').val();
 					var address = $('#address').val();
 					var phone = $('#user_phone').val();
+					var phone_rule = /^09\d{8}$/;
 					var email = $('#email').val();
+					var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
 					var blood_type = $('#blood_type').val();
 					var height = $('#height').val();
 					var weight = $('#weight').val();
@@ -113,7 +116,15 @@
 					var contact_name = $('#contact_name').val();
 					var contact_rel = $('#contact_rel').val();
 					var contact_tel = $('#contact_tel').val();
-
+					if(!user_id_rule.test(user_id)) {
+						alert("身分證格式不符！")
+					}
+					if (!phone_rule.test(phone)) {
+						alert("電話格式不符！")
+					}
+					if (!email_rule.test(email)) {
+						alert("email格式不符")
+					}
 					if(blood_type == null) {
 						blood_type = "";
 					}
@@ -142,51 +153,53 @@
 						contact_tel = "";
 					}
 					
-	 				
-	            	// 將資料組成JSON格式
-	                var data_object = {
-						"user_id": user_id,
-						"user_name": user_name,
-						"address": address,
-						"birth": birth,
-						"email": email,
-						"gender": gender,
-						"phone": phone,
-						"residence_tel": residence_tel,
-						"blood": blood_type,
-						"height": height,
-						"weight": weight,
-						"allergy_history": allergy_history,
-						"servill_history": servill_history,
-						"contact_name": contact_name,
-						"contact_rel": contact_rel,
-						"contact_tel": contact_tel
-	                };
+	 				else {
+	 					alert("新增成功");
+						// 將資料組成JSON格式
+						var data_object = {
+							"user_id": user_id,
+							"user_name": user_name,
+							"address": address,
+							"birth": birth,
+							"email": email,
+							"gender": gender,
+							"phone": phone,
+							"residence_tel": residence_tel,
+							"blood": blood_type,
+							"height": height,
+							"weight": weight,
+							"allergy_history": allergy_history,
+							"servill_history": servill_history,
+							"contact_name": contact_name,
+							"contact_rel": contact_rel,
+							"contact_tel": contact_tel
+						};
 	
-	            	// 將JSON格式轉換成字串
-	            	var data_string = JSON.stringify(data_object);
+						// 將JSON格式轉換成字串
+						var data_string = JSON.stringify(data_object);
 	
-	            	// 發出POST的AJAX請求
-	            	$.ajax({
-	                	type: "POST",
-	                	url: "api/user.do",
-	                	data: data_string,
-	                	crossDomain: true,
-	                	cache: false,
-	               		dataType: 'json',
-	                    timeout: 5000,
-	                	success: function (response) {
-	                		$('#flashMessage').html(response.message);
-	                    	$('#flashMessage').show();
-	                    	if(response.status == 200){
-	                    		alert("新增成功");
-	                        }
-	                    },
-	                	error: function () {
-	                     	alert("無法連線到伺服器！");
-	                	}
-	           		});    		
-	       		}
+						// 發出POST的AJAX請求
+						$.ajax({
+							type: "POST",
+							url: "api/user.do",
+							data: data_string,
+							crossDomain: true,
+							cache: false,
+							dataType: 'json',
+							timeout: 5000,
+							success: function (response) {
+								$('#flashMessage').html(response.message);
+								$('#flashMessage').show();
+								if(response.status == 200){
+									alert("新增成功");
+								}
+							},
+							error: function () {
+								alert("無法連線到伺服器！");
+							}
+						});    		
+					}
+				}
 	       	});
 		</script>
 	
