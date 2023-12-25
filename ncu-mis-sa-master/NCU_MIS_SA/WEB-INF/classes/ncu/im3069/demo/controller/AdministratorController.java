@@ -46,13 +46,12 @@ public class AdministratorController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                Integer admin_id = jso.getInt("admin_id");
                 String admin_name = jso.getString("admin_name");
                 String admin_mail = jso.getString("admin_mail");
                 String admin_password = jso.getString("admin_password");
 
                 /** 建立一個新的admin物件 */
-                Administrator a = new Administrator(admin_id, admin_name, admin_mail, admin_password);
+                Administrator a = new Administrator(admin_name, admin_mail, admin_password);
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
                 if (admin_name.isEmpty() || admin_mail.isEmpty() || admin_password.isEmpty()) {
