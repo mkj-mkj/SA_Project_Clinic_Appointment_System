@@ -69,6 +69,68 @@
         <input type="submit" value="新增"><!--驗證管理者資料庫是否已有這筆資料，若有則顯示「管理者已存在」；若無則顯示「新增成功！」提示，並將這筆資料新增到manager資料庫中-->
     </form>
 </body>
+  <script type="text/javascript">
+                $(document).ready(function() {
+                    // 處理表單點擊事件
+                    var $form = $('#submit');
+                    $form.click(function() {
+                        submit();
+                    });
+                  
+                    function submit() {
+                        var name = $('#admin_name').val();
+                        var mail = $('#admin_mail').val();
+                        var password = $('#admin_password').val();
+
+                        var email_rule = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                        var password_rule = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+
+                        if (!email_rule.test(email)) {
+                            alert("Email格式不符！");
+                        }
+                        else if(!password_rule.test(password)) {
+                            alert("密碼格式不符，長度至少8，且至少包含一個數字和英文字母！");
+                        } else {
+                            // 將資料組成JSON格式
+                            var data_object = {
+                                "admin_name": admin_name,
+                                "admin_mail": admin_mail,
+                                "admin_password": admin_password
+                            };
+                            // 將資料組成JSON格式
+                             var data_object = {
+                                "admin_name": admin_name,
+                                "admin_mail": admin_mail,
+                                "admin_password": admin_password,
+                           };
+
+                            // 將JSON格式轉換成字串
+                            var data_string = JSON.stringify(data_object);
+
+                            // 發出POST的AJAX請求
+                            $.ajax({
+                                    type: "POST",
+                                    url: "api/administrator.do",
+                                    data: data_string,
+                                    crossDomain: true,
+                                    cache: false,
+                                    dataType: 'json',
+                                    timeout: 5000,
+                                    success: function (response) {
+                                        $('#flashMessage').html(response.message);
+                                        $('#flashMessage').show();
+                                        if(response.status == 200){
+                                            alert("新增成功");
+                                        }
+                                    },
+                                    error: function () {
+                                        alert("無法連線到伺服器！");
+                                    }
+                            });
+                        }
+                    }
+                });
+    </script>
 </html>
 
 
