@@ -55,8 +55,8 @@ public class UserController extends HttpServlet {
                 String phone = jso.getString("phone");
                 String residence_tel = jso.getString("residence_tel");
                 String blood = jso.getString("blood");
-                float height = jso.getFloat("height");
-                float weight = jso.getFloat("weight");
+                String height = jso.getString("height");
+                String weight = jso.getString("weight");
                 String allergy_history = jso.getString("allergy_history");
                 String servill_history = jso.getString("servill_history");
                 String contact_name = jso.getString("contact_name");
@@ -186,8 +186,8 @@ public class UserController extends HttpServlet {
                 String phone = jso.getString("phone");
                 String residence_tel = jso.getString("residence_tel");
                 String blood = jso.getString("blood");
-                float height = jso.getFloat("height");
-                float weight = jso.getFloat("weight");
+                String height = jso.getString("height");
+                String weight = jso.getString("weight");
                 String allergy_history = jso.getString("allergy_history");
                 String servill_history = jso.getString("servill_history");
                 String contact_name = jso.getString("contact_name");

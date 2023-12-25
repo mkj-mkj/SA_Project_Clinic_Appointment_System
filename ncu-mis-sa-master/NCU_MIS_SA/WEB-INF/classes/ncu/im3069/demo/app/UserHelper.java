@@ -151,8 +151,8 @@ public class UserHelper {
                 String user_phone = rs.getString("user_phone");
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
-                Float height = rs.getFloat("height");
-                Float weight = rs.getFloat("wieght");
+                String height = rs.getString("height");
+                String weight = rs.getString("wieght");
                 String allergy_history = rs.getString("allergy_history");
                 String serverill_history = rs.getString("serverill_history");
                 String contact_name = rs.getString("contact_name");
@@ -243,8 +243,8 @@ public class UserHelper {
                 String user_phone = rs.getString("user_phone");
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
-                Float height = rs.getFloat("height");
-                Float weight = rs.getFloat("wieght");
+                String height = rs.getString("height");
+                String weight = rs.getString("wieght");
                 String allergy_history = rs.getString("allergy_history");
                 String serverill_history = rs.getString("serverill_history");
                 String contact_name = rs.getString("contact_name");
@@ -367,8 +367,8 @@ public class UserHelper {
             String user_phone = u.getPhone();
             String residence_tel = u.getResidenceTel();
             String blood = u.getBloodType();
-            Float height = u.getHeight();
-            Float weight = u.getWeight();
+            String height = u.getHeight();
+            String weight = u.getWeight();
             String AllergyHistory = u.getAllergyHistory();
             String ServillHistory = u.getServerillHistory();
             String contact_name = u.getContactName();
@@ -387,8 +387,8 @@ public class UserHelper {
             pres.setString(7, user_phone);
             pres.setString(8, residence_tel);
             pres.setString(9, blood);
-            pres.setFloat(10, height);
-            pres.setFloat(11, weight);
+            pres.setString(10, height);
+            pres.setString(11, weight);
             pres.setString(12, AllergyHistory);
             pres.setString(13, ServillHistory);
             pres.setString(14, contact_name);
@@ -458,8 +458,8 @@ public class UserHelper {
             String user_phone = u.getPhone();
             String residence_tel = u.getResidenceTel();
             String blood = u.getBloodType();
-            Float height = u.getHeight();
-            Float weight = u.getWeight();
+            String height = u.getHeight();
+            String weight = u.getWeight();
             String AllergyHistory = u.getAllergyHistory();
             String ServillHistory = u.getServerillHistory();
             String contact_name = u.getContactName();
@@ -477,8 +477,8 @@ public class UserHelper {
             pres.setString(6, user_phone);
             pres.setString(7, residence_tel);
             pres.setString(8, blood);
-            pres.setFloat(9, height);
-            pres.setFloat(10, weight);
+            pres.setString(9, height);
+            pres.setString(10, weight);
             pres.setString(11, AllergyHistory);
             pres.setString(12, ServillHistory);
             pres.setString(13, contact_name);
