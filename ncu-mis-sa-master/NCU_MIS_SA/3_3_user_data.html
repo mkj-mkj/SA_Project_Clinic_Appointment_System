@@ -12,11 +12,11 @@
 		<h1>初診資料</h1>
 		<br/>
 		<br/>
-		<form>
+		<form onsubmit="submitFormReturn();return false;">
 			<center><table border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
-					<td width= "500"><input type="text" name="id" id="user_id" pattern="^[A-Z][0-9]{9}$" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
+					<td width= "500"><input type="text" name="id" id="user_id" pattern="[A-Z][0-9]{9}$" required= "required"/></td><!--身分證號碼格式在這邊已經驗證，已要求必填-->
 				</tr>
 				<tr>
 					<td bgcolor = "#C4E1FF"><strong><font color="#FF0000">姓名(必填)</font></strong></td>
@@ -87,15 +87,22 @@
 			<br/>
     		<center><button type="submit" id="submit" class="button">送出</button><!--送出時驗證user資料庫中是否有這筆資料存在，若有則顯示「已有相同資料，請重新輸入」提示；若沒有重複資料則將這筆資料新增到使用者資料庫中-->
     	</form>
+    	<br>
+    	<center>
+    		<a href="http://localhost:8088/NCU_MIS_SA/3_2_appointment.html">返回預約</a>
+    	</center>
+    	
     
 	    <script type="text/javascript">
+	    
 	    	$(document).ready(function() {
 	        	// 處理表單點擊事件
 	        	var $form = $('#submit');
 	        	$form.click(function() {
 	        		submit();
+	        		window.location.href = "http://localhost:8088/NCU_MIS_SA/3_2_appointment.html";
 	        	});
-	
+
 	        	function submit() {
 	        		var user_id = $('#user_id').val();
 					var user_name = $('#user_name').val();
@@ -118,10 +125,10 @@
 						blood_type = "";
 					}
 					if(height == null) {
-						height = -1;
+						height = "";
 					}
 					if(weight == null) {
-						weight = -1;
+						weight = "";
 					}
 					if(allergy_history == null) {
 						allergy_history = "";
@@ -162,7 +169,7 @@
 						"contact_rel": contact_rel,
 						"contact_tel": contact_tel
 	                };
-	
+	            	
 	            	// 將JSON格式轉換成字串
 	            	var data_string = JSON.stringify(data_object);
 	
@@ -179,11 +186,13 @@
 	                		$('#flashMessage').html(response.message);
 	                    	$('#flashMessage').show();
 	                    	if(response.status == 200){
-	                    		alert("新增成功");
+	                    		
+	                    		window.location.href = "http://localhost:8088/NCU_MIS_SA/3_2_appointment.html";
 	                        }
 	                    },
 	                	error: function () {
 	                     	alert("無法連線到伺服器！");
+	                     	
 	                	}
 	           		});    		
 	       		}

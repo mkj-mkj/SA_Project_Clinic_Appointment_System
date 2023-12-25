@@ -210,7 +210,7 @@ public class User {
      *
      * @return the id 回傳使用者之身高
      */
-    public String  getHeight() {
+    public String getHeight() {
         return this.Height;
     }
 
@@ -219,7 +219,7 @@ public class User {
      *
      * @return the id 回傳使用者之體重
      */
-    public String  getWeight() {
+    public String getWeight() {
         return this.Weight;
     }
 
