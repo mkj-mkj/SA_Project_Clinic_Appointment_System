@@ -195,8 +195,8 @@ public class UserController extends HttpServlet {
                 String contact_tel = jso.getString("contact_tel");
 
                 /** 透過傳入之參數，新建一個以這些參數之使用者Ussr物件 */
-                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood, null,
-                                null, allergy_history, servill_history, contact_name, contact_rel, contact_tel);
+                User u = new User(user_id, user_name, address, birth, email, gender, phone, residence_tel, blood, height,
+                                weight, allergy_history, servill_history, contact_name, contact_rel, contact_tel);
 
                 /** 透過User物件的update()方法至資料庫更新該使用者資料，回傳之資料為JSONObject物件 */
                 JSONObject data = u.update();

@@ -46,13 +46,12 @@ public class AdministratorController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                Integer admin_id = jso.getInt("admin_id");
                 String admin_name = jso.getString("admin_name");
                 String admin_mail = jso.getString("admin_mail");
                 String admin_password = jso.getString("admin_password");
 
                 /** 建立一個新的admin物件 */
-                Administrator a = new Administrator(admin_id, admin_name, admin_mail, admin_password);
+                Administrator a = new Administrator(admin_name, admin_mail, admin_password);
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
                 if (admin_name.isEmpty() || admin_mail.isEmpty() || admin_password.isEmpty()) {
@@ -95,10 +94,10 @@ public class AdministratorController extends HttpServlet {
                 /** 透過JsonReader類別將Request之JSON格式資料解析並取回 */
                 JsonReader jsr = new JsonReader(request);
                 /** 若直接透過前端AJAX之data以key=value之字串方式進行傳遞參數，可以直接由此方法取回資料 */
-                String id = jsr.getParameter("id");
+                String mail = jsr.getParameter("mail");
 
                 /** 判斷該字串是否存在，若存在代表要取回個別admin資料，否則代表要取回全部資料庫內admin之資料 */
-                if (id.isEmpty()) {
+                if (mail.isEmpty()) {
                         /** 透過AdministratorHelper物件之getAll()方法取回所有admin之資料，回傳之資料為JSONObject物件 */
                         JSONObject query = ah.getAll();
 
@@ -112,7 +111,7 @@ public class AdministratorController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 透過adminHelper物件的getByID()方法自資料庫取回該admin之資料，回傳之資料為JSONObject物件 */
-                        JSONObject query = ah.getByID(id);
+                        JSONObject query = ah.getByMail(mail);
 
                         /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                         JSONObject resp = new JSONObject();
