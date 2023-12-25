@@ -95,6 +95,7 @@ public class Administrator {
             /** 透過MemberHelper物件，更新目前之會員資料置資料庫中 */
             data = ah.update(this);
         }
+        return data;
     }
 
     /**

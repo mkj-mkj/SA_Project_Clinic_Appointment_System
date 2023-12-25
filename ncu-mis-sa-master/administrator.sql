@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- 主機： localhost:3308
--- 產生時間： 2023-12-24 17:48:52
--- 伺服器版本： 10.4.32-MariaDB
--- PHP 版本： 8.0.30
+-- 主機： 127.0.0.1
+-- 產生時間： 2023-12-25 10:53:58
+-- 伺服器版本： 10.4.28-MariaDB
+-- PHP 版本： 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -29,8 +29,8 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `administrator` (
   `admin_id` int(11) NOT NULL,
-  `adimn_name` varchar(30) NOT NULL,
-  `adimn_mail` varchar(30) NOT NULL,
+  `admin_name` varchar(30) NOT NULL,
+  `admin_mail` varchar(30) NOT NULL,
   `admin_password` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -38,7 +38,7 @@ CREATE TABLE `administrator` (
 -- 傾印資料表的資料 `administrator`
 --
 
-INSERT INTO `administrator` (`admin_id`, `adimn_name`, `adimn_mail`, `admin_password`) VALUES
+INSERT INTO `administrator` (`admin_id`, `admin_name`, `admin_mail`, `admin_password`) VALUES
 (1, '張興', 'xing21@gmail.com', '51264shn'),
 (2, '李安琪', 'annnqi68@gmail.com', '105479fow'),
 (3, '吳啓明', 'qishen90@gmail.com', '78410wism'),

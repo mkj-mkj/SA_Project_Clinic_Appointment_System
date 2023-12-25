@@ -131,7 +131,7 @@ public class ScheduleHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hospital`.`schdule`";
+            String sql = "SELECT * FROM `hospital`.`schedule`";
             
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -154,9 +154,10 @@ public class ScheduleHelper {
                 int DoctorId = rs.getInt("doctor_id"); 
                 int MaxCapacity = rs.getInt("MaxCapacity");
                 int CurrentRegistrations = rs.getInt("CurrentRegistrations");
+                String Time = rs.getString("time");
                 
                 /** 將每一筆schedule資料產生一名新schedule物件 */
-                s = new Schedule(Seq, DateTime, ClinicId, DoctorId, MaxCapacity, CurrentRegistrations);
+                s = new Schedule(Seq, DateTime, ClinicId, DoctorId, MaxCapacity, CurrentRegistrations, Time);
                 /** 取出該班表之資料並封裝至 JSONsonArray 內 */
                 jsa.put(s.getData());
             }
@@ -192,7 +193,7 @@ public class ScheduleHelper {
      * 
      * @return the JSON object 回傳SQL執行結果與該班表流水號之班表資料
      */
-    public JSONObject getBySeq(int Seq) {  // int or string
+    public JSONObject getBySeq(int clinic_id) {  // int or string
         JSONObject data = new JSONObject();
         Schedule s = null;
         /** 記錄實際執行之SQL指令 */
@@ -208,11 +209,11 @@ public class ScheduleHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hosptial`.`schedule` WHERE `schedule`.`schedule_seq` = ? LIMIT 1";
+            String sql = "SELECT * FROM `schedule` WHERE `clinic_id` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, Seq);
+            pres.setInt(1, clinic_id);
             /** 執行查詢之SQL指令並記錄其回傳之資料 */
             rs = pres.executeQuery();
 
@@ -232,9 +233,10 @@ public class ScheduleHelper {
                 int DoctorId = rs.getInt("doctor_id"); 
                 int MaxCapacity = rs.getInt("MaxCapacity");
                 int CurrentRegistrations = rs.getInt("CurrentRegistrations");
+                String Time = rs.getString("time");
                 
                 /** 將每一筆schedule資料產生一名新schedule物件 */
-                s = new Schedule(seq, DateTime, ClinicId, DoctorId, MaxCapacity, CurrentRegistrations);
+                s = new Schedule(seq, DateTime, ClinicId, DoctorId, MaxCapacity, CurrentRegistrations, Time);
                 /** 取出該班表之資料並封裝至 JSONsonArray 內 */
                 data = s.getData();
             }
@@ -283,8 +285,8 @@ public class ScheduleHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`schedule`(`schedule_seq`,datetime`, `clinic_id`, `doctor_id`, `MaxCapacity`)"
-                    + " VALUES(?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO `hostipal`.`schedule`(`schedule_seq`,datetime`, `clinic_id`, `doctor_id`, `MaxCapacity`,'time')"
+                    + " VALUES(?, ?, ?, ?, ?, ?)";
 
             /** 取得所需之參數 */
             int schedule_seq = s.getSeq();
@@ -292,6 +294,7 @@ public class ScheduleHelper {
             int clinic_id = s.getClinicID();
             int doctor_id = s.getDoctorID();
             int MaxCapacity = s.getMaxCapacity();
+            String Time = s.getTime();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -300,6 +303,7 @@ public class ScheduleHelper {
             pres.setInt(3, clinic_id);
             pres.setInt(4, doctor_id);
             pres.setInt(5, MaxCapacity);
+            pres.setString(6, Time);
 
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
@@ -359,6 +363,7 @@ public class ScheduleHelper {
             int clinic_id = s.getClinicID();
             int doctor_id = s.getDoctorID();
             int MaxCapacity = s.getMaxCapacity();
+            String Time = s.getTime();
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -367,6 +372,7 @@ public class ScheduleHelper {
             pres.setInt(3, clinic_id);
             pres.setInt(4, doctor_id);
             pres.setInt(5, MaxCapacity);
+            pres.setString(6, Time);
             /** 執行更新之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 

@@ -26,9 +26,13 @@ public class Schedule {
 
     private int CurrentRegistrations;
 
+    private String Time;
+    
     private Clinic clinic;
 
     private Doctor doctor;
+    
+    
 
     /** ch，ClinicHelper之物件與Clinic相關之資料庫方法（Sigleton） */
     private ClinicHelper ch = ClinicHelper.getHelper();
@@ -84,6 +88,16 @@ public class Schedule {
         this.MaxCapacity = MaxCapacity;
         this.CurrentRegistrations = CurrentRegistrations;
     }    
+    
+    public Schedule(int Seq, Timestamp DateTime, int ClinicId, int DoctorId, int MaxCapacity,int CurrentRegistrations, String Time) {
+        this.Seq = Seq;
+        this.DateTime = DateTime;
+        this.ClinicId = ClinicId;
+        this.DoctorId = DoctorId;
+        this.MaxCapacity = MaxCapacity;
+        this.CurrentRegistrations = CurrentRegistrations;
+        this.Time = Time;
+    }  
 
     /**
      * 取得班表流水號
@@ -113,6 +127,10 @@ public class Schedule {
     public int getCurrentRegistrations() {
         return this.CurrentRegistrations;
     }
+    
+    public String getTime() {
+    	return this.Time;
+    }
 
     /**
      * 更新班表資料
@@ -138,11 +156,12 @@ public class Schedule {
     /** 透過JSONObject將班表所需之資料全部進行封裝 */
     JSONObject jso = new JSONObject();
     jso.put("seq", getSeq());
-    jso.put("time", getDateTime());
+    jso.put("datetime", getDateTime());
     jso.put("clinic", getClinicID());
     jso.put("doctor", getDoctorID());
     jso.put("maxcapacity", getMaxCapacity());
     jso.put("currentregistrations", getCurrentRegistrations());
+    jso.put("time", getTime());
     return jso;
     }
 
