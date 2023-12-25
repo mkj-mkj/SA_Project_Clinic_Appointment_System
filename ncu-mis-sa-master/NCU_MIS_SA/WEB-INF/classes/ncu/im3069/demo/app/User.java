@@ -32,9 +32,9 @@ public class User {
 
     private String BloodType = null;
 
-    private Float Height = null;
+    private String  Height = null;
 
-    private Float Weight = null;
+    private String  Weight = null;
 
     private String AllergyHistory = null;
 
@@ -70,7 +70,7 @@ public class User {
      * 實例化（Instantiates）一個新的（new）User物件
      */
     public User(String Id, String Name, String Address, String Birth, String Email, int Gender,
-            String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
+            String Phone, String ResidenceTel, String BloodType, String  Height, String  Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
         this.Name = Name;
@@ -94,7 +94,7 @@ public class User {
      * 實例化（Instantiates）一個新的（new）User物件
      */
     public User(String Id, int CaseNumber, String Name, String Address, String Birth, String Email, int Gender,
-            String Phone, String ResidenceTel, String BloodType, Float Height, Float Weight, String AllergyHistory,
+            String Phone, String ResidenceTel, String BloodType, String Height, String Weight, String AllergyHistory,
             String ServillHistory, String ContactName, String ContactRel, String ContactTel) {
         this.Id = Id;
         this.Name = Name;
@@ -210,7 +210,7 @@ public class User {
      *
      * @return the id 回傳使用者之身高
      */
-    public Float getHeight() {
+    public String  getHeight() {
         return this.Height;
     }
 
@@ -219,7 +219,7 @@ public class User {
      *
      * @return the id 回傳使用者之體重
      */
-    public Float getWeight() {
+    public String  getWeight() {
         return this.Weight;
     }
 
