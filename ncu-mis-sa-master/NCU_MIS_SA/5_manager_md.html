@@ -63,7 +63,7 @@
                 <th>姓名</th>
                 <th>郵箱</th>
                 <th></th>
-                <th></th>
+    
             </tr>
         </thead>
         <tbody></tbody>
@@ -73,7 +73,7 @@
                 // 發出POST的GET請求取得所有管理者
                 $.ajax({
                     type: "GET",
-                    url: "api/Administrator.do",
+                    url: "api/administrator.do",
                     crossDomain: true,
                     cache: false,
                     dataType: 'json',
@@ -97,10 +97,10 @@
                 
                 $.each(data, function(index, value) {
                     table_html += '<tr>';
-                    table_html += '<tr>' + value['id'] + '</tr>';
+                    table_html += '<td>' + value['id'] + '</td>';
                     table_html += '<td>' + value['name'] + '</td>';
-                    table_html += '<td>' + value['mail'] + '</td>';
-                    table_html += '<td><button class="delete_button" onclick="DeleteAdministrator('+value['id']+');"刪除</button></td>';
+                    table_html += '<td>' + value['email'] + '</td>';
+                    table_html += '<td><button class="delete_button" onclick="DeleteAdministrator('+value['id']+');">刪除</button></td>';
                     table_html += '<tr>';
                 })
             
@@ -109,7 +109,6 @@
     
             $(document).ready(function() {
                 getAllAdministrator();
-                DeleteAdministrator();
             });
 
             function DeleteAdministrator(id) {   
@@ -122,7 +121,7 @@
                 // 發送 AJAX 請求以刪除管理員
                 $.ajax({
                     type: "DELETE",  // 使用 POST 方法
-                    url: "api/Administrator.do",  // 請替換為實際的 API 端點
+                    url: "api/administrator.do",  // 請替換為實際的 API 端點
                     crossDomain: true,
                     data: data_string,  // 傳遞管理員 ID 給服務器
                     cache: false,
