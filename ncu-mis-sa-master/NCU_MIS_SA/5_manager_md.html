@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>管理者資料</title>
     <style>
         body {
@@ -55,43 +56,17 @@
 </head>
 <body>
     <div style="background-color:#004B97;"><h1><b>管理者</b></h1></div>
-    <table><!--管理者資料庫有幾筆資料就顯示幾筆-->
-        <tr>
-            <th>姓名</th>
-            <th>郵箱</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tr>
-            <td>姓名 1</td>
-            <td>郵箱 1</td>
-            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>姓名 2</td>
-            <td>郵箱 2</td>
-            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>姓名 3</td>
-            <td>郵箱 3</td>
-            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>姓名 4</td>
-            <td>郵箱 4</td>
-            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>姓名 5</td>
-            <td>郵箱 5</td>
-            <td><a href="5_3_manager_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
+    <table id="table"><!--管理者資料庫有幾筆資料就顯示幾筆-->
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>姓名</th>
+                <th>郵箱</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody></tbody>
     </table>
     <script type="text/javascript">
             function getAllAdministrator(){
@@ -122,8 +97,10 @@
                 
                 $.each(data, function(index, value) {
                     table_html += '<tr>';
+                    table_html += '<tr>' + value['id'] + '</tr>';
                     table_html += '<td>' + value['name'] + '</td>';
                     table_html += '<td>' + value['mail'] + '</td>';
+                    table_html += '<td><button class="delete_button" onclick="DeleteAdministrator('+value['id']+');"刪除</button></td>';
                     table_html += '<tr>';
                 })
             
@@ -135,18 +112,19 @@
                 DeleteAdministrator();
             });
 
-            function DeleteAdministrator() {
-                // 點擊 "刪除" 按鈕時觸發事件
-                $(".delete-button").on("click", function() {
-                // 獲取管理員 ID
-                var adminId = $(this).data("id");
-
+            function DeleteAdministrator(id) {   
+                var check = window.confirm("確認要刪除管理員嗎");
+                if (check == true) {
+                console.log("刪除管理員");
+	           // 發出POST的DELETE請求刪除該筆預約資料
+	           var request = {'id': id};
+	           var data_string = JSON.stringify(request);
                 // 發送 AJAX 請求以刪除管理員
                 $.ajax({
-                    type: "POST",  // 使用 POST 方法
+                    type: "DELETE",  // 使用 POST 方法
                     url: "api/Administrator.do",  // 請替換為實際的 API 端點
                     crossDomain: true,
-                    data: { id: adminId },  // 傳遞管理員 ID 給服務器
+                    data: data_string,  // 傳遞管理員 ID 給服務器
                     cache: false,
                     dataType: 'json',
                     timeout: 5000,
@@ -163,7 +141,7 @@
                         alert("無法連線到伺服器！");
                     }
                 });
-                });
+                };
             }
     </script>
 	<br>
