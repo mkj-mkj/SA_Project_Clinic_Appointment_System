@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>管理者登入</title>
     <style>
         body {
@@ -46,18 +47,63 @@
     <div style="background-color:#004B97;"><h1><b>管理者登入</b></h1></div>
     <!-- Form for email and password input -->
     <form>
-        <label for="email">Email:</label>
+        <label for="mail">Email:</label>
         <br>
-        <input type="email" id="email" name="email" placeholder="請輸入您的Email" required>
+        <br>
+        <input type="email" id="admin_mail" name="email" placeholder="請輸入您的Email" required>
         <br><br>
         <label for="password">Password:</label>
         <br>
-        <input type="password" id="password" name="password" placeholder="請輸入您的密碼" required>
+        <input type="text" id="admin_password" name="password" placeholder="請輸入您的密碼" required>
         <br><br>
-        <input type="submit" value="登入"><!--登入時資料庫要驗證有沒有這個管理者，驗證成功後進入5_manager_function介面-->
+        <button type="submit" id="adminLogin" class="button">登入</button><!--登入時資料庫要驗證有沒有這個管理者，驗證成功後進入5_manager_function介面-->
     </form>
+    <script type="text/javascript">
+			
+		$(document).ready(function(){
+			var $form = $('#adminLogin');
+	        $form.click(function() {
+	        	adminLogin();
+	        });	
+	        
+			function adminLogin(){
+	        	var admin_mail = $('#admin_mail').val();
+	        	
+	            // 發出GET請求取得該管理者資料列表
+	            $.ajax({
+	                type: "GET",
+	                url: "api/administrator.do",
+	                crossDomain: true,
+	                cache: false,
+	                data:"mail=" + admin_mail,
+	                dataType: 'json',
+	                timeout: 5000,
+	                success: function (response) {
+						console.log("test");
+	                   if(response.status == 200){
+						   /**
+						   console.log(response);
+                        // Compare passwords or additional validation logic
+                        if(response.data["Password"] == $('#admin_password').val()){
+                            window.location.href = '5_manager_md.html'; // Redirect on success
+                        } else {
+                            alert("登入失敗"); // Alert on incorrect password
+                        }
+                    	} else {
+                        alert("登入失敗"); // Alert on server error or incorrect mail
+                    	}
+                    	**/}
+                    	console.log(response);
+	                },
+	                error: function () {
+						console.log("teset");
+	                    alert("無法連線到伺服器！");
+	                }
+	            });
+	        }
+		})
+
+       
+    </script>
 </body>
 </html>
-
-
-
