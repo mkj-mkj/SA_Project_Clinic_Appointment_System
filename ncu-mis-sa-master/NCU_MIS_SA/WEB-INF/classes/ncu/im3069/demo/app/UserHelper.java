@@ -244,7 +244,7 @@ public class UserHelper {
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
                 String height = rs.getString("height");
-                String weight = rs.getString("wieght");
+                String weight = rs.getString("weight");
                 String allergy_history = rs.getString("allergy_history");
                 String serverill_history = rs.getString("serverill_history");
                 String contact_name = rs.getString("contact_name");
