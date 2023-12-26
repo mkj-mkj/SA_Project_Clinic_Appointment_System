@@ -200,7 +200,7 @@ public class UserHelper {
      * @return the JSON object 回傳SQL執行結果與該身分證字號之使用者資料
      */
     public JSONObject getByID(String id) {
-        JSONObject data = new JSONObject();
+        JSONArray jsa = new JSONArray();
         User u = null;
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
@@ -257,7 +257,7 @@ public class UserHelper {
                         residence_tel, blood, height, weight, allergy_history, serverill_history, contact_name,
                         contact_rel, contact_tel);
                 /** 取出該項使用者之資料並封裝至 JSONsonArray 內 */
-                data = u.getData();
+                jsa.put(u.getData());
             }
 
         } catch (SQLException e) {
@@ -282,7 +282,7 @@ public class UserHelper {
         response.put("sql", exexcute_sql);
         response.put("row", row);
         response.put("time", duration);
-        response.put("data", data);
+        response.put("data", jsa);
 
         return response;
     }
