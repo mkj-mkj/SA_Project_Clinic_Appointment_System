@@ -49,7 +49,7 @@ public class UserHelper {
      * 
      * @return the JSONObject 回傳SQL執行結果
      */
-    public JSONObject deleteByID(String id) {
+    public JSONObject deleteByID(int case_number) {
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         /** 紀錄程式開始執行時間 */
@@ -64,11 +64,11 @@ public class UserHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `users` WHERE `user_id` = ? LIMIT 1";
+            String sql = "DELETE FROM `users` WHERE `case_number` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setString(1, id);
+            pres.setInt(1, id);
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -152,7 +152,7 @@ public class UserHelper {
                 String residence_tel = rs.getString("residence_tel");
                 String blood = rs.getString("blood");
                 String height = rs.getString("height");
-                String weight = rs.getString("wieght");
+                String weight = rs.getString("weight");
                 String allergy_history = rs.getString("allergy_history");
                 String serverill_history = rs.getString("serverill_history");
                 String contact_name = rs.getString("contact_name");
