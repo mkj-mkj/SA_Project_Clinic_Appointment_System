@@ -30,6 +30,80 @@
 		
 	</center>
 
+  	 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+	<script type="text/javascript">
+	
+	<!-- ... your HTML code ... -->
+
+
+
+	    var userid = document.querySelector('input[name="id"]');
+	    var birth = document.querySelector('input[name="birthday"]');
+	
+	    $("#btname").click(function () {
+	    	getByID();
+	    });
+
+	    function getByID() {
+	        const data = {
+	            "id": userid.value
+	        };
+	        var data_string = JSON.stringify(data);
+			console.log(userid.value);
+	        // 發出POST的GET請求取得該使用者之預約資料列表
+	        $.ajax({
+	            type: "GET",
+	            url: "api/user.do",
+	            crossDomain: true,
+	            cache: false,
+	            data: "id="+userid.value,
+	            dataType: 'json',
+	            timeout: 5000,
+	            success: function (response) {
+	                if (response.status == 200) {
+	                    //var row = response;
+	                    window.alert("success");
+	                }
+	                console.log(response);
+	                // else if(row.length() != 0)
+	                // {doPost();}
+	            },
+	            error: function (response) {
+	                console.log(response);
+	            }
+	        });
+	    }
+/**
+	    function doPost() {
+	        const data = {
+	            user_id: userid.value,
+	            reserve_time: birth.value
+	        };
+	        var data_string = JSON.stringify(data);
+
+	        $.ajax({
+	            type: 'POST',
+	            url: 'api/appointment.do',
+	            cache: false,
+	            crossDomain: true,
+	            dataType: 'json',
+	            data: data_string,
+	            success: function (response) {
+	                if (response.status == 200) {
+	                    window.alert("已成功預約");
+	                    console.log(response);
+	                }
+	            },
+	            error: function (response) {
+	                console.log(response);
+	            }
+	        });
+	    }
+	    */
+
+	</script>
+
+
 
 </body>
 </html>
