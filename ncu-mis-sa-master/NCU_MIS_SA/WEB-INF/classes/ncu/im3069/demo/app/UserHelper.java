@@ -68,7 +68,7 @@ public class UserHelper {
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
-            pres.setInt(1, id);
+            pres.setInt(1, case_number);
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
