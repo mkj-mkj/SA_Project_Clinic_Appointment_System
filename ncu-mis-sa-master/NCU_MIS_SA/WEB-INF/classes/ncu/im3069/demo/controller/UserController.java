@@ -150,12 +150,12 @@ public class UserController extends HttpServlet {
                 int case_number = jso.getInt("case_number");
 
                 /** 透過UserHelper物件的deleteByID()方法至資料庫刪除該使用者，回傳之資料為JSONObject物件 */
-                JSONObject query = uh.deleteByID(Integer.parseInt(case_number));
+                JSONObject query = uh.deleteByID(case_number);
 
                 /** 新建一個JSONObject用於將回傳之資料進行封裝 */
                 JSONObject resp = new JSONObject();
                 resp.put("status", "200");
-                resp.put("message", "門診移除成功！");
+                resp.put("message", "病患移除成功！");
                 resp.put("response", query);
 
                 /** 透過JsonReader物件回傳到前端（以JSONObject方式） */

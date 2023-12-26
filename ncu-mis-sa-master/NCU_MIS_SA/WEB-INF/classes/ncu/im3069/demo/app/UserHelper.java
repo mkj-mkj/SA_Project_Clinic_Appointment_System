@@ -45,7 +45,7 @@ public class UserHelper {
     }
 
     /**
-     * 透過身分證字號（ID）刪除使用者
+     * 透過病歷號(case_number)刪除使用者
      * 
      * @return the JSONObject 回傳SQL執行結果
      */
