@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `announcement` (
-  `annouce_seq` int(11) NOT NULL,
+  `announce_seq` int(11) NOT NULL,
   `announce_title` varchar(200) NOT NULL,
   `announce_content` longtext NOT NULL,
   `announce_update` datetime NOT NULL
@@ -38,7 +38,7 @@ CREATE TABLE `announcement` (
 -- 傾印資料表的資料 `announcement`
 --
 
-INSERT INTO `announcement` (`annouce_seq`, `announce_title`, `announce_content`, `announce_update`) VALUES
+INSERT INTO `announcement` (`announce_seq`, `announce_title`, `announce_content`, `announce_update`) VALUES
 (1, '112年12月門診時間表公告', '請點選圖片觀看', '2023-11-30 20:10:43'),
 (2, '夏病冬治《三九貼》，預防改善過敏好時機', '今年度三九貼將於112年12月至113年1月提供貼敷服務', '2023-12-17 13:10:43'),
 (3, '職場反暴力聲明', '全院同仁及工作者均有責任協助並確保免於職場暴力工作環境，為保障所有員工在執行職務過程中，免於遭受身體或精神不法侵害，特公開宣導「職場反暴力聲明」及反暴力海報來宣示「職場暴力零容忍」。', '2023-11-28 20:14:12'),
@@ -52,7 +52,7 @@ INSERT INTO `announcement` (`annouce_seq`, `announce_title`, `announce_content`,
 -- 資料表索引 `announcement`
 --
 ALTER TABLE `announcement`
-  ADD PRIMARY KEY (`annouce_seq`);
+  ADD PRIMARY KEY (`announce_seq`);
 
 --
 -- 在傾印的資料表使用自動遞增(AUTO_INCREMENT)
@@ -62,7 +62,7 @@ ALTER TABLE `announcement`
 -- 使用資料表自動遞增(AUTO_INCREMENT) `announcement`
 --
 ALTER TABLE `announcement`
-  MODIFY `annouce_seq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `announce_seq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
