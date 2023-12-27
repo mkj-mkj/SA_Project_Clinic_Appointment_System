@@ -71,7 +71,7 @@ public class AppointmentHelper {
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
             pres.setInt(1, seq);
-            
+
             /** 執行刪除之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();
 
@@ -150,15 +150,15 @@ public class AppointmentHelper {
                 String reserve_date = rs.getString("reserve_date");
                 String reserve_time_en = rs.getString("reserve_time");
                 String reserve_time = "";
-                switch(reserve_time_en) {
-                	case "morninig":
-                		reserve_time = reserve_date + " 早上班";
-                	case "noon":
-                		reserve_time = reserve_date + " 下午班";
-                	case "night":
-                		reserve_time = reserve_date + " 晚上班";
+                switch (reserve_time_en) {
+                    case "morninig":
+                        reserve_time = reserve_date + " 早上班";
+                    case "noon":
+                        reserve_time = reserve_date + " 下午班";
+                    case "night":
+                        reserve_time = reserve_date + " 晚上班";
                 }
-                
+
                 int appointment_number = rs.getInt("appointment");
 
                 /** 將每一筆預約資料產生一個新Appointment物件 */
@@ -239,44 +239,44 @@ public class AppointmentHelper {
                 String reserve_date = rs.getString("reserve_date");
                 String reserve_time_en = rs.getString("reserve_time");
                 String reserve_time = "";
-                switch(reserve_time_en) {
-                	case "morninig":
-                		reserve_time = reserve_date + " 早上班";
-                	case "noon":
-                		reserve_time = reserve_date + " 下午班";
-                	case "night":
-                		reserve_time = reserve_date + " 晚上班";
+                switch (reserve_time_en) {
+                    case "morninig":
+                        reserve_time = reserve_date + " 早上班";
+                    case "noon":
+                        reserve_time = reserve_date + " 下午班";
+                    case "night":
+                        reserve_time = reserve_date + " 晚上班";
                 }
-                
+
                 int appointment_number = rs.getInt("appointment");
-                
+
                 String doctor_name = "";
                 int dept_id = 0;
-                //利用預約資料表中的doctor_id在醫生資料表中查找對應doctor_name
+                // 利用預約資料表中的doctor_id在醫生資料表中查找對應doctor_name
                 String doctor_name_sql = "SELECT `doctor_name`, `dept_id` FROM `doctor` WHERE `doctor_id` = ? LIMIT 1";
                 pres = conn.prepareStatement(doctor_name_sql);
                 pres.setInt(1, doctor_id);
                 ResultSet doctor_rs = pres.executeQuery();
-                
+
                 while (doctor_rs.next()) {
-                	doctor_name = doctor_rs.getString("doctor_name");
-                	dept_id = doctor_rs.getInt("dept_id");
+                    doctor_name = doctor_rs.getString("doctor_name");
+                    dept_id = doctor_rs.getInt("dept_id");
                 }
-                
+
                 String dept_name = "";
-                //利用醫生資料表中的dept_id在科別資料表中查找對應dept_name
+                // 利用醫生資料表中的dept_id在科別資料表中查找對應dept_name
                 String dept_name_spl = "SELECT `dept_name` FROM `department` WHERE `dept_id` = ? LIMIT 1";
                 pres = conn.prepareStatement(dept_name_spl);
                 pres.setInt(1, dept_id);
                 ResultSet dept_rs = pres.executeQuery();
-                
+
                 while (dept_rs.next()) {
-                	dept_name = dept_rs.getString("dept_name");
+                    dept_name = dept_rs.getString("dept_name");
                 }
-                
-                
+
                 /** 將每一筆預約資料產生一名新Appointment物件 */
-                ap = new Appointment(seq, doctor_id, user_id, reserve_time, appointment_number, dept_name, doctor_name);
+                ap = new Appointment(seq, doctor_id, user_id, reserve_date, reserve_time, appointment_number, dept_name,
+                        doctor_name);
                 /** 取出該項預約資料並封裝至 JSONsonArray 內 */
                 jsa.put(ap.getData());
             }

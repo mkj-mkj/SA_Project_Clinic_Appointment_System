@@ -82,7 +82,8 @@
 	            <th>預約流水號</th>
 	            <th>醫生名稱</th>
 				<th>掛號門診</th><!--顯示掛號門診名稱-->
-	            <th>預約時間</th>
+	            <th>預約日期</th>
+                <th>預約時段</th>
 	            <th>掛號號碼</th>
 				<th>取消預約</th>
 	        </tr>
@@ -130,6 +131,7 @@
                 table_html += '<td>' + value['seq'] + '</td>';
                 table_html += '<td>' + value['doctor_name'] + '</td>';
                 table_html += '<td>' + value['dept_name'] + '</td>';
+                table_html += '<td>' + value['reserve_date'] + '</td>';
                 table_html += '<td>' + value['reserve_time'] + '</td>';
                 table_html += '<td>' + value['appointment_number'] + '</td>';
                 table_html += '<td><button class="delete-button" onclick="cancel_appointment(' + value['seq'] + ');">刪除</button></td>';

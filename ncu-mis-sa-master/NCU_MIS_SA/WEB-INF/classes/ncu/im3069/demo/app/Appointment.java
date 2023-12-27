@@ -20,10 +20,12 @@ public class Appointment {
 
     private String ReserveTime;
 
+    private String ReserveDate;
+
     private int AppointmentNumber;
-    
+
     private String DeptName;
-    
+
     private String DoctorName;
 
     private User user;
@@ -94,11 +96,12 @@ public class Appointment {
         this.ReserveTime = ReserveTime;
         this.AppointmentNumber = AppointmentNumber;
     }
-    
+
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件
      */
-    public Appointment(int Seq, int DoctorId, String UserId, String ReserveTime, int AppointmentNumber, String DeptName, String DoctorName) {
+    public Appointment(int Seq, int DoctorId, String UserId, String ReserveDate, String ReserveTime,
+            int AppointmentNumber, String DeptName, String DoctorName) {
         this.Seq = Seq;
         this.DoctorId = DoctorId;
         this.UserId = UserId;
@@ -106,6 +109,7 @@ public class Appointment {
         this.AppointmentNumber = AppointmentNumber;
         this.DeptName = DeptName;
         this.DoctorName = DoctorName;
+        this.ReserveDate = ReserveDate;
     }
 
     /**
@@ -132,13 +136,17 @@ public class Appointment {
     public int getAppointmentNumber() {
         return this.AppointmentNumber;
     }
-    
+
     public String getDeptName() {
-    	return this.DeptName;
+        return this.DeptName;
     }
-    
+
     public String getDoctorName() {
-    	return this.DoctorName;
+        return this.DoctorName;
+    }
+
+    public String getReserveDate() {
+        return this.ReserveDate;
     }
 
     /**
@@ -169,6 +177,7 @@ public class Appointment {
         jso.put("seq", getSeq());
         jso.put("doctor_id", getDoctorID());
         jso.put("user_id", getUserID());
+        jso.put("reserve_date", getReserveDate());
         jso.put("reserve_time", getReserveTime());
         jso.put("appointment_number", getAppointmentNumber());
         jso.put("dept_name", getDeptName());
