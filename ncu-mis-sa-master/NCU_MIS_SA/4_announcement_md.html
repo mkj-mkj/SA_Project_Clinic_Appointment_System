@@ -50,7 +50,8 @@
         }
         
 		-->
-        a {
+        .modify_button,
+        .delete_button {
             width: 100%;
             padding: 8px;
             background-color: #004B97;
@@ -60,63 +61,87 @@
             cursor: pointer;
 			text-decoration: none;
         }
-		
+		.add_button {
+            width: 50px;
+			padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+        }
     </style>
 </head>
 <body>
     <div style="background-color:#004B97;">
 	<h1><b>公告</b></h1></div>
     <table><!--公告資料庫有幾筆資料就顯示幾筆-->
-        <tr>
-            <th>Seq</th>
-            <th>公告標題</th>
-            <th>公告內容</th>
-            <th>公告時間</th>
-			<th></th>
-			<th></th>
+    	<tbody>
+        	<tr>
+            	<th>Seq</th>
+            	<th>公告標題</th>
+            	<th>公告內容</th>
+            	<th>公告時間</th>
+				<th></th>
+				<th></th>
         </tr>
-        <tr>
-            <td>1</td>
-            <td>標題 1</td>
-			<td>內容1</td>
-			<td>更新時間1</td>
-            <td><a href="4_5_announcement_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>標題 2</td>
-			<td>內容2</td>
-			<td>更新時間 2</td>
-            <td><a href="4_5_announcement_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>標題 3</td>
-			<td>內容3</td>
-			<td>更新時間 3</td>
-            <td><a href="4_5_announcement_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>標題 4</td>
-			<td>內容4</td>
-			<td>更新時間 4</td>
-            <td><a href="4_5_announcement_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>標題 5</td>
-			<td>內容5</td>
-			<td>更新時間 5</td>
-            <td><a href="4_5_announcement_modified.html" class="modify-button">修改</a></td>
-            <td><a class="delete-button">刪除</a></td><!--「刪除成功」提示-->
-        </tr>
+        </tbody>
+        
     </table>
 	<br>
-    <div><a href="4_4_announcement_add.html" class="add-button">新增</a></div>
+    <button class="add_button" onclick="redirectToAddPage()">新增</button>
+    <script type="text/javascript">
+        function redirectToModifyPage() {
+            window.location.href = '4_5_announcement_modified.html';
+        }
+
+        function redirectToAddPage() {
+            window.location.href = '4_4_announcement_add.html';
+        }
+        function getAllAnnouncement(){
+            // 發出POST的GET請求取得所有announcement
+            $.ajax({
+                type: "GET",
+                url: "api/user.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+
+        // 更新announcement表格
+        function updateTable(data) {
+            $("#table > tbody").empty();
+            var table_html = '';
+            
+            $.each(data, function(index, value) {
+                table_html += '<tr>';
+                table_html += '<td>' + value['annouce_seq'] + '</td>';
+                table_html += '<td>' + value['announce_title'] + '</td>';
+                table_html += '<td>' + value['announce_content'] + '</td>';
+                table_html += '<td>' + value['announce_update'] + '</td>';
+                table_html += '<td><button class="delete_button" onclick="DeletePatient(' + value['annouce_seq'] + ');">刪除</button></td>';
+                table_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['annouce_seq']+');">修改</button></td>';
+                table_html += '<tr>';
+            })
+        
+            $("#table > tbody").append(table_html);
+        }
+
+        $(document).ready(function() {
+            getAllAnnouncement();
+        });
+    </script>
 </body>
 </html>
