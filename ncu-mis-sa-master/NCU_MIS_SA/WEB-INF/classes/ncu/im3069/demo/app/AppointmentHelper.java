@@ -238,16 +238,21 @@ public class AppointmentHelper {
                 String user_id = rs.getString("user_id");
                 String reserve_date = rs.getString("reserve_date");
                 String reserve_time_en = rs.getString("reserve_time");
+                //System.out.println(reserve_time_en);
                 String reserve_time = "";
                 switch (reserve_time_en) {
-                    case "morninig":
-                        reserve_time = reserve_date + " 早上班";
+                    case "morning":
+                        reserve_time = "早上班";
+                        //System.out.println("test");
+                        break;
                     case "noon":
-                        reserve_time = reserve_date + " 下午班";
+                        reserve_time = "下午班";
+                        break;
                     case "night":
-                        reserve_time = reserve_date + " 晚上班";
+                        reserve_time = "晚上班";
+                        break;
                 }
-
+                //System.out.println(reserve_time);
                 int appointment_number = rs.getInt("appointment");
 
                 String doctor_name = "";
