@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
 <head>
+	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+
 	<link rel="stylesheet" href="3_2_appointment.css">
 	<meta charset="UTF-8">
 	<title>掛號系統</title>
@@ -30,8 +32,8 @@
 		
 	</center>
 
-  	 <script type="text/javascript" src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
-	<script type="text/javascript">
+  	 
+		<script type="text/javascript">
 	
 	<!-- ... your HTML code ... -->
 
@@ -39,8 +41,20 @@
 
 	    var userid = document.querySelector('input[name="id"]');
 	    var birth = document.querySelector('input[name="birthday"]');
-	
+		var row;
+		
+		function isObjectEmpty(obj) {
+		    for (var key in obj) {
+		        if (obj.hasOwnProperty(key)) {
+		            return key.val();
+		        }
+		    }
+		    return true;
+		}
+
+		
 	    $("#btname").click(function () {
+	    	
 	    	getByID();
 	    });
 
@@ -48,6 +62,9 @@
 	        const data = {
 	            "id": userid.value
 	        };
+	        
+	       
+	        
 	        var data_string = JSON.stringify(data);
 			console.log(userid.value);
 	        // 發出POST的GET請求取得該使用者之預約資料列表
@@ -60,34 +77,53 @@
 	            dataType: 'json',
 	            timeout: 5000,
 	            success: function (response) {
-	                if (response.status == 200) {
-	                    //var row = response;
-	                    window.alert("success");
+	            	if (response.status == 200) {
+	            		
+	                    
+	                    
+	                   
+	                    
+
+	                    // Check if 'row' is an array and if it is empty
+	                    if ($.isEmptyObject(row)== false) {	//case 1:沒有找到患者資料
+	                        var result = window.confirm("沒有患者資料，煩請填寫患者資料");
+	                        if (result == true) {
+	                            location.assign("http://localhost:8080/NCU_MIS_SA/1_2_patient_add.html");
+	                        }
+	                        
+	                    } 
+	                    
+	                    
+	                    else   {	
+	                    	//case 2：有找到患者資料
+	                        // Check if 'row' is an empty object
+	                        console.log("getAppointmentByID");
+	                       doPost();
+	                    }
+	            	}
+	                },
+	                error: function (response) {
+	                    console.log(response);
 	                }
-	                console.log(response);
-	                // else if(row.length() != 0)
-	                // {doPost();}
-	            },
-	            error: function (response) {
-	                console.log(response);
-	            }
-	        });
+	            });
 	    }
-/**
-	    function doPost() {
-	        const data = {
-	            user_id: userid.value,
-	            reserve_time: birth.value
-	        };
+	               
+	              
+	   	 function doPost() {
+	   		 const data = {
+	 	            "id": userid.value
+	 	        };
+	 	        
 	        var data_string = JSON.stringify(data);
 
 	        $.ajax({
 	            type: 'POST',
 	            url: 'api/appointment.do',
-	            cache: false,
 	            crossDomain: true,
+	            cache: false,
+	            data: "id="+userid.value,
 	            dataType: 'json',
-	            data: data_string,
+	            timeout: 5000,
 	            success: function (response) {
 	                if (response.status == 200) {
 	                    window.alert("已成功預約");
@@ -99,7 +135,7 @@
 	            }
 	        });
 	    }
-	    */
+	    
 
 	</script>
 
