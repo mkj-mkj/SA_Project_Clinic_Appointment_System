@@ -41,11 +41,14 @@
 			margin-bottom: 10px;
 		}
 
-		input[type="submit"] {
-			background-color: #004B97;
-			color: white;
-			cursor: pointer;
-			width: 100px;
+		button {
+			width: 50px;
+			padding: 8px;
+            background-color: #004B97;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
 		}
 	</style>
 </head>
@@ -65,7 +68,7 @@
 		<br>
 		<input type="text" id="admin_password" name="password" placeholder="請輸入您的密碼" required>
 		<br><br>
-		<button id="adminLogin" class="button"
+		<button id="adminLogin" class="login_button"
 			onclick="validationLogin()">登入</button><!--登入時資料庫要驗證有沒有這個管理者，驗證成功後進入5_manager_function介面-->
 	</form>
 	<script type="text/javascript">
