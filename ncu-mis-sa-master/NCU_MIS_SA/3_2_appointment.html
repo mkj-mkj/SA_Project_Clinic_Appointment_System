@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="zh-tw">
 <head>
-	<script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	
 
 	<link rel="stylesheet" href="3_2_appointment.css">
 	<meta charset="UTF-8">
@@ -43,19 +44,13 @@
 	    var birth = document.querySelector('input[name="birthday"]');
 		var row;
 		
-		function isObjectEmpty(obj) {
-		    for (var key in obj) {
-		        if (obj.hasOwnProperty(key)) {
-		            return key.val();
-		        }
-		    }
-		    return true;
-		}
+		
 
 		
 	    $("#btname").click(function () {
 	    	
 	    	getByID();
+	    	doPost();
 	    });
 
 	    function getByID() {
@@ -79,13 +74,15 @@
 	            success: function (response) {
 	            	if (response.status == 200) {
 	            		
-	                    row = response;
-	                    
-	                   
+	            		console.log(response);
+	            		console.log(response.response.row);
+	            		//console.log(response.resposne.data.at(0).Array);
+	                   //console.log($.isEmptyObject(response.data.row));
+	                  
 	                    
 
 	                    // Check if 'row' is an array and if it is empty
-	                    if ($.isEmptyObject(row)== false) {	//case 1:沒有找到患者資料
+	                    if (response.response.row == 0) {	//case 1:沒有找到患者資料
 	                        var result = window.confirm("沒有患者資料，煩請填寫患者資料");
 	                        if (result == true) {
 	                            location.assign("http://localhost:8080/NCU_MIS_SA/1_2_patient_add.html");
@@ -117,8 +114,8 @@
 	        var data_string = JSON.stringify(data);
 
 	        $.ajax({
-	            type: 'POST',
-	            url: 'api/appointment.do',
+	            type: "POST",
+	            url: "api/appointment.do",
 	            crossDomain: true,
 	            cache: false,
 	            data: "id="+userid.value,
@@ -135,7 +132,6 @@
 	            }
 	        });
 	    }
-	    
 
 	</script>
 
