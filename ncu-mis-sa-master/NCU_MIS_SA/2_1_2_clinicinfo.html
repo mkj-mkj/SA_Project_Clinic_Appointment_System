@@ -57,25 +57,55 @@
         <a href="2_2_doctor_info.html" class="right-button">醫師</a>
     </div>
     <table><!--顯示公告-->
-        <tr>
-            <th>公告</th>
-        </tr>
-        <tr>
-            <td>公告內容 1</td>
-        </tr>
-        <tr>
-            <td>公告內容 2</td>
-        </tr>
-        <tr>
-            <td>公告內容 3</td>
-        </tr>
-        <tr>
-            <td>公告內容 4</td>
-        </tr>
-        <tr>
-            <td>公告內容 5</td>
-        </tr>
+    	<thead>
+        	<tr>
+            	<th>公告</th>
+        	</tr>
+       	</thead>
     </table>
+    <script type="text/javascript">
+        function getAllAnnouncement(){
+            // 發出POST的GET請求取得所有announcement
+            $.ajax({
+                type: "GET",
+                url: "api/announcement.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        updateTable(response.response.data);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+        }
+
+        // 更新announcement表格
+        function updateTable(data) {
+            $("#table > tbody").empty();
+            var table_html = '';
+            
+            $.each(data, function(index, value) {
+                table_html += '<tr>';
+                table_html += '<td>' + value['announce_seq'] + '</td>';
+                table_html += '<td>' + value['announce_title'] + '</td>';
+                table_html += '<td>' + value['announce_content'] + '</td>';
+                table_html += '<td>' + value['announce_update'] + '</td>';
+                table_html += '<tr>';
+            })
+        
+            $("#table > tbody").append(table_html);
+        }
+
+        $(document).ready(function() {
+            getAllAnnouncement();
+        });
+    </script>
 </body>
 </html>
 
