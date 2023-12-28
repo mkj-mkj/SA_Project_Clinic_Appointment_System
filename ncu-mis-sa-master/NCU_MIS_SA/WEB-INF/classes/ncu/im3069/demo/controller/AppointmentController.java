@@ -8,7 +8,6 @@ import javax.servlet.http.*;
 import org.json.*;
 import ncu.im3069.demo.app.Appointment;
 import ncu.im3069.demo.app.AppointmentHelper;
-import ncu.im3069.demo.app.UserHelper;
 import ncu.im3069.demo.app.Clinic;
 import ncu.im3069.tools.JsonReader;
 
@@ -31,8 +30,6 @@ public class AppointmentController extends HttpServlet {
 
         /** aph，AppointmentHelper之物件與Appointment相關之資料庫方法（Sigleton） */
         private AppointmentHelper aph = AppointmentHelper.getHelper();
-        
-        private UserHelper uh = UserHelper.getHelper();
 
         /**
          * 處理Http Method請求POST方法（新增資料）
@@ -56,8 +53,6 @@ public class AppointmentController extends HttpServlet {
 
                 /** 建立一個新的Appointment物件 */ 
                 Appointment ap = new Appointment(doctor_name, user_id, reserve_date, reserve_time);
-                
-                System.out.println("row:" + uh.checkByID(user_id));
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
                 if (user_id.isEmpty() || doctor_name.isEmpty() || reserve_time.isEmpty() || reserve_date.isEmpty()) {
@@ -65,13 +60,6 @@ public class AppointmentController extends HttpServlet {
                         String resp = "{\"status\": \'400\', \"message\": \'欄位不能有空值\', \'response\': \'\'}";
                         /** 透過JsonReader物件回傳到前端（以字串方式） */
                         jsr.response(resp, response);
-                }
-                else if (uh.checkByID(user_id) == 0) {
-                	/** 以字串組出JSON格式之資料 */
-                    String resp = "{\"status\": \'401\', \"message\": \'用戶不存在\', \'response\': \'\'}";
-                    /** 透過JsonReader物件回傳到前端（以字串方式） */
-                    System.out.println("初診");
-                    jsr.response(resp, response);
                 }
                 /** 透過AppointmentHelper物件的checkDuplicate()檢查該預約是否有重複 */
                 else if (!aph.checkDuplicate(ap)) {
@@ -88,7 +76,7 @@ public class AppointmentController extends HttpServlet {
                         jsr.response(resp, response);
                 } else {
                         /** 以字串組出JSON格式之資料 */
-                        String resp = "{\"status\": \'402\', \"message\": \'新增預約失敗，此預約重複！\', \'response\': \'\'}";
+                        String resp = "{\"status\": \'400\', \"message\": \'新增預約失敗，此預約重複！\', \'response\': \'\'}";
                         /** 透過JsonReader物件回傳到前端（以字串方式） */
                         jsr.response(resp, response);
                 }
