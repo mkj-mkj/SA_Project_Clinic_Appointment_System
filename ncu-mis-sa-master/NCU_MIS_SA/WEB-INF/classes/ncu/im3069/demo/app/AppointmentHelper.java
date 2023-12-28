@@ -323,7 +323,7 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `appoint` WHERE `doctor_id` = ? and `reserve_time` = ?";
+            String sql = "SELECT count(*) FROM `appointment` WHERE `doctor_id` = ? and `reserve_time` = ?";
 
             /** 取得所需之參數 */
             int dcotor_id = ap.getDoctorID();
@@ -408,8 +408,6 @@ public class AppointmentHelper {
      */
     public JSONObject create(Appointment ap) {
     	
-    	
-    	
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         /** 紀錄程式開始執行時間 */
@@ -420,26 +418,43 @@ public class AppointmentHelper {
         try {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
-        	
+            
             /** 取得所需之參數 */
             String doctor_name = ap.getDoctorName();
+            //System.out.println(doctor_name);
             String user_id = ap.getUserID();
             String reserve_date = ap.getReserveDate();
             String reserve_time = ap.getReserveTime();
-            int appointment_number = getAppointment(ap);
-        	int doctor_id = 0;
+            //int appointment_number = getAppointment(ap);
+            int doctor_id = 1;
+            int appointment_number = 0;
             
             // 利用預約資料表中的doctor_id在醫生資料表中查找對應doctor_name
-            String doctor_id_sql = "SELECT `doctor_id` FROM `doctor` WHERE `doctor_name` = ? LIMIT 1";
-            pres = conn.prepareStatement(doctor_id_sql);
+            String doctor_name_sql = "SELECT `doctor_id` FROM `doctor` WHERE `doctor_name` = ? LIMIT 1";
+            pres = conn.prepareStatement(doctor_name_sql);
             pres.setString(1, doctor_name);
             ResultSet doctor_rs = pres.executeQuery();
 
             while (doctor_rs.next()) {
                 doctor_id = doctor_rs.getInt("doctor_id");
             }
-        	
-        
+
+            
+            String appointment_number_sql = "SELECT count(*) FROM `appointment` WHERE `doctor_id` = ? and `reserve_time` = ? and `reserve_date` = ?";
+
+            /** 將參數回填至SQL指令當中 */
+            pres = conn.prepareStatement(appointment_number_sql);
+            pres.setInt(1, doctor_id);
+            pres.setString(2, reserve_time);
+            pres.setString(3, reserve_date);
+            /** 執行查詢之SQL指令並記錄其回傳之資料 */
+            ResultSet rs = pres.executeQuery();
+
+            /** 讓指標移往最後一列，取得目前有幾行在資料庫內 */
+            rs.next();
+            appointment_number = rs.getInt("count(*)");
+            System.out.print(appointment_number);
+            
             /** SQL指令 */
             String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_date`, `reserve_time`, `appointment`)"
                     + " VALUES(?, ?, ?, ?, ?)";
