@@ -253,7 +253,7 @@ public class AppointmentHelper {
                         break;
                 }
                 //System.out.println(reserve_time);
-                int appointment_number = rs.getInt("appointment");
+                int appointment_number = rs.getInt("appointment") + 1;
 
                 String doctor_name = "";
                 int dept_id = 0;
@@ -452,7 +452,7 @@ public class AppointmentHelper {
 
             /** 讓指標移往最後一列，取得目前有幾行在資料庫內 */
             rs.next();
-            appointment_number = rs.getInt("count(*)");
+            appointment_number = rs.getInt("count(*)") + 1;
             System.out.print(appointment_number);
             
             /** SQL指令 */
