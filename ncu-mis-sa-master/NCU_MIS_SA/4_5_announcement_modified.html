@@ -70,7 +70,7 @@
 		<div class="context-group">
 			<tr>
 				<td><label for="notice-content">正文</label></td>
-				<td><textarea class="form-control" id="notice-content" name="announce_content" placeholder="原本的內文" required="required"></textarea></td>
+				<td><textarea class="form-control" name="notice-content" id="announce_content" placeholder="原本的內文" required="required"></textarea></td>
 			</tr>
 		</div>
 		<div class="attachments-group">
@@ -88,6 +88,7 @@
 	
     <script type="text/javascript">
     	$(document).ready(function() {
+    		getAnnouncement();
         	// 處理表單點擊事件
         	var $form = $('#form');
         	$form.submit(function() {
@@ -98,16 +99,17 @@
 				var announce_title = $('#announce_title').val();
 				var announce_content = $('#announce_content').val();
 				var time = new Date();
-				var update_time = time.toISOString().slice(0, 19).replace("T", " ");
+				var update_time = time.toString();
 
 				if(announce_title == null) {
 					announce_title = "";
 				}
+				
 				if(announce_content == null) {
 					announce_content = "";
 				}
 				
- 				else {
+/**
 					// 將資料組成JSON格式
 					var data_object = {
 						"announce_title": announce_title,
@@ -136,12 +138,40 @@
 						error: function () {
 							alert("無法連線到伺服器！");
 						}
-					});    		
+					});  
+					**/
 				}
 				
-			}
-        	
+			
        	});
+    	
+    	function getAnnouncement(){
+            var queryString = window.location.search.substring(1);
+            var params = new URLSearchParams(queryString);
+            var seq = params.get('seq');
+            // 發出POST的GET請求取得所有announcement
+            $.ajax({
+                type: "GET",
+                url: "api/announcement.do",
+                crossDomain: true,
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                data: "seq=" + seq,
+                success: function (response) {
+                    if(response.status == 200){
+                        $("#announce_title").attr("value",response.response.data["announce_title"]);
+                        document.getElementById("announce_content").innerHTML = response.response.data["announce_content"];
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+    	}
+    	
+    	
 	</script>		
     
 </body>

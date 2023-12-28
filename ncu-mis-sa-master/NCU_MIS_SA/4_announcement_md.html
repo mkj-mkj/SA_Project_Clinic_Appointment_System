@@ -93,8 +93,9 @@
 	<br>
     <button class="add_button" onclick="redirectToAddPage()">新增</button>
     <script type="text/javascript">
-        function redirectToModifyPage() {
-            window.location.href = '4_5_announcement_modified.html';
+        function redirectToModifyPage(announce_seq) {
+        	var queryString = '?seq=' + announce_seq;
+            window.location.href = '4_5_announcement_modified.html' + queryString;
         }
 
         function redirectToAddPage() {

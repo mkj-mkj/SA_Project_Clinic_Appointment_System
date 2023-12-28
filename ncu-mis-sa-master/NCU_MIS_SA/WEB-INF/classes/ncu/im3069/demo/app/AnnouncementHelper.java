@@ -64,7 +64,7 @@ public class AnnouncementHelper {
             conn = DBMgr.getConnection();
 
             /** SQL指令 */
-            String sql = "DELETE FROM `hospital`.`announcement` WHERE `announce_seq` = ? LIMIT 1";
+            String sql = "DELETE FROM `announcement` WHERE `announce_seq` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
@@ -124,7 +124,7 @@ public class AnnouncementHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hospital`.`announcement`";
+            String sql = "SELECT * FROM `announcement`";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -199,7 +199,7 @@ public class AnnouncementHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT * FROM `hosptial`.`announcement` WHERE `announcement`.`announce_seq` = ? LIMIT 1";
+            String sql = "SELECT * FROM `announcement` WHERE `announce_seq` = ? LIMIT 1";
 
             /** 將參數回填至SQL指令當中，若無則不用只需要執行 prepareStatement */
             pres = conn.prepareStatement(sql);
@@ -270,7 +270,7 @@ public class AnnouncementHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "SELECT count(*) FROM `hostipal`.`announcement` WHERE `announce_seq` = ?";
+            String sql = "SELECT count(*) FROM `announcement` WHERE `announce_seq` = ?";
 
             /** 取得所需之參數 */
             int announcement_seq = an.getSeq();
@@ -321,7 +321,7 @@ public class AnnouncementHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `hostipal`.`announcement`(`announce_title`, `announce_content`, `announce_update`)"
+            String sql = "INSERT INTO `announcement`(`announce_title`, `announce_content`, `announce_update`)"
                     + " VALUES(?, ?, ?)";
 
             /** 取得所需之參數 */
@@ -386,7 +386,7 @@ public class AnnouncementHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "Update `hospital`.`announcement` SET `announce_title` = ? ,`announce_content` = ? ,`announce_update` = ? WHERE `announce_seq` = ?";
+            String sql = "Update `announcement` SET `announce_title` = ? ,`announce_content` = ? ,`announce_update` = ? WHERE `announce_seq` = ?";
             /** 取得所需之參數 */
             int announce_seq = an.getSeq();
             String announce_title = an.getTitle();
