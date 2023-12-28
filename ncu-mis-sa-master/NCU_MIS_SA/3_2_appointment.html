@@ -50,7 +50,7 @@
 	    $("#btname").click(function () {
 	    	
 	    	getByID();
-	    	doPost();
+	    	
 	    });
 
 	    function getByID() {
@@ -108,10 +108,13 @@
 	              
 	   	 function doPost() {
 	   		 const data = {
-	 	            "id": userid.value
+	 	            "user_id": userid.value,
+	 	            "doctor_id":1,
+	 	           "reserve_time":noon
+	 	            
 	 	        };
 	 	        
-	        var data_string = JSON.stringify(data);
+	     //   var data_string = JSON.stringify(data);
 
 	        $.ajax({
 	            type: "POST",
