@@ -48,6 +48,46 @@ button {
 </style>
 <body>
 	<h1>新增公告</h1>
+<<<<<<< HEAD
+    <form id = "form">
+		<center><table>
+		<div class="title-group">		
+			<tr>
+				<td><label for="notice-title">標題</label></td>
+				<td style="height:50px;"><input type="text" class="title-control" id="announce_title" name="notice-title" required="required" /></td>
+			</tr>
+		</div>
+		<div class="context-group">
+			<tr>
+				<td><label for="notice-content">正文</label></td>
+				<td><textarea class="form-control" id="announce_content" name="notice-content" required="required"></textarea></td>
+			</tr>
+		</div>
+		<div class="attachments-group">
+			<tr>
+				<td style="height:100;"><label for="attachments">附件</label></td>
+				<td><input type="file" class="form-control" id="attachments" name="attachments" multiple></td>
+			</tr>
+		</table></center>
+        </div>
+        <center><button type="submit" class="add">新增</button></center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
+	</form>
+	
+	
+	    <script type="text/javascript">
+	    	$(document).ready(function() {
+	        	// 處理表單點擊事件
+	        	var $form = $('#form');
+	        	$form.submit(function() {
+	        		submit();
+	        	});
+	
+	        	function submit() {
+					var announce_title = $('#announce_title').val();
+					var announce_content = $('#announce_content').val();
+					var time = new Date();
+					var update_time = time.toString();
+=======
 	<formid="addAnounce">
 	<center>
 		<table>
@@ -81,6 +121,7 @@ button {
 	</center>
 	<!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
 	</form>
+>>>>>>> 6bf8f3053b1f0ada7c1a58503aecde1eba2a7010
 
 
 	<script type="text/javascript">
@@ -129,9 +170,52 @@ button {
 					error : function() {
 						alert("無法連線到伺服器！");
 					}
+<<<<<<< HEAD
+					if(announce_content == null) {
+						announce_content = "";
+					}
+					
+	 				else {
+						alert("新增成功");
+						// 將資料組成JSON格式
+						var data_object = {
+							"announce_title": announce_title,
+							"announce_content": announce_content,
+							"update_time": update_time,
+						};
+	
+						// 將JSON格式轉換成字串
+						var data_string = JSON.stringify(data_object);
+						// 發出POST的AJAX請求
+						$.ajax({
+							type: "POST",
+							url: "api/announcement.do",
+							data: data_string,
+							crossDomain: true,
+							cache: false,
+							dataType: 'json',
+							timeout: 5000,
+							success: function (response) {
+								$('#flashMessage').html(response.message);
+								$('#flashMessage').show();
+								if(response.status == 200){
+									alert("新增成功");
+								}
+							},
+							error: function () {
+								alert("無法連線到伺服器！");
+							}
+						});    		
+					}
+				}
+	       	});
+		</script>		
+    
+=======
 				});
 			}
 		}
 	</script>
+>>>>>>> 6bf8f3053b1f0ada7c1a58503aecde1eba2a7010
 </body>
 </html>
