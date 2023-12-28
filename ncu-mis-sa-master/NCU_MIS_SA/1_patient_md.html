@@ -68,7 +68,7 @@
         }
 
         .add-button {
-            width: 50px;
+        	
 			padding: 8px;
             background-color: #004B97;
             color: white;
@@ -97,10 +97,28 @@
             border-radius: 5px;
             cursor: pointer;
         }
+        .lefttopbutton {
+            width: 100px;
+            height: 40px;
+            margin-top: 10px;
+            background-color: #004b97;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2em;
+            position: absolute;
+            top: 15px;
+            left: 15px;
+	}
+
+
     </style>
 </head>
 
 <body>
+	<a href="5_manager_function.html" class="lefttopbutton">返回</a>
     <div style="background-color:#004B97;">
         <h1><b>患者管理</b></h1>
     </div>
@@ -123,8 +141,9 @@
     <br>
     <div>
     	 <button class="add-button" onclick="redirectToAddPage()">新增</button>
-    	 <a href="5_manager_function.html" class="add-button">回上一頁</a>
+    	 
     </div>
+    
 
     <script type="text/javascript">
         function redirectToModifyPage() {
@@ -209,6 +228,7 @@
             };
         }
     </script>
+    <br>
 </body>
 
 </html>
