@@ -1,73 +1,137 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>公告欄新增</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<meta charset="UTF-8">
+<title>公告欄新增</title>
+
 </head>
 <style>
-	h1 {
-		background-color: #004B97;
-		color: white;
-		font-size: 3em;
-		margin-top: 0;
-		margin-bottom: 40px;
-		padding: 5px;
-		text-align: center;
-	}
-	label {
-		vertical-align: top;
-		font-weight: bold;
-		
-		}
-	.title-control {
-		width: 500px;
-	}
-	.form-control {
-		width: 500px;
-		height: 150px;
-	}
-	#attachments {
-    height: 30px;
-	}
-	button {
-		width: 50px;
-		padding: 8px;
-		background-color: #004B97;
-		color: white;
-		border: none;
-		border-radius: 5px;
-		cursor: pointer;
-		text-decoration: none;
-	}
-	
-	
+h1 {
+	background-color: #004B97;
+	color: white;
+	font-size: 3em;
+	margin-top: 0;
+	margin-bottom: 40px;
+	padding: 5px;
+	text-align: center;
+}
+
+label {
+	vertical-align: top;
+	font-weight: bold;
+}
+
+.title-control {
+	width: 500px;
+}
+
+.form-control {
+	width: 500px;
+	height: 150px;
+}
+
+#attachments {
+	height: 30px;
+}
+
+button {
+	width: 50px;
+	padding: 8px;
+	background-color: #004B97;
+	color: white;
+	border: none;
+	border-radius: 5px;
+	cursor: pointer;
+	text-decoration: none;
+}
 </style>
 <body>
 	<h1>新增公告</h1>
-    <form action="/add-notice" method="post">
-		<center><table>
-		<div class="title-group">		
-			<tr>
-				<td><label for="notice-title">標題</label></td>
-				<td style="height:50px;"><input type="text" class="title-control" id="notice-title" name="notice-title" required="required" /></td>
-			</tr>
-		</div>
-		<div class="context-group">
-			<tr>
-				<td><label for="notice-content">正文</label></td>
-				<td><textarea class="form-control" id="notice-content" name="notice-content" required="required"></textarea></td>
-			</tr>
-		</div>
-		<div class="attachments-group">
-			<tr>
-				<td style="height:100;"><label for="attachments">附件</label></td>
-				<td><input type="file" class="form-control" id="attachments" name="attachments" multiple></td>
-			</tr>
-		</table></center>
-        </div>
+	<formid="addAnounce">
+	<center>
+		<table>
+			<div class="title-group">
+				<tr>
+					<td><label for="notice-title">標題</label></td>
+					<td style="height: 50px;"><input type="text"
+						class="title-control" id="notice-title" name="notice-title"
+						required="required" /></td>
+				</tr>
+			</div>
+			<div class="context-group">
+				<tr>
+					<td><label for="notice-content">正文</label></td>
+					<td><textarea class="form-control" id="notice-content"
+							name="notice-content" required="required"></textarea></td>
+				</tr>
+			</div>
+			<div class="attachments-group">
+				<tr>
+					<td style="height: 100;"><label for="attachments">附件</label></td>
+					<td><input type="file" class="form-control" id="attachments"
+						name="attachments" multiple></td>
+				</tr>
+		</table>
+	</center>
+	</div>
+	<center>
+		<button type="submit" id="submit" class="button"
+			onclick="addAnnounce()">新增</button>
+	</center>
+	<!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
 	</form>
-	<center><button type="submit" class="add">新增</button></center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
-		
-    
+
+
+	<script type="text/javascript">
+		$("#addAnnounce").submit(function(e) {
+			e.preventDefault();
+		});
+
+		function addAnnounce() {
+			var announce_title = $('#announce_title').val();
+			var announce_content = $('#announce_content').val();
+
+			if (announce_title == null) {
+				announce_title = "";
+			}
+			if (announce_content == null) {
+				announce_content = "";
+			}
+
+			else {
+				alert("新增成功");
+				// 將資料組成JSON格式
+				var data_object = {
+					"announce_title" : announce_title,
+					"announce_content" : announce_content,
+				};
+
+				// 將JSON格式轉換成字串
+				var data_string = JSON.stringify(data_object);
+
+				// 發出POST的AJAX請求
+				$.ajax({
+					type : "POST",
+					url : "api/announcement.do",
+					data : data_string,
+					crossDomain : true,
+					cache : false,
+					dataType : 'json',
+					timeout : 5000,
+					success : function(response) {
+						$('#flashMessage').html(response.message);
+						$('#flashMessage').show();
+						if (response.status == 200) {
+							alert("新增成功");
+						}
+					},
+					error : function() {
+						alert("無法連線到伺服器！");
+					}
+				});
+			}
+		}
+	</script>
 </body>
 </html>

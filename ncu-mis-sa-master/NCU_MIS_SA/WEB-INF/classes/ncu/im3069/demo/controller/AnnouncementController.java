@@ -131,7 +131,7 @@ public class AnnouncementController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                int seq = jso.getInt("seq");
+                int seq = jso.getInt("announce_seq");
 
                 /** 透過AnnouncementHelper物件的deleteBySeq()方法至資料庫刪除該公告，回傳之資料為JSONObject物件 */
                 JSONObject query = anh.deleteBySeq(seq);

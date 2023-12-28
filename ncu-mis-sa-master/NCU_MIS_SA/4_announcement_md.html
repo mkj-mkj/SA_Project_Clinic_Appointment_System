@@ -132,8 +132,8 @@
                 table_html += '<td>' + value['announce_title'] + '</td>';
                 table_html += '<td>' + value['announce_content'] + '</td>';
                 table_html += '<td>' + value['announce_update'] + '</td>';
-                table_html += '<td><button class="delete_button" onclick="DeletePatient(' + value['annouce_seq'] + ');">刪除</button></td>';
-                table_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['annouce_seq']+');">修改</button></td>';
+                table_html += '<td><button class="delete_button" onclick="DeleteAnnouncement(' + value['announce_seq'] + ');">刪除</button></td>';
+                table_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['announce_seq']+');">修改</button></td>';
                 table_html += '<tr>';
             })
         
@@ -143,6 +143,38 @@
         $(document).ready(function() {
             getAllAnnouncement();
         });
+        
+        function DeleteAnnouncement(announce_seq) {   
+            var check = window.confirm("確認要刪除該公告嗎");
+            if (check == true) {
+            console.log("刪除公告");
+           // 發出POST的DELETE請求刪除該筆公告資料
+           var request = {'announce_seq': announce_seq};
+           var data_string = JSON.stringify(request);
+            // 發送 AJAX 請求以刪除公告
+            $.ajax({
+                type: "DELETE",  // 使用 POST 方法
+                url: "api/announcement.do",  // 請替換為實際的 API 端點
+                crossDomain: true,
+                data: data_string,  // 傳遞seq 給服務器
+                cache: false,
+                dataType: 'json',
+                timeout: 5000,
+                success: function (response) {
+                    if(response.status == 200){
+                        // 刪除成功後，更新表格
+                        getAllAnnouncement();
+                    } else {
+                        alert("刪除失敗：" + response.message);
+                    }
+                    console.log(response);
+                },
+                error: function () {
+                    alert("無法連線到伺服器！");
+                }
+            });
+            };
+        }
     </script>
 </body>
 </html>
