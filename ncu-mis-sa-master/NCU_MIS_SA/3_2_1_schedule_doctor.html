@@ -63,7 +63,6 @@
             <th>診別</th><!--早上診、下午診、晚上診-->
             <th>門診名稱</th><!--科-->
             <th>醫生姓名</th>
-            <th>已掛人數</th>
             <th>預約按鈕</th>
         </tr>
         <tr>
@@ -71,7 +70,6 @@
             <td id="time"></td>
             <td id="department"></td>
             <td id="doctorName"></td>
-            <td id="numofpeople"></td>
             <td><a href="3_2_appointment.html" class="appointment">我要預約</a></td>
         </tr>
     </table>
@@ -87,18 +85,12 @@
         var doctorNameElement = document.getElementById('doctorName');
         var dayElement = document.getElementById('day');
         var timeElement = document.getElementById('time');
-        var numofpeopleElement = document.getElementById('numofpeople');
         var departmentElement = document.getElementById('department');
         
-        if (doctorNameElement && dayElement && timeElement && numofpeopleElement && departmentElement) {
+        if (doctorNameElement && dayElement && timeElement && departmentElement) {
             doctorNameElement.innerHTML = params.get('doctor');
             dayElement.innerHTML = params.get('day');
             timeElement.innerHTML = params.get('time');
-            if (params.get('numofpeople') === '0') {
-                numofpeopleElement.innerHTML = '0';
-            } else {
-                numofpeopleElement.innerHTML = params.get('numofpeople');
-            }
             departmentElement.innerHTML = params.get('department');
         }
     }
