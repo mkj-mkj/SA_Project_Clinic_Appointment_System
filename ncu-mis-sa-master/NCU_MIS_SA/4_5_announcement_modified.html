@@ -59,7 +59,6 @@
 <body>
 	<div style="background-color:#004B97;">
 	<h1><b>修改公告</b></h1></div>
-    <form id="form">
         <div class="title-group">
 		<center><table>
 			<tr>
@@ -81,26 +80,30 @@
 		</table></center>
         </div>
         <center>
-	       <button type="submit" class="add">修改</button>
+	       <button  class="add" onclick="submit();">修改</button>
 	       <a href="4_announcement_md.html" class="add-button">回到公告頁面</a>
         </center><!--將新的資料覆蓋舊的資料但seq還是一樣的，覆蓋成功顯示「修改成功！」提示-->
-	</form>
 	
     <script type="text/javascript">
     	$(document).ready(function() {
     		getAnnouncement();
-        	// 處理表單點擊事件
-        	var $form = $('#form');
-        	$form.submit(function() {
-        		submit();
-        	});
+
+       	});
+
+
 
         	function submit(announce_seq) {
+                var queryString = window.location.search.substring(1);
+                var params = new URLSearchParams(queryString);
+                var seq = params.get('seq');
 				var announce_title = $('#announce_title').val();
-				var announce_content = $('#announce_content').val();
+				console.log(announce_title);
+				var announce_content = document.getElementById("announce_content").value;
+				console.log(announce_content);
 				var time = new Date();
 				var update_time = time.toString();
-
+				console.log(update_time);
+/**
 				if(announce_title == null) {
 					announce_title = "";
 				}
@@ -108,10 +111,11 @@
 				if(announce_content == null) {
 					announce_content = "";
 				}
-				
-/**
+**/
+
 					// 將資料組成JSON格式
 					var data_object = {
+						"announce_seq":seq,
 						"announce_title": announce_title,
 						"announce_content": announce_content,
 						"update_time": update_time,
@@ -122,7 +126,7 @@
 					// 發出POST的AJAX請求
 					$.ajax({
 						type: "PUT",
-						url: "api/announcement.do?announce_seq=", announce_seq,
+						url: "api/announcement.do",
 						data: data_string,
 						crossDomain: true,
 						cache: false,
@@ -139,11 +143,10 @@
 							alert("無法連線到伺服器！");
 						}
 					});  
-					**/
+					
 				}
 				
 			
-       	});
     	
     	function getAnnouncement(){
             var queryString = window.location.search.substring(1);
