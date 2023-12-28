@@ -15,7 +15,7 @@
             margin: 0;
             padding: 5px;
         }
-        a {
+        .normalbutton {
             width: 400px;
             height: 300px;
             background-color: #004B97;
@@ -27,12 +27,27 @@
             line-height: 300px;
             font-size: 2.5em;
         }
+        .lefttopbutton {
+            width: 100px;
+            height: 40px;
+            margin-top: 10px;
+            background-color: #004b97;
+            border: none;
+            color: white;
+            border-radius: 10px;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 1.2em;
+            position: absolute;
+            top: 15px;
+            left: 15px;}
         .button-container {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
+	<a href="index.html" class="lefttopbutton">首頁</a>
 	<div style="background-color:#004B97;">
         <h1><b>預約系統功能</b></h1>
     </div>
@@ -40,8 +55,8 @@
 	<br>
 	<br>
     <div class="button-container">
-        <a href="3_1_clinic.html" class="left-button">預約掛號</a><!--選擇門診後跳到該門診的3_2_schedule.html，點選schedule中的時段後再跳轉進入3_appointment.html輸入資料進行預約-->
-        <a href="3_4_search.html" class="right-button">檢視預約</a>
+        <a href="3_1_clinic.html" class="normalbutton">預約掛號</a><!--選擇門診後跳到該門診的3_2_schedule.html，點選schedule中的時段後再跳轉進入3_appointment.html輸入資料進行預約-->
+        <a href="3_4_search.html" class="normalbutton">檢視預約</a>
     </div>
 </body>
 </html>
