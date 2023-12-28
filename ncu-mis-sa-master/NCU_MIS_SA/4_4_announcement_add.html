@@ -45,18 +45,18 @@
 </style>
 <body>
 	<h1>新增公告</h1>
-    <form action="/add-notice" method="post">
+    <form id = "form">
 		<center><table>
 		<div class="title-group">		
 			<tr>
 				<td><label for="notice-title">標題</label></td>
-				<td style="height:50px;"><input type="text" class="title-control" id="notice-title" name="notice-title" required="required" /></td>
+				<td style="height:50px;"><input type="text" class="title-control" id="announce_title" name="notice-title" required="required" /></td>
 			</tr>
 		</div>
 		<div class="context-group">
 			<tr>
 				<td><label for="notice-content">正文</label></td>
-				<td><textarea class="form-control" id="notice-content" name="notice-content" required="required"></textarea></td>
+				<td><textarea class="form-control" id="announce_content" name="notice-content" required="required"></textarea></td>
 			</tr>
 		</div>
 		<div class="attachments-group">
@@ -73,14 +73,16 @@
 	    <script type="text/javascript">
 	    	$(document).ready(function() {
 	        	// 處理表單點擊事件
-	        	var $form = $('#submit');
-	        	$form.click(function() {
+	        	var $form = $('#form');
+	        	$form.submit(function() {
 	        		submit();
 	        	});
 	
 	        	function submit() {
 					var announce_title = $('#announce_title').val();
 					var announce_content = $('#announce_content').val();
+					var time = new Date();
+					var update_time = time.toString();
 
 					if(announce_title == null) {
 						announce_title = "";
@@ -95,11 +97,11 @@
 						var data_object = {
 							"announce_title": announce_title,
 							"announce_content": announce_content,
+							"update_time": update_time,
 						};
 	
 						// 將JSON格式轉換成字串
 						var data_string = JSON.stringify(data_object);
-	
 						// 發出POST的AJAX請求
 						$.ajax({
 							type: "POST",
