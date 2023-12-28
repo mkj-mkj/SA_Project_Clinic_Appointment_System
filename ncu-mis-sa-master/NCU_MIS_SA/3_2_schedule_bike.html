@@ -3,108 +3,72 @@
 <head>
 	<link rel="stylesheet" href="3_2_schedule.css">
 	<meta charset="UTF-8">
-    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<title>門診時間表</title>
-</head>
-<!-- 在 <body> 部分中添加 id 為 table 的 <table> 元素 -->
 <body>
 	<h1>門診時間</h1>
-	<center>
-		<h2>鼻科</h2>
-		<table id="table" border="1" cellspacing="0" cellpadding="5">
-			<thead>
-				<tr class="title">
-					<th></th>
-					<th>(一)</th>
-					<th>(二)</th>
-					<th>(三)</th>
-					<th>(四)</th>
-					<th>(五)</th>
-					<th>(六)</th>
-					<th>(日)</th>
-				</tr>
-			</thead>
-
-			<tbody class="working">
-				<tr>
-					<td class="title" id="morning">8:00<br/>~<br/>12:00</td>
-					<td id="1"></td>
-					<td id="2"></td>
-					<td id="3"></td>
-					<td id="4"></td>
-					<td id="5"></td>
-					<td id="6"></td>
-					<td id="7"></td>
-				</tr>
-				<tr>
-					<td class="title" id="noon">14:00<br/>~<br/>18:00</td>
-					<td id="8"></td>
-					<td id="9"></td>
-					<td id="10"></td>
-					<td id="11"></td>
-					<td id="12"></td>
-					<td id="13"></td>
-					<td id="14"></td>
-				</tr>
-				<tr>
-					<td class="title" id="night">19:00<br/>~<br/>21:00</td>
-					<td id="15"></td>
-					<td id="16"></td>
-					<td id="17"></td>
-					<td id="18"></td>
-					<td id="19"></td>
-					<td id="20"></td>
-					<td id="21"></td>
-				</tr>
-			</tbody>
-		</table>
-		<br/>
-		<br/>
-		<a href="3_1_clinic.html" class="back">回上一頁</a>
+	<center><h2>鼻科(1/1-1/7)</h2>
+	<table border="1" cellspacing="0" cellpadding="5">
+		<thead>
+			<tr class="title">
+				<th></th>
+				<th>(一)</th>
+				<th>(二)</th>
+				<th>(三)</th>
+				<th>(四)</th>
+				<th>(五)</th>
+				<th>(六)</th>
+				<th>(日)</th>
+			</tr>
+		</thead>
+		
+		<tbody class="working">
+			<tr>
+				<td class="title">8:00<br/>~<br/>12:00</td>
+				<td></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('馮易慶', '(二)', '早上','0')">馮易慶</a></td>
+				<td></td>
+				<td></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(五)', '早上','0')">彭城元</a></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td class="title">14:00<br/>~<br/>18:00</td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(一)', '下午','0')">彭城元</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('馮易慶', '(二)', '下午','0')">馮易慶</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(三)', '下午','0')">彭城元</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('馮易慶', '(四)', '下午','0')">馮易慶</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(五)', '下午','0')">彭城元</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('馮易慶', '(六)', '下午','0')">馮易慶</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(日)', '下午','0')">彭城元</a></td>
+			</tr>
+			<tr>
+				<td class="title">19:00<br/>~<br/>21:00</td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(一)', '晚上','0')">彭城元</a></td>
+				<td></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('馮易慶', '(三)', '晚上','0')">馮易慶</a></td>
+				<td><a href="javascript:void(0)" onclick="selectDoctor('彭城元', '(四)', '晚上','0')">彭城元</a></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	<br/>
+	<button onclick="window.location.href='3_1_clinic.html'" class="back">回上一頁</button>
+	
 	</center>
+	<br/>
+	<br/>
 </body>
-
-<script type="text/javascript">
-            function getSchedule(){
-				var request = {'clinic_id': '7411'};
-	            var data_string = JSON.stringify(request);
-                $.ajax({
-                    type: "GET",
-                    url: "api/schedule.do",
-                    crossDomain: true,
-                    cache: false,
-                    data: data_string,
-                    dataType: 'json',
-                    timeout: 5000,
-                    success: function (response) {
-                        if(response.status == 200){
-                            updateTable(response.response.data);
-                        }
-                        console.log(response);
-                    },
-                    error: function () {
-                        alert("無法連線到伺服器！");
-                    }
-                });
-            }
+<script>
+function selectDoctor(doctorName, day, time, numofpeople) {
+    // Add 'department' to the query string with the selected information
+    var queryString = '?doctor=' + encodeURIComponent(doctorName) + '&day=' + encodeURIComponent(day) + '&time='+ encodeURIComponent(time) + '&numofpeople=' + encodeURIComponent(numofpeople) + '&department=' + encodeURIComponent('耳科');
     
-            // 更新管理者表格
-            function updateTable(data) {
-                $("#table > tbody").empty();
-                var table_html = '';
-                
-                $.each(data, function(index, value) {
-                    table_html += '<tr>';
-                    table_html += '<td>' + value['doctor_id'] + '</td>';
-                    table_html += '<tr>';
-                })
-            
-                $("#table > tbody").append(table_html);
-            }
-    
-            $(document).ready(function() {
-                getSchedule();
-                });
-
-    </script>
+    // Redirect to the second HTML file with the query string
+    window.location.href = '3_2_1_schedule_doctor.html' + queryString;
+}
+</script>
 </html>
+	
