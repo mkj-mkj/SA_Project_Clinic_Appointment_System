@@ -407,6 +407,9 @@ public class AppointmentHelper {
      * @return the JSON object 回傳SQL指令執行之結果
      */
     public JSONObject create(Appointment ap) {
+    	
+    	
+    	
         /** 記錄實際執行之SQL指令 */
         String exexcute_sql = "";
         /** 紀錄程式開始執行時間 */
@@ -417,17 +420,29 @@ public class AppointmentHelper {
         try {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
-            /** SQL指令 */
-            String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_date`, `reserve_time`, `appointment`)"
-                    + " VALUES(?, ?, ?, ?, ?)";
-
+        	
             /** 取得所需之參數 */
-            // int appointment_seq = ap.getSeq();
-            int doctor_id = ap.getDoctorID();
+            String doctor_name = ap.getDoctorName();
             String user_id = ap.getUserID();
             String reserve_date = ap.getReserveDate();
             String reserve_time = ap.getReserveTime();
             int appointment_number = getAppointment(ap);
+        	int doctor_id = 0;
+            
+            // 利用預約資料表中的doctor_id在醫生資料表中查找對應doctor_name
+            String doctor_id_sql = "SELECT `doctor_id` FROM `doctor` WHERE `doctor_name` = ? LIMIT 1";
+            pres = conn.prepareStatement(doctor_id_sql);
+            pres.setString(1, doctor_name);
+            ResultSet doctor_rs = pres.executeQuery();
+
+            while (doctor_rs.next()) {
+                doctor_id = doctor_rs.getInt("doctor_id");
+            }
+        	
+        
+            /** SQL指令 */
+            String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_date`, `reserve_time`, `appointment`)"
+                    + " VALUES(?, ?, ?, ?, ?)";
 
             /** 將參數回填至SQL指令當中 */
             pres = conn.prepareStatement(sql);
