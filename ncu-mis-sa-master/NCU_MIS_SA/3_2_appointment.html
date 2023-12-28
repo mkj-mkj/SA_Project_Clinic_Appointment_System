@@ -44,21 +44,14 @@
 	    var birth = document.querySelector('input[name="birthday"]');
 		var row;
 		
-		
-
-		
-	    $("#btname").click(function () {
-	    	
-	    	getByID();
-	    	
+	    $("#btname").click(function () {	
+	    	doPost();
 	    });
-
+/**
 	    function getByID() {
 	        const data = {
 	            "id": userid.value
 	        };
-	        
-	       
 	        
 	        var data_string = JSON.stringify(data);
 			console.log(userid.value);
@@ -77,9 +70,7 @@
 	            		console.log(response);
 	            		console.log(response.response.row);
 	            		//console.log(response.resposne.data.at(0).Array);
-	                   //console.log($.isEmptyObject(response.data.row));
-	                  
-	                    
+	                   //console.log($.isEmptyObject(response.data.row)); 
 
 	                    // Check if 'row' is an array and if it is empty
 	                    if (response.response.row == 0) {	//case 1:沒有找到患者資料
@@ -87,15 +78,13 @@
 	                        if (result == true) {
 	                            location.assign("http://localhost:8080/NCU_MIS_SA/1_2_patient_add.html");
 	                        }
-	                        
 	                    } 
-	                    
 	                    
 	                    else   {	
 	                    	//case 2：有找到患者資料
 	                        // Check if 'row' is an empty object
 	                        console.log("getAppointmentByID");
-	                       doPost();
+	                       	doPost();
 	                    }
 	            	}
 	                },
@@ -104,34 +93,40 @@
 	                }
 	            });
 	    }
-	               
+	               **/
 	              
 	   	 function doPost() {
+	         var queryString = window.location.search.substring(1);
+	         var params = new URLSearchParams(queryString);
 	   		 const data = {
-	 	            "user_id": userid.value,
-	 	            "doctor_id":"1",
-	 	           "reserve_time":"noon",	 	          
-	 	           "doctor_name" : "周勝",        
-           			"reserve_date":"2024-01-01",
-	 	           
-	 	           
-	 	            
+	 	           	"user_id": userid.value,
+	 	           	"reserve_time":params.get('time'),	 	          
+	 	           	"doctor_name" : params.get('doctor'),        
+           			"reserve_date": params.get('day')
 	 	        };
 	 	        
-	     //   var data_string = JSON.stringify(data);
+	     	var data_string = JSON.stringify(data);
 
 	        $.ajax({
 	            type: "POST",
 	            url: "api/appointment.do",
 	            crossDomain: true,
 	            cache: false,
-	            data: data,
+	            data: data_string,
 	            dataType: 'json',
 	            timeout: 5000,
 	            success: function (response) {
 	                if (response.status == 200) {
 	                    window.alert("已成功預約");
 	                    console.log(response);
+	                    window.location.href = "http://localhost:8088/NCU_MIS_SA/3_4_2_alldata.html?valus="+userid.value;
+	                    
+	                }
+	                else if (response.status == 401){
+	                	window.alert("請填寫初診資料表");
+	                	console.log(response);
+	                	var queryString = '?doctor=' + params.get('doctor') + '&day=' + params.get('day') + '&time='+ params.get('time');
+	                	window.location.href = "http://localhost:8088/NCU_MIS_SA/3_3_user_data.html"+queryString;
 	                }
 	            },
 	            error: function (response) {
