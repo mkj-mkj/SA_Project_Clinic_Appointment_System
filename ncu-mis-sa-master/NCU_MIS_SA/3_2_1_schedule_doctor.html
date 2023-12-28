@@ -32,17 +32,14 @@
             color: white;
         }
         td {
-            text-align: left;
+            text-align: mid;
             background-color: #E0E0E0;
         }
-        td:nth-child(1), td:nth-child(2), td:nth-child(4), td:nth-child(5) {
+        td:nth-child(1), td:nth-child(2) {
             width: 15%; 
         }
-		td:nth-child(3) {
-			width: 27%;
-		}
-		td:nth-child(6) {
-			width: 13%;
+		td:nth-child(3), td:nth-child(4), td:nth-child(5),td:nth-child(6){
+			width: 17.5%;
 		}
 		
         .appointment {
@@ -74,7 +71,7 @@
             <td id="time"></td>
             <td id="department"></td>
             <td id="doctorName"></td>
-            <td></td>
+            <td id="numofpeople"></td>
             <td><a href="3_2_appointment.html" class="appointment">我要預約</a></td>
         </tr>
     </table>
@@ -90,16 +87,22 @@
         var doctorNameElement = document.getElementById('doctorName');
         var dayElement = document.getElementById('day');
         var timeElement = document.getElementById('time');
+        var numofpeopleElement = document.getElementById('numofpeople');
         var departmentElement = document.getElementById('department');
         
-        if (doctorNameElement && dayElement && timeElement && departmentElement) {
+        if (doctorNameElement && dayElement && timeElement && numofpeopleElement && departmentElement) {
             doctorNameElement.innerHTML = params.get('doctor');
             dayElement.innerHTML = params.get('day');
             timeElement.innerHTML = params.get('time');
-            timeElement.innerHTML = params.get('time');
+            if (params.get('numofpeople') === '0') {
+                numofpeopleElement.innerHTML = '0';
+            } else {
+                numofpeopleElement.innerHTML = params.get('numofpeople');
+            }
             departmentElement.innerHTML = params.get('department');
         }
     }
+
     </script>
 </body>
 
