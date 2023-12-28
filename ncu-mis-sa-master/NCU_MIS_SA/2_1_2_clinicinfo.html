@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>門診資訊</title>
     <style>
         body {
@@ -56,13 +57,18 @@
         <a href="2_1_departmentinfo.html" class="left-button">科別</a>
         <a href="2_2_doctor_info.html" class="right-button">醫師</a>
     </div>
-    <table><!--顯示公告-->
+    <table id="table"><!--顯示公告-->
     	<thead>
         	<tr>
-            	<th>公告</th>
+            	<th>Seq</th>
+            	<th>公告標題</th>
+            	<th>公告內容</th>
+            	<th>公告時間</th>
         	</tr>
        	</thead>
+       	<tbody></tbody> 
     </table>
+    
     <script type="text/javascript">
         function getAllAnnouncement(){
             // 發出POST的GET請求取得所有announcement
