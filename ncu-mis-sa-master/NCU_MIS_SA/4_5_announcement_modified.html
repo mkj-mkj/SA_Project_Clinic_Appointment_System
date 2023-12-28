@@ -6,14 +6,17 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <style>
+ 	body {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
 	h1 {
-		background-color: #004B97;
 		color: white;
 		font-size: 3em;
 		margin-top: 0;
 		margin-bottom: 40px;
 		padding: 5px;
-		text-align: center;
 	}
 	label {
 		vertical-align: top;
@@ -40,23 +43,34 @@
 		cursor: pointer;
 		text-decoration: none;
 	}
+	.add-button {
+    	width: 50px;
+    	padding: 8px;
+    	background-color: #004B97;
+    	color: white;
+   	    border: none;
+    	border-radius: 5px;
+    	cursor: pointer;
+    	text-decoration: none; 
+}
 	
 	
 </style>
 <body>
-	<h1>修改公告</h1>
-    <form action="/add-notice" method="post">
+	<div style="background-color:#004B97;">
+	<h1><b>修改公告</b></h1></div>
+    <form id="form">
         <div class="title-group">
 		<center><table>
 			<tr>
 				<td><label for="notice-title">標題</label></td>
-				<td style="height:50px;"><input type="text" class="title-control" id="notice-title" name="notice-title" placeholder="原本的標題"required="required" /></td>
+				<td style="height:50px;"><input type="text" class="title-control" id="announce_title" name="notice-title" placeholder="原本的標題"required="required" /></td>
 			</tr>
 		</div>
 		<div class="context-group">
 			<tr>
 				<td><label for="notice-content">正文</label></td>
-				<td><textarea class="form-control" id="notice-content" name="notice-content" placeholder="原本的內文" required="required"></textarea></td>
+				<td><textarea class="form-control" id="notice-content" name="announce_content" placeholder="原本的內文" required="required"></textarea></td>
 			</tr>
 		</div>
 		<div class="attachments-group">
@@ -66,9 +80,69 @@
 			</tr>
 		</table></center>
         </div>
+        <center>
+	       <button type="submit" class="add">修改</button>
+	       <a href="4_announcement_md.html" class="add-button">回到公告頁面</a>
+        </center><!--將新的資料覆蓋舊的資料但seq還是一樣的，覆蓋成功顯示「修改成功！」提示-->
 	</form>
-	<center><button type="submit" class="add">修改</button></center><!--將新的資料覆蓋舊的資料但seq還是一樣的，覆蓋成功顯示「修改成功！」提示-->
-		
+	
+    <script type="text/javascript">
+    	$(document).ready(function() {
+        	// 處理表單點擊事件
+        	var $form = $('#form');
+        	$form.submit(function() {
+        		submit();
+        	});
+
+        	function submit(announce_seq) {
+				var announce_title = $('#announce_title').val();
+				var announce_content = $('#announce_content').val();
+				var time = new Date();
+				var update_time = time.toISOString().slice(0, 19).replace("T", " ");
+
+				if(announce_title == null) {
+					announce_title = "";
+				}
+				if(announce_content == null) {
+					announce_content = "";
+				}
+				
+ 				else {
+					// 將資料組成JSON格式
+					var data_object = {
+						"announce_title": announce_title,
+						"announce_content": announce_content,
+						"update_time": update_time,
+					};
+
+					// 將JSON格式轉換成字串
+					var data_string = JSON.stringify(data_object);
+					// 發出POST的AJAX請求
+					$.ajax({
+						type: "PUT",
+						url: "api/announcement.do?announce_seq=", announce_seq,
+						data: data_string,
+						crossDomain: true,
+						cache: false,
+						dataType: 'json',
+						timeout: 5000,
+						success: function (response) {
+							$('#flashMessage').html(response.message);
+							$('#flashMessage').show();
+							if(response.status == 200){
+								alert("修改成功");
+							}
+						},
+						error: function () {
+							alert("無法連線到伺服器！");
+						}
+					});    		
+				}
+				
+			}
+        	
+       	});
+	</script>		
     
 </body>
 </html>
