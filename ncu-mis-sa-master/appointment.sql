@@ -31,7 +31,7 @@ CREATE TABLE `appointment` (
   `appointment_seq` int(11) NOT NULL,
   `doctor_id` int(11) NOT NULL,
   `user_id` varchar(20) NOT NULL,
-  `reserve_date` date NOT NULL,
+  `reserve_date` text NOT NULL,
   `reserve_time` text NOT NULL,
   `appointment` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
