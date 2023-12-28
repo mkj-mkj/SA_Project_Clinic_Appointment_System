@@ -6,14 +6,17 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <style>
+    body {
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
 	h1 {
-		background-color: #004B97;
 		color: white;
 		font-size: 3em;
 		margin-top: 0;
 		margin-bottom: 40px;
 		padding: 5px;
-		text-align: center;
 	}
 	label {
 		vertical-align: top;
@@ -40,11 +43,22 @@
 		cursor: pointer;
 		text-decoration: none;
 	}
+	.add-button {
+		width: 50px;
+		padding: 8px;
+		background-color: #004B97;
+		color: white;
+		border: none;
+		border-radius: 5px;
+		cursor: pointer;
+		text-decoration: none;
+	}
 	
 	
 </style>
 <body>
-	<h1>新增公告</h1>
+	<div style="background-color:#004B97;">
+	<h1><b>新增公告</b></h1></div>
     <form id = "form">
 		<center><table>
 		<div class="title-group">		
@@ -59,14 +73,13 @@
 				<td><textarea class="form-control" id="announce_content" name="notice-content" required="required"></textarea></td>
 			</tr>
 		</div>
-		<div class="attachments-group">
-			<tr>
-				<td style="height:100;"><label for="attachments">附件</label></td>
-				<td><input type="file" class="form-control" id="attachments" name="attachments" multiple></td>
-			</tr>
 		</table></center>
         </div>
-        <center><button type="submit" class="add">新增</button></center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
+        <br>
+        <center>
+        	<button type="submit" class="add">新增</button>
+        	<a href="4_announcement_md.html" class="add-button">回到公告頁面</a>
+        </center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
 	</form>
 	
 	
@@ -82,7 +95,7 @@
 					var announce_title = $('#announce_title').val();
 					var announce_content = $('#announce_content').val();
 					var time = new Date();
-					var update_time = time.toString();
+					var update_time = time.toISOString().slice(0, 19).replace("T", " ");
 
 					if(announce_title == null) {
 						announce_title = "";
@@ -92,7 +105,6 @@
 					}
 					
 	 				else {
-						alert("新增成功");
 						// 將資料組成JSON格式
 						var data_object = {
 							"announce_title": announce_title,
