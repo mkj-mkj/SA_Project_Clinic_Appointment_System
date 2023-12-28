@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>公告欄新增</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <style>
 	h1 {
@@ -65,9 +66,64 @@
 			</tr>
 		</table></center>
         </div>
+        <center><button type="submit" class="add">新增</button></center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
 	</form>
-	<center><button type="submit" class="add">新增</button></center><!--將輸入的公告內容新增到公告資料庫中，新增完成後顯示「新增成功！」提示-->
-		
+	
+	
+	    <script type="text/javascript">
+	    	$(document).ready(function() {
+	        	// 處理表單點擊事件
+	        	var $form = $('#submit');
+	        	$form.click(function() {
+	        		submit();
+	        	});
+	
+	        	function submit() {
+					var announce_title = $('#announce_title').val();
+					var announce_content = $('#announce_content').val();
+
+					if(announce_title == null) {
+						announce_title = "";
+					}
+					if(announce_content == null) {
+						announce_content = "";
+					}
+					
+	 				else {
+						alert("新增成功");
+						// 將資料組成JSON格式
+						var data_object = {
+							"announce_title": announce_title,
+							"announce_content": announce_content,
+						};
+	
+						// 將JSON格式轉換成字串
+						var data_string = JSON.stringify(data_object);
+	
+						// 發出POST的AJAX請求
+						$.ajax({
+							type: "POST",
+							url: "api/announcement.do",
+							data: data_string,
+							crossDomain: true,
+							cache: false,
+							dataType: 'json',
+							timeout: 5000,
+							success: function (response) {
+								$('#flashMessage').html(response.message);
+								$('#flashMessage').show();
+								if(response.status == 200){
+									alert("新增成功");
+								}
+							},
+							error: function () {
+								alert("無法連線到伺服器！");
+							}
+						});    		
+					}
+				}
+	       	});
+		</script>		
     
 </body>
 </html>
