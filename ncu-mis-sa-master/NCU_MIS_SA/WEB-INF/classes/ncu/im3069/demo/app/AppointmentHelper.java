@@ -418,13 +418,14 @@ public class AppointmentHelper {
             /** 取得資料庫之連線 */
             conn = DBMgr.getConnection();
             /** SQL指令 */
-            String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_time`, `appointment`)"
+            String sql = "INSERT INTO `appointment`(`doctor_id`, `user_id`, `reserve_date`, `reserve_time`, `appointment`)"
                     + " VALUES(?, ?, ?, ?, ?)";
 
             /** 取得所需之參數 */
             // int appointment_seq = ap.getSeq();
             int doctor_id = ap.getDoctorID();
             String user_id = ap.getUserID();
+            String reserve_date = ap.getReserveDate();
             String reserve_time = ap.getReserveTime();
             int appointment_number = getAppointment(ap);
 
@@ -433,8 +434,9 @@ public class AppointmentHelper {
             // pres.setInt(1, appointment_seq);
             pres.setInt(1, doctor_id);
             pres.setString(2, user_id);
-            pres.setString(3, reserve_time);
-            pres.setInt(4, appointment_number);
+            pres.setString(3, reserve_date);
+            pres.setString(4, reserve_time);
+            pres.setInt(5, appointment_number);
 
             /** 執行新增之SQL指令並記錄影響之行數 */
             row = pres.executeUpdate();

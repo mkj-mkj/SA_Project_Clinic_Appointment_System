@@ -75,6 +75,16 @@ public class Appointment {
         this.UserId = UserId;
         this.ReserveTime = ReserveTime;
     }
+    
+    /**
+     * 實例化（Instantiates）一個新的（new）Appointment物件
+     */
+    public Appointment(int DoctorId, String UserId, String ReserveDate, String ReserveTime) {
+        this.DoctorId = DoctorId;
+        this.UserId = UserId;
+        this.ReserveTime = ReserveTime;
+        this.ReserveDate = ReserveDate;
+    }
 
     /**
      * 實例化（Instantiates）一個新的（new）Appointment物件

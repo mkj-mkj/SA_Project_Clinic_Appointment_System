@@ -49,9 +49,10 @@ public class AppointmentController extends HttpServlet {
                 Integer doctor_id = jso.getInt("doctor_id");
                 String user_id = jso.getString("user_id");
                 String reserve_time = jso.getString("reserve_time");
+                String reserve_date = jso.getString("reserve_date");
 
                 /** 建立一個新的Appointment物件 */ 
-                Appointment ap = new Appointment(doctor_id, user_id, reserve_time);
+                Appointment ap = new Appointment(doctor_id, user_id, reserve_date, reserve_time);
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
                 if (user_id.isEmpty() || doctor_id == null || reserve_time == null) {
