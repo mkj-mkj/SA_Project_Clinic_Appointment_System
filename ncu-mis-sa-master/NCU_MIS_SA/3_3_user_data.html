@@ -12,7 +12,7 @@
 		<h1>初診資料</h1>
 		<br/>
 		<br/>
-		<form>
+
 			<center><table border="1" cellspacing="0" cellpadding="5">
 				<tr>
 					<td width= "300" bgcolor = "#C4E1FF"><strong><font color="#FF0000">請輸入身分證號碼10碼(必填)</font></strong></td>
@@ -85,23 +85,31 @@
 		    </table></center>
 			<br/>
 			<br/>
-    		<center><button type="submit" id="submit" class="button">送出</button><!--送出時驗證user資料庫中是否有這筆資料存在，若有則顯示「已有相同資料，請重新輸入」提示；若沒有重複資料則將這筆資料新增到使用者資料庫中-->
-    	</form>
-    
+    		<center>
+    		<table>
+    			<tr>
+    				<td>
+    					<button  id="last_page" class="button" onclick="return_appointment();">返回預約</button>
+  					</td>
+    				
+    				<td>
+    					<button id="submit" class="button" onclick="submit();">送出</button><!--送出時驗證user資料庫中是否有這筆資料存在，若有則顯示「已有相同資料，請重新輸入」提示；若沒有重複資料則將這筆資料新增到使用者資料庫中-->
+    				</td>
+    			</tr>
+    		</table>
+
 	    <script type="text/javascript">
-	    	$(document).ready(function() {
-	        	// 處理表單點擊事件
-	        	var $form = $('#submit');
-	        	$form.click(function() {
-	        		submit();
-	        	});
+	    
+			
+        	function return_appointment(){
+            	var queryString = window.location.search.substring(1);
+    	        var params = new URLSearchParams(queryString);
+    	        var queryString = '?doctor=' + params.get('doctor') + '&day=' + params.get('day') + '&time='+ params.get('time');
+        		window.location.href = "http://localhost:8088/NCU_MIS_SA/3_2_appointment.html"+queryString;
+        	}
+        	
 	
-	        	function submit() {
-	                var queryString = window.location.search.substring(1);
-	                var params = new URLSearchParams(queryString);
-	                
-	            	var queryString = '?doctor=' + params.get('doctor') + '&day=' + params.get('day') + '&time='+ params.get('time');
-	            	
+	        	function submit() {       	
 	        		var user_id = $('#user_id').val();
 					var user_id_rule = /^[A-Z][12]\d{8}$/;
 					var user_name = $('#user_name').val();
@@ -162,7 +170,6 @@
 					}
 					
 	 				else {
-						alert("新增成功");
 						// 將資料組成JSON格式
 						var data_object = {
 							"user_id": user_id,
@@ -200,7 +207,7 @@
 								$('#flashMessage').show();
 								if(response.status == 200){
 									alert("新增成功");
-									window.location.href = "http://localhost:8088/NCU_MIS_SA/3_2_appointment.html"+val;
+									
 								}
 							},
 							error: function () {
@@ -209,7 +216,6 @@
 						});    		
 					}
 				}
-	       	});
 		</script>
 	
 	</body>

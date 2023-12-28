@@ -119,6 +119,8 @@
 	                if (response.status == 200) {
 	                    window.alert("已成功預約");
 	                    console.log(response);
+	                    window.location.href = "http://localhost:8088/NCU_MIS_SA/3_4_2_alldata.html?valus="+userid.value;
+	                    
 	                }
 	                else if (response.status == 401){
 	                	window.alert("請填寫初診資料表");
