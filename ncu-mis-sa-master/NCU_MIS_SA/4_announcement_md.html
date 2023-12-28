@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <title>公告資料</title>
     <style>
         body {
@@ -76,8 +77,8 @@
 <body>
     <div style="background-color:#004B97;">
 	<h1><b>公告</b></h1></div>
-    <table><!--公告資料庫有幾筆資料就顯示幾筆-->
-    	<tbody>
+    <table id="table"><!--公告資料庫有幾筆資料就顯示幾筆-->
+    	<thead>
         	<tr>
             	<th>Seq</th>
             	<th>公告標題</th>
@@ -85,9 +86,9 @@
             	<th>公告時間</th>
 				<th></th>
 				<th></th>
-        </tr>
-        </tbody>
-        
+        	</tr>
+        </thead>    	
+    	<tbody></tbody>  
     </table>
 	<br>
     <button class="add_button" onclick="redirectToAddPage()">新增</button>
@@ -103,7 +104,7 @@
             // 發出POST的GET請求取得所有announcement
             $.ajax({
                 type: "GET",
-                url: "api/user.do",
+                url: "api/announcement.do",
                 crossDomain: true,
                 cache: false,
                 dataType: 'json',
@@ -127,7 +128,7 @@
             
             $.each(data, function(index, value) {
                 table_html += '<tr>';
-                table_html += '<td>' + value['annouce_seq'] + '</td>';
+                table_html += '<td>' + value['announce_seq'] + '</td>';
                 table_html += '<td>' + value['announce_title'] + '</td>';
                 table_html += '<td>' + value['announce_content'] + '</td>';
                 table_html += '<td>' + value['announce_update'] + '</td>';
