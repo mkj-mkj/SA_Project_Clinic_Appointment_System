@@ -109,8 +109,12 @@
 	   	 function doPost() {
 	   		 const data = {
 	 	            "user_id": userid.value,
-	 	            "doctor_id":1,
-	 	           "reserve_time":noon
+	 	            "doctor_id":"1",
+	 	           "reserve_time":"noon",	 	          
+	 	           "doctor_name" : "周勝",        
+           			"reserve_date":"2024-01-01",
+	 	           
+	 	           
 	 	            
 	 	        };
 	 	        
@@ -121,7 +125,7 @@
 	            url: "api/appointment.do",
 	            crossDomain: true,
 	            cache: false,
-	            data: "id="+userid.value,
+	            data: data,
 	            dataType: 'json',
 	            timeout: 5000,
 	            success: function (response) {
@@ -132,6 +136,7 @@
 	            },
 	            error: function (response) {
 	                console.log(response);
+	                console.log(data);
 	            }
 	        });
 	    }
