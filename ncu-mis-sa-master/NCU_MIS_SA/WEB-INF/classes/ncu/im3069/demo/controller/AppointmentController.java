@@ -46,16 +46,16 @@ public class AppointmentController extends HttpServlet {
                 JSONObject jso = jsr.getObject();
 
                 /** 取出經解析到JSONObject之Request參數 */
-                Integer doctor_id = jso.getInt("doctor_id");
+                String doctor_name = jso.getString("doctor_name");
                 String user_id = jso.getString("user_id");
                 String reserve_time = jso.getString("reserve_time");
                 String reserve_date = jso.getString("reserve_date");
 
                 /** 建立一個新的Appointment物件 */ 
-                Appointment ap = new Appointment(doctor_id, user_id, reserve_date, reserve_time);
+                Appointment ap = new Appointment(doctor_name, user_id, reserve_date, reserve_time);
 
                 /** 後端檢查是否有欄位為空值，若有則回傳錯誤訊息 */
-                if (user_id.isEmpty() || doctor_id == null || reserve_time == null) {
+                if (user_id.isEmpty() || doctor_name.isEmpty() || reserve_time.isEmpty() || reserve_date.isEmpty()) {
                         /** 以字串組出JSON格式之資料 */
                         String resp = "{\"status\": \'400\', \"message\": \'欄位不能有空值\', \'response\': \'\'}";
                         /** 透過JsonReader物件回傳到前端（以字串方式） */
