@@ -19,6 +19,21 @@
 			margin-bottom: 40px;
 			padding: 5px;
 		}
+		.lefttopbutton {
+    		width: 100px;
+    		height: 40px;
+    		margin-top: 10px;
+    		background-color: #004b97;
+    		border: none;
+    		color: white;
+    		border-radius: 10px;
+    		text-decoration: none;
+    		display: inline-block;
+    		font-size: 1.2em;
+    		position: absolute;
+    		top: 15px;
+    		left: 15px;
+}
 
 		form {
 			margin-top: 20px;
@@ -50,6 +65,7 @@
             border-radius: 5px;
             cursor: pointer;
 		}
+		
 	</style>
 </head>
 
@@ -57,6 +73,7 @@
 	<div style="background-color:#004B97;">
 		<h1><b>管理者登入</b></h1>
 	</div>
+	<a href="index.html" class="lefttopbutton">回首頁</a>
 	<!-- Form for email and password input -->
 	<form id="loginForm">
 		<label for="mail">Email:</label>
@@ -71,6 +88,7 @@
 		<button id="adminLogin" class="login_button"
 			onclick="validationLogin()">登入</button><!--登入時資料庫要驗證有沒有這個管理者，驗證成功後進入5_manager_function介面-->
 	</form>
+	
 	<script type="text/javascript">
 		$("#loginForm").submit(function (e) {
 			e.preventDefault();
