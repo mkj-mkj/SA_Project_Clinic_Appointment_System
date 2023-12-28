@@ -104,10 +104,10 @@
     <div style="background-color:#004B97;">
         <h1><b>患者管理</b></h1>
     </div>
-    <form class="search-form">
-        <input type="text" class="search-input" placeholder="輸入身分證碼">
-        <button type="submit" class="search-button">搜尋</button>
-    </form>
+
+        <input type="text" class="search-input" placeholder="輸入身分證碼" id="search_user" name="search_id" />
+        <button class="search-button" onclick="search();">搜尋</button>
+
     <table id="table">
     	<thead>
 	        <tr>
@@ -127,6 +127,36 @@
     </div>
 
     <script type="text/javascript">
+	    function search(){
+	        //var user_id = document.getElementById('search_user').value;
+	        var user_id = $('#search_user').val();
+	        console.log(user_id);
+
+            const data_object = {							
+            		"id": user_id
+			};
+            var data_string = JSON.stringify(data_object);
+	        // 發出POST的GET請求取得所有patient
+	        $.ajax({
+	            type: "GET",
+	            url: "api/user.do",
+	            crossDomain: true,
+	            cache: false,
+	            dataType: 'json',
+                data: "id="+user_id,
+	            timeout: 5000,
+	            success: function (response) {
+	                if(response.status == 200){
+	                    updateTable(response.response.data);
+	                }
+	                console.log(response);
+	            },
+	            error: function () {
+	                alert("無法連線到伺服器！");
+	            }
+	        });
+	    }
+    
         function redirectToModifyPage() {
             window.location.href = '1_3_patient_modified.html';
         }
@@ -174,9 +204,9 @@
         }
 
         $(document).ready(function() {
-            getAllPatient();
+        	getAllPatient();
         });
-        
+       
         function DeletePatient(case_number) {  
             var check = window.confirm("確認要刪除此病患嗎");
             if (check == true) {
