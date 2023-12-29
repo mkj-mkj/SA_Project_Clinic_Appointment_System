@@ -115,6 +115,7 @@
 	            <th>姓名</th>
 	            <th>身分證</th>
 	            <th></th>
+	            <th></th>
 	        </tr>
         </thead>
         <tbody></tbody>
@@ -156,7 +157,9 @@
 	        });
 	    }
     
-
+	    function redirectToModifyPage() {
+            window.location.href = '1_3_patient_modified.html';
+        }
         function redirectToAddPage() {
             window.location.href = '1_2_patient_add.html';
         }
@@ -192,6 +195,7 @@
                 table_html += '<td>' + value['name'] + '</td>';
                 table_html += '<td>' + value['user_id'] + '</td>';
                 table_html += '<td><button class="delete_button" onclick="DeletePatient(' + value['case_number'] + ');">刪除</button></td>';
+                able_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['user_id']+');">修改</button></td>';
                 table_html += '<tr>';
             })
         
