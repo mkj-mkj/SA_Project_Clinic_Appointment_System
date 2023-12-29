@@ -151,12 +151,15 @@ public class AppointmentHelper {
                 String reserve_time_en = rs.getString("reserve_time");
                 String reserve_time = "";
                 switch (reserve_time_en) {
-                    case "morninig":
+                    case "早上":
                         reserve_time = reserve_date + " 早上班";
-                    case "noon":
+                        break;
+                    case "下午":
                         reserve_time = reserve_date + " 下午班";
-                    case "night":
+                        break;
+                    case "晚上":
                         reserve_time = reserve_date + " 晚上班";
+                        break;
                 }
 
                 int appointment_number = rs.getInt("appointment");
