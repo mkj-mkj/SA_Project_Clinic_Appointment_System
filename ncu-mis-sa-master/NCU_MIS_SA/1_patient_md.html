@@ -11,50 +11,51 @@
             margin: 0;
             padding: 0;
         }
-
+        
         h1 {
             color: white;
             font-size: 3em;
             margin-top: 0;
             margin-bottom: 40px;
         }
-
+        
         table {
             width: 810px;
             margin: 0 auto;
             border-collapse: collapse;
             border-radius: 15px;
         }
-
+        
         th,
         td {
             border: 2px solid #ffffff;
             padding: 8px;
             text-align: center;
         }
-
+        
         th {
             background-color: #004B97;
             color: white;
         }
-
+        
         td {
             text-align: left;
             background-color: #E0E0E0;
         }
-
+        
         td:nth-child(1),
         td:nth-child(3),
         td:nth-child(4),
 		td:nth-child(5) {
             width: 15%;
         }
-
+        
         td:nth-child(2) {
             width: 40%;
         }
+       
 		
-
+		
         .modify_button,
         .delete_button {
             width: 100%;
@@ -66,7 +67,7 @@
             cursor: pointer;
             text-decoration: none;
         }
-
+        
         .add-button {
             width: 50px;
 			padding: 8px;
@@ -77,18 +78,18 @@
             cursor: pointer;
             text-decoration: none;
         }
-
+        
         .search-form {
             margin-bottom: 20px;
         }
-
+        
         .search-input {
             width: 200px;
             padding: 8px;
             border: 1px solid #004B97;
             border-radius: 5px;
         }
-
+        
         .search-button {
             padding: 8px;
             background-color: #004B97;
@@ -104,8 +105,8 @@
     <div style="background-color:#004B97;">
         <h1><b>患者管理</b></h1>
     </div>
-
-        <input type="text" class="search-input" placeholder="輸入身分證碼" id="search_user" name="search_id" />
+    <input type="text" class="search-input" placeholder="輸入身分證碼" id="search_user" name="search_id" />
+    
         <button class="search-button" onclick="search();">搜尋</button>
 
     <table id="table">
@@ -127,7 +128,7 @@
     </div>
 
     <script type="text/javascript">
-	    function search(){
+    function search(){
 	        //var user_id = document.getElementById('search_user').value;
 	        var user_id = $('#search_user').val();
 	        console.log(user_id);
@@ -156,8 +157,8 @@
 	            }
 	        });
 	    }
-    
-	    function redirectToModifyPage() {
+
+        function redirectToModifyPage() {
             window.location.href = '1_3_patient_modified.html';
         }
         function redirectToAddPage() {
@@ -183,7 +184,7 @@
                 }
             });
         }
-
+        
         // 更新patient表格
         function updateTable(data) {
             $("#table > tbody").empty();
@@ -195,7 +196,7 @@
                 table_html += '<td>' + value['name'] + '</td>';
                 table_html += '<td>' + value['user_id'] + '</td>';
                 table_html += '<td><button class="delete_button" onclick="DeletePatient(' + value['case_number'] + ');">刪除</button></td>';
-                able_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['user_id']+');">修改</button></td>';
+                table_html += '<td><button class="modify_button" onclick="redirectToModifyPage('+value['user_id']+');">修改</button></td>';
                 table_html += '<tr>';
             })
         
@@ -205,7 +206,7 @@
         $(document).ready(function() {
         	getAllPatient();
         });
-       
+        
         function DeletePatient(case_number) {  
             var check = window.confirm("確認要刪除此病患嗎");
             if (check == true) {
@@ -239,5 +240,4 @@
         }
     </script>
 </body>
-
 </html>
