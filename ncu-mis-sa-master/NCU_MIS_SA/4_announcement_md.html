@@ -62,7 +62,8 @@
             cursor: pointer;
 			text-decoration: none;
         }
-		.add_button {
+		.add_button,
+		.lefttopbutton{
             width: 50px;
 			padding: 8px;
             background-color: #004B97;
@@ -72,25 +73,9 @@
             cursor: pointer;
             text-decoration: none;
         }
-        .lefttopbutton {
-            width: 100px;
-            height: 40px;
-            margin-top: 10px;
-            background-color: #004b97;
-            border: none;
-            color: white;
-            border-radius: 10px;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 1.2em;
-            position: absolute;
-            top: 15px;
-            left: 15px;
-}
     </style>
 </head>
 <body>
-	<a href="5_manager_function.html" class="lefttopbutton">返回</a>
     <div style="background-color:#004B97;">
 	<h1><b>公告</b></h1></div>
     <table id="table"><!--公告資料庫有幾筆資料就顯示幾筆-->
@@ -108,6 +93,7 @@
     </table>
 	<br>
     <button class="add_button" onclick="redirectToAddPage()">新增</button>
+    <a href="5_manager_function.html" class="lefttopbutton" >返回</a>
     <script type="text/javascript">
         function redirectToModifyPage(announce_seq) {
         	var queryString = '?seq=' + announce_seq;
